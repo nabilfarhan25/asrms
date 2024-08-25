@@ -4,7 +4,7 @@
 
             <div class="flex items-center">
                 <div class="font-bold">
-                    Hello World
+                    Say Hello to the World
                 </div>
             </div>
 
