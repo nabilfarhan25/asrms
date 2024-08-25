@@ -22,5 +22,9 @@ export default {
         },
     },
 
-    plugins: [require("flowbite/plugin"), forms],
+    plugins: [
+        require("flowbite/plugin"),
+        require("tailwindcss-animated"),
+        forms,
+    ],
 };
