@@ -190,6 +190,117 @@ class InventoryController extends Controller
         return redirect('/create/rating/' . $request->slug);
     }
 
+    public function create_rating(Request $request)
+    {
+        $geo = $request->session()->get('geometry');
+        $char = $request->session()->get('characteristic');
+
+        $data = [
+            'slope' => Slopes::where('slug', $geo['slug'])->first(),
+            'geometry' => $geo,
+            'characteristic' => $char,
+        ];
+
+        return view('inventory.rating', $data);
+    }
+
+    public function store_rating(Request $request)
+    {
+        $slope = Slopes::where('slug',$request->slug)->first();
+
+        $geometry = $request->session()->get('geometry');
+        $characteristic = $request->session()->get('characteristic');
+        $rating = $request->all();
+        unset($rating['_token']);
+
+        // Image Handling
+        $img = TemporaryFile::all();
+        foreach ($img as $i) {
+            Storage::move('temp/' . $i->file, $request->slug.'/'. $i->file);
+            TemporaryFile::find($i->id)->delete();
+        }
+
+        // Calculation Handling
+        if ($slope->slope_type == 'cut-type' || $slope->slope_type == 'combine-type') {
+            // CUT TYPE && COMBINE TYPE
+            $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['A5'] * $rating['B1'] * $rating['B2'];
+            $CS = (($rating['C1'] * $rating['C2']) + ($rating['D1'] * $rating['D2'])) * $geometry['feature_height'];
+        }else if($slope->slope_type == 'rock-type'){
+            // ROCK TYPE
+            $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['B1'] * $rating['B2'];
+            $K = 1;
+            if (isset($request['scale_of_failure'])) {
+                if ($request['scale_of_failure'] === "Large") {
+                    $K = 5;
+                } elseif ($request['scale_of_failure'] === "Medium") {
+                    $K = 3;
+                } elseif ($request['scale_of_failure'] === "Small") {
+                    $K = 1;
+                } else {
+                    $K = 1;
+                }
+            }
+            $CS = (($rating['C1'] * $rating['C2']) + ($rating['D1'] * $rating['D2'])) * $K;
+        }else if($slope->slope_type == 'fill-type')
+        {
+            // FILL TYPE
+            $IS1 = $rating['A1'] * $rating['A2'] * $rating['B1'] * $rating['B2'];
+            $IS2 = $rating['A1'] * $rating['A3'] * $rating['B1'] * $rating['B2'];
+            $IS3 = $rating['A1'] * $rating['A4'] * $rating['B1'] * $rating['B2'];
+
+            $CS1 = (($rating['C1'] * $rating['C21']) + ($rating['D1'] * $rating['D21'])) * $geometry['feature_height'];
+            $CS2 = (($rating['C1'] * $rating['C22']) + ($rating['D1'] * $rating['D22'])) * $geometry['feature_height'];
+            $CS3 = (($rating['C1'] * $rating['C23']) + ($rating['D1'] * $rating['D23'])) * $geometry['feature_height'];
+
+        }else if($slope->slope_type == 'retaining-type')
+        {
+            // RETAINING WALL TYPE
+            $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['A5'] * $rating['B1'] * $rating['B2'];
+            $CS = (($rating['C1'] * $rating['C2']) + ($rating['D1'] * $rating['D2'])) * $geometry['feature_height'];
+        }
+         else {
+            $IS = 1;
+            $CS = 1;
+        }
+        // Total Score
+        if ($slope->slope_type == 'fill-type') {
+            $TS = ($IS1 * $CS1) + ($IS2 * $CS2) + ($IS3 * $CS3);
+            // dd(['IS1' => $IS1,'IS2' => $IS2,'IS3' => $IS3,'CS1' => $CS1,'CS2' => $CS2,'CS3' => $CS3,'TS' => $TS]);
+        } else {
+            $TS = $IS * $CS;
+            // dd(['IS' => $IS,'CS' => $CS,'TS' => $TS]);
+        }
+        $ranking = ['IS' =>$IS,'CS' =>$CS,'TS' =>$TS];
+        $cons = $request->consequence_to_life;
+
+        // Inspection Scheduling
+        if ($cons == 'category-1') {
+            $inspection_date = 5;
+            $maintenance_date = 1;
+        } else if($cons == 'category-2'){
+            $inspection_date = 5;
+            $maintenance_date = 1;
+        }else if($cons == 'category-3'){
+            $inspection_date = 10;
+            $maintenance_date = 2;
+        }
+
+        $slope = Slopes::where('slug', $request->slug)->firstOrFail();
+        $slope->geometry = $geometry;
+        $slope->characteristic = $characteristic;
+        $slope->rating = $rating;
+        $slope->ranking = json_encode($ranking);
+        $slope->img = json_encode($img);
+        $slope->engineer_inspection = Carbon::now()->addYear($inspection_date);
+        $slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
+
+        //dd(json_encode($slope));
+        $slope->save();
+
+        $request->session()->forget(['geometry', 'characteristic', 'rating']);
+        return redirect('/management');
+    }
+
     public function tempUpload(Request $request)
     {
         if ($request->hasFile('plan')) {
