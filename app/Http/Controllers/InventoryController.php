@@ -100,6 +100,19 @@ class InventoryController extends Controller
         $data = [
             'slope' => Slopes::where('slug', $slug)->first(),
         ];
+
+        // Reseting Files
+        $plan_file = TemporaryFile::where('type','plan')->first();
+        if (isset($plan_file)) {
+            Storage::deleteDirectory('temp/' . $plan_file->file);
+            $plan_file->delete();
+        }
+        $cross_file = TemporaryFile::where('type','cross')->first();
+        if (isset($cross_file)) {
+            Storage::deleteDirectory('temp/' . $cross_file->file);
+            $cross_file->delete();
+        }
+        
         return view('inventory.geometry', $data);
     }
 
@@ -108,9 +121,73 @@ class InventoryController extends Controller
         $geo = $request->all();
         unset($geo['_token']);
 
-        dd($request->all());
+        //dd($geo);
         $request->session()->put('geometry', $geo);
         return redirect('/create/characteristic/' . $request->slug);
+    }
+
+    public function create_characteristic(Request $request)
+    {
+        $geo = $request->session()->get('geometry');
+        $data = [
+            'slope' => Slopes::where('slug', $geo['slug'])->first(),
+        ];
+
+        // Reseting Files
+        $img_slope_protection_file = TemporaryFile::where('type','img_slope_protection')->get();
+        if (isset($img_slope_protection_file)) {
+            foreach ($img_slope_protection_file as $img) {
+                Storage::deleteDirectory('temp/' . $img->file);
+            }
+            $img_slope_protection_file->each->delete();
+        }
+        $img_surface_drainage_provision_file = TemporaryFile::where('type','img_surface_drainage_provision')->get();
+        if (isset($img_surface_drainage_provision_file)) {
+            foreach ($img_surface_drainage_provision_file as $img) {
+                Storage::deleteDirectory('temp/' . $img->file);
+            }
+            $img_surface_drainage_provision_file->each->delete();
+        }
+        $img_hydrogeological_settings_file = TemporaryFile::where('type','img_hydrogeological_settings')->get();
+        if (isset($img_hydrogeological_settings_file)) {
+            foreach ($img_hydrogeological_settings_file as $img) {
+                Storage::deleteDirectory('temp/' . $img->file);
+            }
+            $img_hydrogeological_settings_file->each->delete();
+        }
+        $img_geological_features_file = TemporaryFile::where('type','img_geological_features')->get();
+        if (isset($img_geological_features_file)) {
+            foreach ($img_geological_features_file as $img) {
+                Storage::deleteDirectory('temp/' . $img->file);
+            }
+            $img_geological_features_file->each->delete();
+        }
+        $img_signs_of_distress_file = TemporaryFile::where('type','img_signs_of_distress')->get();
+        if (isset($img_signs_of_distress_file)) {
+            foreach ($img_signs_of_distress_file as $img) {
+                Storage::deleteDirectory('temp/' . $img->file);
+            }
+            $img_signs_of_distress_file->each->delete();
+        }
+        $img_instability_after_file = TemporaryFile::where('type','img_instability_after')->get();
+        if (isset($img_instability_after_file)) {
+            foreach ($img_instability_after_file as $img) {
+                Storage::deleteDirectory('temp/' . $img->file);
+            }
+            $img_instability_after_file->each->delete();
+        }
+
+        return view('inventory.characteristic', $data);
+    }
+
+    public function store_characteristic(Request $request)
+    {
+        $char = $request->all();
+        unset($char['_token']);
+
+        //dd($char);
+        $request->session()->put('characteristic', $char);
+        return redirect('/create/rating/' . $request->slug);
     }
 
     public function tempUpload(Request $request)

@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     
     Route::get('/create/geometry/{slug}', [InventoryController::class, 'create_geometry']);
     Route::post('/create/geometry/{slug}', [InventoryController::class, 'store_geometry']);
+    Route::get('/create/characteristic/{slug}', [InventoryController::class, 'create_characteristic']);
+    Route::post('/create/characteristic/{slug}', [InventoryController::class, 'store_characteristic']);
 });
 
 require __DIR__.'/auth.php';
