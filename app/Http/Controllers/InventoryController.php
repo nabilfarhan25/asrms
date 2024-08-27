@@ -74,6 +74,27 @@ class InventoryController extends Controller
         return view('inventory.detail', $data);
     }
 
+    public function destroy(string $slug){
+        $item = Slopes::where('slug',$slug)->first();
+        // $inspection = Inspection::where('slug',$slug)->get();
+        // $maintenance = Maintenance::where('slug',$slug)->get();
+        // $mitigation = Mitigation::where('slug',$slug)->get();
+
+        // Storage::deleteDirectory($slug);
+        // if ($inspection->isNotEmpty()) {
+        //     $inspection->each->delete();
+        // }
+        // if ($maintenance->isNotEmpty()) {
+        //     $maintenance->each->delete();
+        // }
+        // if ($mitigation->isNotEmpty()) {
+        //     $mitigation->each->delete();
+        // }
+        $item->delete();
+
+        return redirect('/inventory')->with('success', 'Item deleted successfully.');
+    }
+
     public function create_geometry(string $slug)
     {
         $data = [
