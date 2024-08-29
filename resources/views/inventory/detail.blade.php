@@ -6,7 +6,7 @@
                 <!-- Breadcrumb -->
                 @php
                 $bread = [
-                ['url' => '/inventory', 'label' => 'Inventory'],
+                ['url' => '/inventory', 'label' => 'Slope Inventory'],
                 ['url' => '/inventory/'.$slope->slug, 'label' => $slope->slope_name,'active' => true],
 
                 ];
