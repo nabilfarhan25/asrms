@@ -172,6 +172,74 @@
                                 <div class="grid gap-4 mb-4 grid-cols-2">
 
                                     <div class="col-span-2">
+                                        <label for="" class="block mb-2 font-medium text-gray-900 dark:text-white"><span
+                                                class="text-red-600">*</span>Slope
+                                            Type</label>
+                                        <div class="mb-5 grid w-full gap-3 md:grid-cols-4 text-lg">
+                                            <label>
+                                                <input type="radio" name="slope_type" value="cut-type" checked
+                                                    class="hidden peer" />
+                                                <div
+                                                    class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
+                                                    <div>
+                                                        <img src="/icons/cut-type.svg" class="w-10 h-10" alt="">
+                                                        <div class="font-bold">Cut Slope</div>
+                                                    </div>
+                                                </div>
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="slope_type" value="fill-type"
+                                                    class="hidden peer" />
+                                                <div
+                                                    class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
+                                                    <div>
+                                                        <img src="/icons/fill-type.svg" class="w-10 h-10" alt="">
+                                                        <div class="font-bold">Fill Slope</div>
+                                                    </div>
+                                                </div>
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="slope_type" value="rock-type"
+                                                    class="hidden peer" />
+                                                <div
+                                                    class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
+                                                    <div>
+                                                        <img src="/icons/rock-type.svg" class="w-10 h-10" alt="">
+                                                        <div class="font-bold">Rock Slope</div>
+                                                    </div>
+                                                </div>
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="slope_type" value="retaining-type"
+                                                    class="hidden peer" />
+                                                <div
+                                                    class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
+                                                    <div>
+                                                        <img src="/icons/retaining-type.svg" class="w-10 h-10" alt="">
+                                                        <div class="font-bold">Retaining Wall</div>
+                                                    </div>
+                                                </div>
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="slope_type" value="combine-type"
+                                                    class="hidden peer" />
+                                                <div
+                                                    class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
+                                                    <div>
+                                                        <img src="/icons/combine-type.svg" class="w-10 h-10" alt="">
+                                                        <div class="font-bold">Combine Slope</div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <x-line />
+                                    </div>
+
+                                    <div class="col-span-2">
                                         <label for="slope_name"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><span
                                                 class="text-red-600">*</span>Slope
@@ -188,6 +256,20 @@
                                         <input type="text" name="location" id="location"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
                                             placeholder="">
+                                    </div>
+
+                                    <div class="col-span-2">
+                                        <label for="category"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><span
+                                                class="text-red-600">*</span>Side
+                                            of Road</label>
+                                        <select id="category" name="side_of_road"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                            <option value="" selected hidden>Select Side..</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+
+                                        </select>
                                     </div>
 
                                     <div class="col-span-2">
@@ -236,109 +318,7 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
                                             placeholder="E:">
                                     </div>
-
-                                    <div class="col-span-2">
-                                        <label for="category"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><span
-                                                class="text-red-600">*</span>Side
-                                            of Road</label>
-                                        <select id="category" name="side_of_road"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                            <option value="" selected hidden>Select Side..</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-
-                                        </select>
-                                    </div>
-
                                 </div>
-
-                                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><span
-                                        class="text-red-600">*</span>Slope
-                                    Type</label>
-                                <ul class="mb-5 grid w-full gap-3 md:grid-cols-2">
-                                    <li>
-                                        <input type="hidden" name="slope_type" value="" />
-                                        <input type="radio" id="cut-type" checked name="slope_type" value="cut-type"
-                                            class="hidden peer">
-                                        <label for="cut-type"
-                                            class="inline-flex items-center justify-between w-full p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                            <div class="block">
-                                                <div class="w-full text-lg font-semibold">Cut Slope</div>
-                                            </div>
-                                            <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                            </svg>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="fill-type" name="slope_type" value="fill-type"
-                                            class="hidden peer">
-                                        <label for="fill-type"
-                                            class="inline-flex items-center justify-between w-full p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                            <div class="block">
-                                                <div class="w-full text-lg font-semibold">Fill Slope</div>
-                                            </div>
-                                            <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                            </svg>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="rock-type" name="slope_type" value="rock-type"
-                                            class="hidden peer">
-                                        <label for="rock-type"
-                                            class="inline-flex items-center justify-between w-full p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                            <div class="block">
-                                                <div class="w-full text-lg font-semibold">Rock Slope</div>
-                                            </div>
-                                            <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                            </svg>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="retaining-type" name="slope_type" value="retaining-type"
-                                            class="hidden peer">
-                                        <label for="retaining-type"
-                                            class="inline-flex items-center justify-between w-full p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                            <div class="block">
-                                                <div class="w-full text-lg font-semibold">Retaining Walls</div>
-                                            </div>
-                                            <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                            </svg>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" id="combine-type" name="slope_type" value="combine-type"
-                                            class="hidden peer">
-                                        <label for="combine-type"
-                                            class="inline-flex items-center justify-between w-full p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                            <div class="block">
-                                                <div class="w-full text-lg font-semibold">Combined Slope</div>
-                                            </div>
-                                            <svg class="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                            </svg>
-                                        </label>
-                                    </li>
-                                </ul>
 
                                 <button type="submit"
                                     class="text-white inline-flex items-center bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">

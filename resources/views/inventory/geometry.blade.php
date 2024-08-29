@@ -55,11 +55,16 @@
                     @csrf
                     <input type="hidden" name="slug" value="{{$slope->slug}}">
 
-                    <div class="flex justify-between items-center">
-                        <h2 class="font-bold text-xl">
-                            FEATURE NO : {{$slope->slope_name}}
-                        </h2>
-                        <x-primary-button>Next</x-primary-button>
+                    <div class="flex justify-between">
+                        <div>
+                            <h2 class="font-bold text-xl mb-3">
+                                <span class="text-gray-600">FEATURE NO : </span>{{$slope->slope_name}}
+                            </h2>
+                            <x-slope-type type="{{$slope->slope_type}}" side="{{$slope->side_of_road}}" />
+                        </div>
+                        <div>
+                            <x-primary-button>Next</x-primary-button>
+                        </div>
                     </div>
                     <x-line />
 

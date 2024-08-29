@@ -25,16 +25,16 @@
 
 <div class="grid sm:grid-cols-2 gap-4">
     <div>
-        <h4 class="font-bold">Geometry</h4>
+        <h4 class="font-bold mb-1">Geometry</h4>
         <div id="accordion-open" data-accordion="open">
-            <p class="text-gray-800 mb-5" id="accordion-open-heading-2">
+            <p class="text-gray-800 mb-2" id="accordion-open-heading-2">
                 (refer to <button type="button" data-accordion-target="#accordion-open-body-2" aria-expanded="false"
                     aria-controls="accordion-open-body-2" class="text-lime-600 font-bold">Figure A1</button>)
             </p>
 
             <div id="accordion-open-body-2" class="hidden" aria-labelledby="accordion-open-heading-2">
                 <div class="p-4 border border-gray-300 rounded-xl">
-                    <img src="/components/slope.png" class="w-full" alt="">
+                    <img src="/components/slope-cut.png" class="w-full" alt="">
                 </div>
             </div>
         </div>
