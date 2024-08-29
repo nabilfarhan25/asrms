@@ -1,3 +1,5 @@
+<x-forms.select_ctl />
+<x-line />
 <div x-data="levelGeotechnical()">
     <div class="flex justify-between items-center">
         <legend class="text-lg font-semibold mb-2">Level of Geotechnical Engineering Input</legend>
@@ -114,8 +116,8 @@
 <x-line />
 
 <div x-data="{
-    modeOfFailure: 'Wedge',
-    scaleOfFailure: 'Medium',
+    modeOfFailure: 'Ravelling',
+    scaleOfFailure: 'None',
     potentialForFailure: 0.5,
     a3aValue: 0,
     a3Value: 0,
@@ -145,7 +147,7 @@
         <div>
             <label for="mode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mode
                 of Failure:</label>
-            <select id="mode_of_failure" x-model="modeOfFailure" @change="calculateA3"
+            <select id="mode_of_failure" x-model="modeOfFailure" @change="calculateA3" name="mode_of_failure"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 <option value="Ravelling">Ravelling</option>
                 <option value="Toppling">Toppling</option>
@@ -154,11 +156,9 @@
             </select>
         </div>
         <div>
-            <label for="scale"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scale of
+            <label for="scale" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scale of
                 Failure:</label>
-            <select id="scale_of_failure" name="scale_of_failure" x-model="scaleOfFailure"
-                @change="calculateA3"
+            <select id="scale_of_failure" name="scale_of_failure" x-model="scaleOfFailure" @change="calculateA3"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 <option value="Large">Large (> 50 m³)</option>
                 <option value="Medium">Medium (5 - 50 m³)</option>
@@ -168,10 +168,10 @@
         </div>
 
         <div>
-            <label for="pot"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Potential for
+            <label for="pot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Potential for
                 Failure:</label>
             <select id="potential_for_failure" x-model="potentialForFailure" @change="calculateA3"
+                name="potential_for_failure"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 <option value="0.5">Low potential for failure</option>
                 <option value="1.0">High potential for failure</option>
@@ -217,12 +217,10 @@
             class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse border border-gray-200 dark:border-gray-700">
             <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                 <tr>
-                    <th rowspan="2"
-                        class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
+                    <th rowspan="2" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
                         Drainage Provision
                     </th>
-                    <th colspan="3"
-                        class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
+                    <th colspan="3" class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
                         Seepage
                     </th>
                 </tr>
@@ -230,8 +228,7 @@
                     <th class="px-6 py-3 text-center border border-gray-200">
                         Heavy
                     </th>
-                    <th
-                        class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
+                    <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
                         Moderate
                     </th>
                     <th class="px-6 py-3 text-center border border-gray-200">
@@ -240,8 +237,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td
                         class="px-6 py-4 font-medium text-gray-900 bg-gray-50 dark:text-white dark:bg-gray-800 border border-gray-200">
                         Potential for convergence
@@ -251,27 +247,22 @@
                         discontinuities
                     </td>
                     <td class="px-6 py-4 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="8"
-                            @change="A4 = $event.target.value; A4_pos = '1-1'"
+                        <input type="radio" name="A4" value="8" @change="A4 = $event.target.value; A4_pos = '1-1'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         8
                     </td>
-                    <td
-                        class="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="6"
-                            @change="A4 = $event.target.value; A4_pos = '1-2'"
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
+                        <input type="radio" name="A4" value="6" @change="A4 = $event.target.value; A4_pos = '1-2'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         6
                     </td>
                     <td class="px-6 py-4 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="4"
-                            @change="A4 = $event.target.value; A4_pos = '1-3'"
+                        <input type="radio" name="A4" value="4" @change="A4 = $event.target.value; A4_pos = '1-3'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         4
                     </td>
                 </tr>
-                <tr
-                    class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td
                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800 border border-gray-200">
                         Insufficient or no drainage
@@ -280,27 +271,22 @@
                         area and face of the slope
                     </td>
                     <td class="px-6 py-4 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="6"
-                            @change="A4 = $event.target.value; A4_pos = '2-1'"
+                        <input type="radio" name="A4" value="6" @change="A4 = $event.target.value; A4_pos = '2-1'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         6
                     </td>
-                    <td
-                        class="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="4"
-                            @change="A4 = $event.target.value; A4_pos = '2-2'"
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
+                        <input type="radio" name="A4" value="4" @change="A4 = $event.target.value; A4_pos = '2-2'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         4
                     </td>
                     <td class="px-6 py-4 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="2"
-                            @change="A4 = $event.target.value; A4_pos = '2-3'"
+                        <input type="radio" name="A4" value="2" @change="A4 = $event.target.value; A4_pos = '2-3'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         2
                     </td>
                 </tr>
-                <tr
-                    class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td
                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800 border border-gray-200">
                         Drainage measures
@@ -309,28 +295,24 @@
                         and face of the slope
                     </td>
                     <td class="px-6 py-4 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="4"
-                            @change="A4 = $event.target.value; A4_pos = '3-1'"
+                        <input type="radio" name="A4" value="4" @change="A4 = $event.target.value; A4_pos = '3-1'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         4
                     </td>
-                    <td
-                        class="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="2"
-                            @change="A4 = $event.target.value; A4_pos = '3-2'"
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-center border border-gray-200">
+                        <input type="radio" name="A4" value="2" @change="A4 = $event.target.value; A4_pos = '3-2'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         2
                     </td>
                     <td class="px-6 py-4 text-center border border-gray-200">
-                        <input type="radio" name="A4" value="1"
-                            @change="A4 = $event.target.value; A4_pos = '3-3'"
+                        <input type="radio" name="A4" value="1" @change="A4 = $event.target.value; A4_pos = '3-3'"
                             class="mr-2 mb-0.5 w-6 h-6 text-lime-600 bg-gray-100 border border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         1
                     </td>
                 </tr>
             </tbody>
         </table>
-        
+
         <input type="hidden" readonly :value="A4_pos" name="A4_pos"
             class="ml-4 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
     </div>
@@ -418,74 +400,74 @@
         }
     </script>
 </div>
-    <x-line />
-    <div x-data="crestHandler()">
-        <div class="flex justify-between items-center">
-            <legend class="text-lg font-semibold mb-2">Facilities Above Crest of Feature</legend>
-            <div class="flex items-center">
-                <div class="flex items-center mr-5">
-                    <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">C1:</h2>
-                    <input type="text" id="C1" x-bind:value="C1" name="C1" readonly
-                        class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="flex items-center">
-                    <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">C2:</h2>
-                    <input type="text" id="C2" x-bind:value="C2" name="C2" readonly
-                        class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
+<x-line />
+<div x-data="crestHandler()">
+    <div class="flex justify-between items-center">
+        <legend class="text-lg font-semibold mb-2">Facilities Above Crest of Feature</legend>
+        <div class="flex items-center">
+            <div class="flex items-center mr-5">
+                <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">C1:</h2>
+                <input type="text" id="C1" x-bind:value="C1" name="C1" readonly
+                    class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
             </div>
-        </div>
-        <div class="form-section mb-2">
+
             <div class="flex items-center">
-                <label class="block mr-3 font-medium text-gray-900 dark:text-gray-300">Vulnerability
-                    Factor
-                    (C2) for Crest Facility :</label>
-                <select id="tableChoice" x-model="tableChoice"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                    <option value="buildings">Buildings</option>
-                    <option value="other">Other than Buildings</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-section mb-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Type
-                        of
-                        Crest Facility:</label>
-                    <input type="text" id="type" x-model="type_of_crest_facility" readonly
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Facility
-                        Group:</label>
-                    <input type="text" x-model="facilityGroup" readonly
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Distance
-                        (D) from Crest
-                        (m):</label>
-                    <input type="number" step="0.01" id="distance" x-model="distance" readonly
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Feature
-                        Height (H) (m):</label>
-                    <input type="number" step="0.01" id="height" x-model="height" readonly
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
+                <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">C2:</h2>
+                <input type="text" id="C2" x-bind:value="C2" name="C2" readonly
+                    class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
             </div>
         </div>
     </div>
+    <div class="form-section mb-2">
+        <div class="flex items-center">
+            <label class="block mr-3 font-medium text-gray-900 dark:text-gray-300">Vulnerability
+                Factor
+                (C2) for Crest Facility :</label>
+            <select id="tableChoice" x-model="tableChoice" name="crest_vulnerbility"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                <option value="buildings">Buildings</option>
+                <option value="other">Other than Buildings</option>
+            </select>
+        </div>
+    </div>
 
-    <script>
-        function crestHandler() {
+    <div class="form-section mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Type
+                    of
+                    Crest Facility:</label>
+                <input type="text" id="type" x-model="type_of_crest_facility" readonly
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Facility
+                    Group:</label>
+                <input type="text" x-model="facilityGroup" readonly
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Distance
+                    (D) from Crest
+                    (m):</label>
+                <input type="number" step="0.01" id="distance" x-model="distance" readonly
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Feature
+                    Height (H) (m):</label>
+                <input type="number" step="0.01" id="height" x-model="height" readonly
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function crestHandler() {
             return {
                 
                 type_of_crest_facility: '{{$geometry["crest_facility_type"]}}',
@@ -546,79 +528,79 @@
                                 }
                             };
                             }
-    </script>
+</script>
 
-    <div x-data="toeHandler()">
-        <div class="form-section mb-4">
-            <div class="flex justify-between items-center">
-                <legend class="text-lg font-semibold mb-2">Facility at Toe of Feature</legend>
+<div x-data="toeHandler()">
+    <div class="form-section mb-4">
+        <div class="flex justify-between items-center">
+            <legend class="text-lg font-semibold mb-2">Facility at Toe of Feature</legend>
+            <div class="flex items-center">
+                <div class="flex items-center mr-5">
+                    <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">D1:</h2>
+                    <input type="text" id="D1" x-bind:value="D1" name="D1" readonly
+                        class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                </div>
                 <div class="flex items-center">
-                    <div class="flex items-center mr-5">
-                        <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">D1:</h2>
-                        <input type="text" id="D1" x-bind:value="D1" name="D1" readonly
-                            class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                    </div>
-                    <div class="flex items-center">
-                        <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">D2:</h2>
-                        <input type="text" id="D2" x-bind:value="D2" name="D2" readonly
-                            class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                    </div>
+                    <h2 class="text-sm text-gray-900 dark:text-gray-300 font-bold">D2:</h2>
+                    <input type="text" id="D2" x-bind:value="D2" name="D2" readonly
+                        class="p-2 ml-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 </div>
-            </div>
-            <div class="form-section mb-2">
-                <div class="flex items-center">
-                    <label class="block mr-3 font-medium text-gray-900 dark:text-gray-300">Vulnerability
-                        Factor (D2) for Toe Facility:</label>
-                    <select id="tableChoice" x-model="tableChoice"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                        <option value="buildings">Buildings</option>
-                        <option value="other">Other than Buildings</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Type
-                        of Toe Facility:</label>
-                    <input type="text" id="type" x-model="type_of_toe_facility" readonly
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Facility
-                        Group:</label>
-                    <input type="text" x-model="facilityGroup" readonly
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Distance
-                        (L) from Toe to
-                        Facility (m):</label>
-                    <input type="number" step="0.01" readonly id="distance" x-model="distance"
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Shadow
-                        Angle (ω) from
-                        Crest of Feature to Toe Facility (°):</label>
-                    <input type="number" step="0.01" readonly id="shadowAngle" x-model="shadowAngle"
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
-                <div class="mb-2">
-                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Feature
-                        Height (H) (m):</label>
-                    <input type="number" step="0.01" readonly id="height" x-model="height"
-                        class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </div>
-
             </div>
         </div>
-        <script>
-            function toeHandler() {
+        <div class="form-section mb-2">
+            <div class="flex items-center">
+                <label class="block mr-3 font-medium text-gray-900 dark:text-gray-300">Vulnerability
+                    Factor (D2) for Toe Facility:</label>
+                <select id="tableChoice" x-model="tableChoice" name="toe_vulnerbility"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    <option value="buildings">Buildings</option>
+                    <option value="other">Other than Buildings</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Type
+                    of Toe Facility:</label>
+                <input type="text" id="type" x-model="type_of_toe_facility" readonly
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Facility
+                    Group:</label>
+                <input type="text" x-model="facilityGroup" readonly
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Distance
+                    (L) from Toe to
+                    Facility (m):</label>
+                <input type="number" step="0.01" readonly id="distance" x-model="distance"
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Shadow
+                    Angle (ω) from
+                    Crest of Feature to Toe Facility (°):</label>
+                <input type="number" step="0.01" readonly id="shadowAngle" x-model="shadowAngle"
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+            <div class="mb-2">
+                <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Feature
+                    Height (H) (m):</label>
+                <input type="number" step="0.01" readonly id="height" x-model="height"
+                    class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500">
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function toeHandler() {
                 return {
                     type_of_toe_facility: '{{$geometry["toe_facility_type"]}}',
                     facilityGroup: '{{$geometry["toe_facility_group"]}}',
@@ -680,91 +662,5 @@
                     }
                 };
             }
-        </script>
-<x-line />
-    <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Consequence To Life (CTL)
-        Catergory
-    </h3>
-    <ul class="grid w-full gap-6 md:grid-cols-3">
-        <li>
-            <input type="radio" id="cat1" name="consequence_to_life" value="category-1" checked
-                class="hidden peer" required />
-            <label for="cat1"
-                class="inline-flex w-full p-6 text-gray-500 border h-80 border-gray-400 rounded-2xl cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <div class="block">
-                    <div class="w-full text-xl font-bold mb-3">Category 1</div>
-                    <div class="w-full">
-
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting occupied buildings (e.g. residential, educational,
-                            commercial or industrial buildings, bus shelters, railway platforms).
-                        </div>
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting buildings storing dangerous goods.
-                        </div>
-
-
-                    </div>
-                </div>
-            </label>
-        </li>
-        <li>
-            <input type="radio" id="cat2" name="consequence_to_life" value="category-2"
-                class="hidden peer">
-            <label for="cat2"
-                class="inline-flex w-full p-6 text-gray-500 border h-80 border-gray-400 rounded-2xl cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <div class="block">
-                    <div class="w-full text-xl font-bold mb-3">Category 2</div>
-                    <div class="w-full">
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting heavily used open spaces and recreational facilities
-                            (e.g. sitting-out areas, playgrounds, car parks).
-                        </div>
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting roads with high vehicular or pedestrian traffic
-                            density.
-                        </div>
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting public waiting areas (e.g. bus stops , petrol
-                            stations).
-                        </div>
-                    </div>
-                </div>
-
-            </label>
-        </li>
-        <li>
-            <input type="radio" id="cat3" name="consequence_to_life" value="category-3"
-                class="hidden peer">
-            <label for="cat3"
-                class="inline-flex w-full p-6 text-gray-500 border h-80 border-gray-400 rounded-2xl cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <div class="block">
-                    <div class="w-full text-xl font-bold mb-3">Category 3</div>
-                    <div class="w-full">
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting country parks and
-                            lightly used open-air recreation areas.
-                        </div>
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting roads with low traffic
-                            density.
-                        </div>
-                        <div class="mb-2 flex">
-                            <span class="mr-2">&#8226;</span>
-                            Failures affecting storage compounds
-                            (non-dangerous goods).
-                        </div>
-                    </div>
-                </div>
-
-            </label>
-        </li>
-    </ul>
+    </script>
 </div>

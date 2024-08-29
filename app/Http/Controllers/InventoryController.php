@@ -207,7 +207,7 @@ class InventoryController extends Controller
     public function store_rating(Request $request)
     {
         $slope = Slopes::where('slug',$request->slug)->first();
-
+        //dd($request->all());
         $geometry = $request->session()->get('geometry');
         $characteristic = $request->session()->get('characteristic');
         $rating = $request->all();
