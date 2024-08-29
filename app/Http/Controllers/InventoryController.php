@@ -207,26 +207,27 @@ class InventoryController extends Controller
     public function store_rating(Request $request)
     {
         $slope = Slopes::where('slug',$request->slug)->first();
-        //dd($request->all());
+        $rat = $request->all();
+        unset($rat['_token']);
+        $request->session()->put('rating', $rat);
+
         $geometry = $request->session()->get('geometry');
         $characteristic = $request->session()->get('characteristic');
-        $rating = $request->all();
-        unset($rating['_token']);
-
-        // Image Handling
+        $rating = $request->session()->get('rating');
+ 
+        // File Handling
         $img = TemporaryFile::all();
+        $dir = TemporaryFile::select(['img', 'file','type'])->get();
+
         foreach ($img as $i) {
             Storage::move('temp/' . $i->file, $request->slug.'/'. $i->file);
             TemporaryFile::find($i->id)->delete();
         }
 
-        // Calculation Handling
         if ($slope->slope_type == 'cut-type' || $slope->slope_type == 'combine-type') {
-            // CUT TYPE && COMBINE TYPE
             $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['A5'] * $rating['B1'] * $rating['B2'];
             $CS = (($rating['C1'] * $rating['C2']) + ($rating['D1'] * $rating['D2'])) * $geometry['feature_height'];
         }else if($slope->slope_type == 'rock-type'){
-            // ROCK TYPE
             $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['B1'] * $rating['B2'];
             $K = 1;
             if (isset($request['scale_of_failure'])) {
@@ -243,7 +244,6 @@ class InventoryController extends Controller
             $CS = (($rating['C1'] * $rating['C2']) + ($rating['D1'] * $rating['D2'])) * $K;
         }else if($slope->slope_type == 'fill-type')
         {
-            // FILL TYPE
             $IS1 = $rating['A1'] * $rating['A2'] * $rating['B1'] * $rating['B2'];
             $IS2 = $rating['A1'] * $rating['A3'] * $rating['B1'] * $rating['B2'];
             $IS3 = $rating['A1'] * $rating['A4'] * $rating['B1'] * $rating['B2'];
@@ -254,26 +254,36 @@ class InventoryController extends Controller
 
         }else if($slope->slope_type == 'retaining-type')
         {
-            // RETAINING WALL TYPE
             $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['A5'] * $rating['B1'] * $rating['B2'];
             $CS = (($rating['C1'] * $rating['C2']) + ($rating['D1'] * $rating['D2'])) * $geometry['feature_height'];
         }
          else {
             $IS = 1;
             $CS = 1;
+
         }
-        // Total Score
+        $ranking = [];
         if ($slope->slope_type == 'fill-type') {
             $TS = ($IS1 * $CS1) + ($IS2 * $CS2) + ($IS3 * $CS3);
-            // dd(['IS1' => $IS1,'IS2' => $IS2,'IS3' => $IS3,'CS1' => $CS1,'CS2' => $CS2,'CS3' => $CS3,'TS' => $TS]);
+            $ranking =  [
+            'IS1' => $IS1,
+            'IS2' => $IS2,
+            'IS3' => $IS3,
+            'CS1' => $CS1,
+            'CS2' => $CS2,
+            'CS3' => $CS3,
+            'TS' => $TS,
+        ];
         } else {
             $TS = $IS * $CS;
-            // dd(['IS' => $IS,'CS' => $CS,'TS' => $TS]);
+            $ranking = [
+            'IS' =>$IS,
+            'CS' =>$CS,
+            'TS' =>$TS,
+        ];
         }
-        $ranking = ['IS' =>$IS,'CS' =>$CS,'TS' =>$TS];
-        $cons = $request->consequence_to_life;
 
-        // Inspection Scheduling
+        $cons = $request->consequence_to_life;
         if ($cons == 'category-1') {
             $inspection_date = 5;
             $maintenance_date = 1;
@@ -290,11 +300,10 @@ class InventoryController extends Controller
         $slope->characteristic = $characteristic;
         $slope->rating = $rating;
         $slope->ranking = json_encode($ranking);
-        $slope->img = json_encode($img);
+        $slope->img = json_encode($dir);
         $slope->engineer_inspection = Carbon::now()->addYear($inspection_date);
         $slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
 
-        //dd(json_encode($slope));
         $slope->save();
 
         $request->session()->forget(['geometry', 'characteristic', 'rating']);
