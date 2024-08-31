@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Inventory
     Route::get('/inventory', [InventoryController::class, 'index']);
     Route::get('/inventory/{slug}', [InventoryController::class, 'detail']);
+
+    // Management
+    Route::get('/management', [ManagementController::class, 'index']);
+    Route::post('/find', [ManagementController::class, 'get']);
+    Route::get('/management/{slug}', [ManagementController::class, 'detail']);
 
 
 });
