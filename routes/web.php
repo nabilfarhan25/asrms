@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InspectionController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ProfileController;
@@ -27,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/find', [ManagementController::class, 'get']);
     Route::get('/management/{slug}', [ManagementController::class, 'detail']);
 
+    // Inspection
+    Route::get('/inspection', [InspectionController::class, 'index']);
+    Route::post('/inspection', [InspectionController::class, 'index']);
+    Route::get('/inspection/{slug}', [InspectionController::class, 'detail']);
 
 });
 
@@ -45,7 +50,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/edit/rating/{slug}', [InventoryController::class, 'edit_rating']);
     Route::post('/edit/rating/{slug}', [InventoryController::class, 'change_rating']);
 
-    
     Route::get('/create/geometry/{slug}', [InventoryController::class, 'create_geometry']);
     Route::post('/create/geometry/{slug}', [InventoryController::class, 'store_geometry']);
     Route::get('/create/characteristic/{slug}', [InventoryController::class, 'create_characteristic']);
