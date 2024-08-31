@@ -532,7 +532,7 @@
             facilityGroup: '{{$geometry["crest_facility_group"];}}',
             distance: '{{$geometry["crest_d"];}}',
             height: '{{$geometry["feature_height"];}}',
-            tableChoice: 'buildings',
+            tableChoice: '{{isset($rating->crest_vulnerbility) ? ($rating->crest_vulnerbility=="buildings" ? "buildings" : "other")  : "buildings"}}',
             get C1() {
                 const C1_values = {
                     '1(a)': 9,
@@ -670,7 +670,7 @@
                 distance: '{{$geometry["toe_l"];}}',
                 shadowAngle: '{{$geometry["toe_w"];}}',
                 height: '{{$geometry["feature_height"];}}',
-                tableChoice: 'buildings',
+                tableChoice: '{{isset($rating->toe_vulnerbility) ? ($rating->toe_vulnerbility=="buildings" ? "buildings" : "other")  : "buildings"}}',
                 get D1() {
                     const D1_values = {
                         '1(a)': 9,
