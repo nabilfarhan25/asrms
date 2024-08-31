@@ -31,6 +31,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     // Inventory
     Route::post('/inventory', [InventoryController::class, 'store']);
     Route::delete('/slope/{slug}', [InventoryController::class, 'destroy']);
+    Route::get('/edit/geometry/{slug}', [InventoryController::class, 'edit_geometry']);
+    Route::post('/edit/geometry/{slug}', [InventoryController::class, 'change_geometry']);
+    Route::get('/edit/characteristic/{slug}', [InventoryController::class, 'edit_characteristic']);
+    Route::post('/edit/characteristic/{slug}', [InventoryController::class, 'change_characteristic']);
+
     
     Route::get('/create/geometry/{slug}', [InventoryController::class, 'create_geometry']);
     Route::post('/create/geometry/{slug}', [InventoryController::class, 'store_geometry']);

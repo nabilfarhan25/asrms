@@ -191,7 +191,7 @@
                             class="h-full w-full border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600">
 
                             <div class="flex justify-center mb-3">
-                                <img src="/icons/inspection-ico.svg"
+                                <img src="/icons/preservation-ico.svg"
                                     class="sm:h-20 h-16 group-hover:animate-jump animate-once animate-ease-in-out"
                                     alt="">
                             </div>

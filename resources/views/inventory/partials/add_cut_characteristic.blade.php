@@ -4,7 +4,11 @@
 
     </div>
     <div>
-        <div x-data="{ surface_opt: 'Vegetation', coverPercentage: '' }" class="mb-3">
+        <div x-data="{ surface_opt: '{{isset($characteristic->surface_cover) ? explode(" :", $characteristic->
+            surface_cover)[0] : 'Vegetation'}}', coverPercentage: {{isset($characteristic->surface_cover) ?
+            explode(" :", $characteristic->
+            surface_cover)[1] : 0}} }"
+            class="mb-3">
             <div class="mb-2">
                 <p class="font-medium text-gray-800">
                     Surface cover with :
@@ -61,16 +65,24 @@
             </div>
             <div>
                 <div class="flex items-center mb-2">
-                    <input id="slope_surface1" type="radio" name="slope_surface" checked
-                        value="Substantially protected (>75%)"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="slope_surface1" type="radio" name="slope_surface" value="Substantially protected (>75%)"
+                        @if(isset($characteristic->slope_surface))
+                    {{$characteristic->slope_surface == "Substantially protected (>75%)" ? 'checked' : 'checked' }}
+                    @endif
+                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600">
                     <label for="slope_surface1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
                         protected (>
                         75%)</label>
                 </div>
                 <div class="flex items-center mb-2">
                     <input id="slope_surface2" type="radio" name="slope_surface" value="Partially protected (25% - 75%)"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        @if(isset($characteristic->slope_surface))
+                    {{$characteristic->slope_surface == "Partially protected (25% - 75%)" ? 'checked' : '' }} @endif
+                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600">
                     <label for="slope_surface2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Partially
                         protected
                         (25% -
@@ -78,9 +90,11 @@
                 </div>
                 <div class="flex items-center mb-2">
                     <input id="slope_surface3" type="radio" name="slope_surface" value="Substantially unprotected (<25)"
+                        @if(isset($characteristic->slope_surface))
+                    {{$characteristic->slope_surface == "Substantially unprotected (<25)" ? 'checked' : '' }} @endif
                         class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="slope_surface3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
-                        unprotected (< 25)</label>
+                        <label for="slope_surface3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
+                            unprotected (< 25)</label>
                 </div>
             </div>
         </div>
@@ -94,12 +108,21 @@
             <div class="mb-2">
                 <div class="flex items-center mb-2">
                     <input id="zone1" type="radio" name="zone_of_depression" value="Yes"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        @if(isset($characteristic->zone_of_depression))
+                    {{$characteristic->slope_surface == "Yes" ? 'checked' : '' }} @endif
+                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600">
                     <label for="zone1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Yes</label>
                 </div>
                 <div class="flex items-center mb-2">
-                    <input id="zone2" type="radio" name="zone_of_depression" value="No" checked
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="zone2" type="radio" name="zone_of_depression" value="No"
+                        @if(isset($characteristic->zone_of_depression))
+                    {{$characteristic->slope_surface == "No" ? 'checked' : 'checked' }} @endif
+                    checked
+                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600">
                     <label for="zone2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No</label>
                 </div>
                 <p class="text-sm text-gray-500">
@@ -156,37 +179,46 @@
                     </th>
                     <td class="p-2">
                         <input type="number" step="0.01" name="crest_size"
+                            value="{{isset($characteristic->crest_size) ? $characteristic->crest_size : ''}}"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
-                        <input type="number" step="0.01" name="crest_spacing"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="number" step="0.01" name="crest_spacing" value="{{isset($characteristic->crest_spacing) ?
+                        $characteristic->crest_spacing : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
                         <select name="crest_type"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Select..</option>
+                            <option value="{{isset($characteristic->crest_type) ?
+                        $characteristic->crest_type : ''}}" selected hidden>{{isset($characteristic->crest_type) ?
+                                $characteristic->crest_type : 'Select..'}}</option>
                             <option>U-Channel</option>
                             <option>Step Channel</option>
                             <option>Downpipes</option>
                             <option>Ditch</option>
                         </select>
-
                     </td>
                     <td class="p-2">
                         <select name="crest_adequante"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Y/N</option>
+                            <option value="{{isset($characteristic->crest_adequante) ?
+                                $characteristic->crest_adequante : ''}}" selected hidden>
+                                {{isset($characteristic->crest_adequante) ?
+                                $characteristic->crest_adequante : 'Y/N'}}</option>
                             <option>Yes</option>
                             <option>No</option>
                         </select>
                     </td>
 
                     <td class="p-2">
-                        <input type="text" name="crest_remarks"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="text" name="crest_remarks" value="{{isset($characteristic->crest_remarks) ?
+                        $characteristic->crest_remarks : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                     </td>
                 </tr>
 
@@ -196,37 +228,46 @@
                     </th>
                     <td class="p-2">
                         <input type="number" step="0.01" name="berm_size"
+                            value="{{isset($characteristic->berm_size) ? $characteristic->berm_size : ''}}"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
-                        <input type="number" step="0.01" name="berm_spacing"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="number" step="0.01" name="berm_spacing" value="{{isset($characteristic->berm_spacing) ?
+                        $characteristic->berm_spacing : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
                         <select name="berm_type"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Select..</option>
+                            <option value="{{isset($characteristic->berm_type) ?
+                        $characteristic->berm_type : ''}}" selected hidden>{{isset($characteristic->berm_type) ?
+                                $characteristic->berm_type : 'Select..'}}</option>
                             <option>U-Channel</option>
                             <option>Step Channel</option>
                             <option>Downpipes</option>
                             <option>Ditch</option>
                         </select>
-
                     </td>
                     <td class="p-2">
                         <select name="berm_adequante"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Y/N</option>
+                            <option value="{{isset($characteristic->berm_adequante) ?
+                                $characteristic->berm_adequante : ''}}" selected hidden>
+                                {{isset($characteristic->berm_adequante) ?
+                                $characteristic->berm_adequante : 'Y/N'}}</option>
                             <option>Yes</option>
                             <option>No</option>
                         </select>
                     </td>
 
                     <td class="p-2">
-                        <input type="text" name="berm_remarks"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="text" name="berm_remarks" value="{{isset($characteristic->berm_remarks) ?
+                        $characteristic->berm_remarks : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                     </td>
                 </tr>
 
@@ -236,37 +277,46 @@
                     </th>
                     <td class="p-2">
                         <input type="number" step="0.01" name="onslope_size"
+                            value="{{isset($characteristic->onslope_size) ? $characteristic->onslope_size : ''}}"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
-                        <input type="number" step="0.01" name="onslope_spacing"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="number" step="0.01" name="onslope_spacing" value="{{isset($characteristic->onslope_spacing) ?
+                        $characteristic->onslope_spacing : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
                         <select name="onslope_type"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Select..</option>
+                            <option value="{{isset($characteristic->onslope_type) ?
+                        $characteristic->onslope_type : ''}}" selected hidden>{{isset($characteristic->onslope_type) ?
+                                $characteristic->onslope_type : 'Select..'}}</option>
                             <option>U-Channel</option>
                             <option>Step Channel</option>
                             <option>Downpipes</option>
                             <option>Ditch</option>
                         </select>
-
                     </td>
                     <td class="p-2">
                         <select name="onslope_adequante"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Y/N</option>
+                            <option value="{{isset($characteristic->onslope_adequante) ?
+                                $characteristic->onslope_adequante : ''}}" selected hidden>
+                                {{isset($characteristic->onslope_adequante) ?
+                                $characteristic->onslope_adequante : 'Y/N'}}</option>
                             <option>Yes</option>
                             <option>No</option>
                         </select>
                     </td>
 
                     <td class="p-2">
-                        <input type="text" name="onslope_remarks"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="text" name="onslope_remarks" value="{{isset($characteristic->onslope_remarks) ?
+                        $characteristic->onslope_remarks : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                     </td>
                 </tr>
 
@@ -276,37 +326,46 @@
                     </th>
                     <td class="p-2">
                         <input type="number" step="0.01" name="toe_size"
+                            value="{{isset($characteristic->toe_size) ? $characteristic->toe_size : ''}}"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
-                        <input type="number" step="0.01" name="toe_spacing"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="number" step="0.01" name="toe_spacing" value="{{isset($characteristic->toe_spacing) ?
+                        $characteristic->toe_spacing : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
 
                     </td>
                     <td class="p-2">
                         <select name="toe_type"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Select..</option>
+                            <option value="{{isset($characteristic->toe_type) ?
+                        $characteristic->toe_type : ''}}" selected hidden>{{isset($characteristic->toe_type) ?
+                                $characteristic->toe_type : 'Select..'}}</option>
                             <option>U-Channel</option>
                             <option>Step Channel</option>
                             <option>Downpipes</option>
                             <option>Ditch</option>
                         </select>
-
                     </td>
                     <td class="p-2">
                         <select name="toe_adequante"
                             class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                            <option value="" selected hidden>Y/N</option>
+                            <option value="{{isset($characteristic->toe_adequante) ?
+                                $characteristic->toe_adequante : ''}}" selected hidden>
+                                {{isset($characteristic->toe_adequante) ?
+                                $characteristic->toe_adequante : 'Y/N'}}</option>
                             <option>Yes</option>
                             <option>No</option>
                         </select>
                     </td>
 
                     <td class="p-2">
-                        <input type="text" name="toe_remarks"
-                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <input type="text" name="toe_remarks" value="{{isset($characteristic->toe_remarks) ?
+                        $characteristic->toe_remarks : ''}}" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs
+                        focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                     </td>
                 </tr>
             </tbody>

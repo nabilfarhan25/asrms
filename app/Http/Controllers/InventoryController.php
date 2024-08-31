@@ -310,6 +310,46 @@ class InventoryController extends Controller
         return redirect('/management');
     }
 
+    public function edit_geometry(string $slug)
+    {
+        $data = [
+            'slope' => Slopes::where('slug', $slug)->first(),
+            'geometry' => json_decode(Slopes::where('slug', $slug)->first()['geometry']),
+        ];
+        return view('inventory.geometry', $data);
+    }
+
+    public function change_geometry(Request $request)
+    {
+        $geo = $request->all();
+        unset($geo['_token']);
+
+        //dd($geo);
+        $request->session()->put('geometry', $geo);
+        return redirect('/edit/characteristic/' . $request->slug);
+    }
+    
+    public function edit_characteristic(Request $request)
+    {
+        $geo = $request->session()->get('geometry');
+        $data = [
+            'slope' => Slopes::where('slug', $geo['slug'])->first(),
+            'characteristic' => json_decode(Slopes::where('slug', $geo['slug'])->first()['characteristic']),
+        ];
+
+        return view('inventory.characteristic', $data);
+    }
+
+    public function change_characteristic(Request $request)
+    {
+        $char = $request->all();
+        unset($char['_token']);
+
+        //dd($char);
+        $request->session()->put('characteristic', $char);
+        return redirect('/create/rating/' . $request->slug);
+    }
+
     public function tempUpload(Request $request)
     {
         if ($request->hasFile('plan')) {

@@ -16,7 +16,9 @@
     </div>
     <div class="flex items-center">
         <input type="checkbox" name="section" value="use" id="section2Toggle" x-model="section2Enabled"
-            class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 rounded focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            {{isset($geometry->section) ? 'checked' : ''}}
+        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 rounded focus:ring-lime-500 dark:focus:ring-lime-600
+        dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         <label for="section2Toggle" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">2-2
             (Maximum Feature Height)</label>
     </div>
@@ -454,28 +456,28 @@
     <script>
         function formHandler() {
                     return {
-                        soil_slope_height: 0,
-                        soil_slope_height_2: 0,
-                        rock_slope_height: 0,
-                        rock_slope_height_2: 0,
-                        height_r: 0,
-                        height_r_2: 0,
-                        crest_wall_height: 0,
-                        crest_wall_height_2: 0,
-                        toe_wall_height: 0,
-                        toe_wall_height_2: 0,
-                        upslope_angle: 0,
-                        upslope_angle_2: 0,
-                        surchange_above_slope_crest: 0,
-                        surchange_above_slope_crest_2: 0,
-                        soil_slope_angle: 0,
-                        soil_slope_angle_2: 0,
-                        average_slope_angle: 0,
-                        average_slope_angle_2: 0,
-                        downslope_gradient: 0,
-                        downslope_gradient_2: 0,
-                        soil_bulk_unit_weight: 1,
-                        section2Enabled: false,
+                        soil_slope_height: {{isset($geometry->soil_slope_height) ? $geometry->soil_slope_height : 0}},
+                        soil_slope_height_2: {{isset($geometry->soil_slope_height_2) ? $geometry->soil_slope_height_2 : 0}},
+                        rock_slope_height: {{isset($geometry->rock_slope_height) ? $geometry->rock_slope_height : 0}},
+                        rock_slope_height_2: {{isset($geometry->rock_slope_height_2) ? $geometry->rock_slope_height_2 : 0}},
+                        height_r: {{isset($geometry->height_r) ? $geometry->height_r : 0}},
+                        height_r_2: {{isset($geometry->height_r_2) ? $geometry->height_r_2 : 0}},
+                        crest_wall_height: {{isset($geometry->crest_wall_height) ? $geometry->crest_wall_height : 0}},
+                        crest_wall_height_2: {{isset($geometry->crest_wall_height_2) ? $geometry->crest_wall_height_2 : 0}},
+                        toe_wall_height: {{isset($geometry->toe_wall_height) ? $geometry->toe_wall_height : 0}},
+                        toe_wall_height_2: {{isset($geometry->toe_wall_height_2) ? $geometry->toe_wall_height_2 : 0}},
+                        upslope_angle: {{isset($geometry->upslope_angle) ? $geometry->upslope_angle : 0}},
+                        upslope_angle_2: {{isset($geometry->upslope_angle_2) ? $geometry->upslope_angle_2 : 0}},
+                        surchange_above_slope_crest: {{isset($geometry->surchange_above_slope_crest) ? $geometry->surchange_above_slope_crest : 0}},
+                        surchange_above_slope_crest_2: {{isset($geometry->surchange_above_slope_crest_2) ? $geometry->surchange_above_slope_crest_2 : 0}},
+                        soil_slope_angle: {{isset($geometry->soil_slope_angle) ? $geometry->soil_slope_angle : 0}},
+                        soil_slope_angle_2: {{isset($geometry->soil_slope_angle_2) ? $geometry->soil_slope_angle_2 : 0}},
+                        average_slope_angle:{{isset($geometry->average_slope_angle) ? $geometry->average_slope_angle : 0}},
+                        average_slope_angle_2: {{isset($geometry->average_slope_angle_2) ? $geometry->average_slope_angle_2 : 0}},
+                        downslope_gradient: {{isset($geometry->downslope_gradient) ? $geometry->downslope_gradient : 0}},
+                        downslope_gradient_2:{{isset($geometry->downslope_gradient_2) ? $geometry->downslope_gradient_2 : 0}},
+                        soil_bulk_unit_weight: {{isset($geometry->soil_bulk_unit_weight) ? $geometry->soil_bulk_unit_weight : 1}},
+                        section2Enabled: {{isset($geometry->section) ? 'true' : 'false'}},
                         get featureHeight1() {
                             return this.soil_slope_height + this.rock_slope_height + this.crest_wall_height + this.toe_wall_height;
                         },
@@ -664,14 +666,18 @@
                 <td class="border border-gray-300 px-4 py-2">Toe</td>
                 <td class="border border-gray-300 px-4 py-2">
                     <input type="text" id="toe_facility_type" required name="toe_facility_type"
+                        value="{{isset($geometry->toe_facility_type) ? $geometry->toe_facility_type : ''}}"
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 </td>
                 <td class="border border-gray-300 px-4 py-2">
                     <select id="toe_facility_group" name="toe_facility_group"
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">>
+                        <option hidden
+                            value="{{isset($geometry->toe_facility_group) ? $geometry->toe_facility_group : ''}}">
+                            {{isset($geometry->toe_facility_group) ? $geometry->toe_facility_group : ''}}
+                        </option>
                         <option value="1(a)">1 (A)</option>
                         <option value="1(b)">1 (B)</option>
-
                         <option value="2(a)">2 (A)</option>
                         <option value="2(b)">2 (B)</option>
                         <option value="3">3</option>
@@ -686,7 +692,8 @@
                             <label for="toe_l" class="block mb-1 text-sm font-medium text-gray-500 dark:text-white">L
                                 =
                                 -- m</label>
-                            <input type="number" step="0.01" id="toe_l" name="toe_l" required
+                            <input type="number" step="0.01" id="toe_l" name="toe_l" required value="{{isset($geometry->toe_l) ?
+                    $geometry->toe_l : 0}}"
                                 class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                         </div>
 
@@ -694,7 +701,8 @@
                             <label for="toe_w"
                                 class="block mb-1 text-sm font-medium text-gray-500 dark:text-white">&#969;
                                 = -- Deg</label>
-                            <input type="number" step="0.01" id="toe_w" name="toe_w" required
+                            <input type="number" step="0.01" id="toe_w" name="toe_w" required value="{{isset($geometry->toe_w) ?
+                    $geometry->toe_w : 0}}"
                                 class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                         </div>
                     </div>
@@ -705,14 +713,18 @@
                 <td class="border border-gray-300 px-4 py-2">Crest</td>
                 <td class="border border-gray-300 px-4 py-2">
                     <input type="text" id="crest_facility_type" required name="crest_facility_type"
+                        value="{{isset($geometry->crest_facility_type) ? $geometry->crest_facility_type : ''}}"
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 </td>
                 <td class="border border-gray-300 px-4 py-2">
                     <select id="crest_facility_group" name="crest_facility_group"
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">>
+                        <option hidden
+                            value="{{isset($geometry->toe_facility_group) ? $geometry->toe_facility_group : ''}}">
+                            {{isset($geometry->toe_facility_group) ? $geometry->toe_facility_group : ''}}
+                        </option>
                         <option value="1(a)">1 (A)</option>
                         <option value="1(b)">1 (B)</option>
-
                         <option value="2(a)">2 (A)</option>
                         <option value="2(b)">2 (B)</option>
                         <option value="3">3</option>
@@ -726,8 +738,10 @@
                     <label for="toe_l" class="block mb-1 text-sm font-medium text-gray-500 dark:text-white">D
                         =
                         -- m</label>
-                    <input type="number" step="0.01" id="crest_d" name="crest_d" required
-                        class="mb-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    <input type="number" step="0.01" id="crest_d" name="crest_d" required value="{{isset($geometry->crest_d) ?
+                    $geometry->crest_d : 0}}" class="mb-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600
+                    focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                    dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 </td>
             </tr>
         </tbody>
@@ -755,6 +769,7 @@
                 <td class="border border-gray-300 px-4 py-2">Toe</td>
                 <td class="border border-gray-300 px-4 py-2">
                     <input type="text" id="toe_facility_type_2" required name="toe_facility_type_2"
+                        value="{{isset($geometry->toe_facility_type_2) ? $geometry->toe_facility_type_2 : ''}}"
                         :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}"
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 </td>
@@ -762,9 +777,12 @@
                     <select id="toe_facility_group_2" name="toe_facility_group_2" :disabled="!section2Enabled"
                         :class="{'bg-slate-100': !section2Enabled}"
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">>
+                        <option hidden
+                            value="{{isset($geometry->toe_facility_group_2) ? $geometry->toe_facility_group_2 : ''}}">
+                            {{isset($geometry->toe_facility_group_2) ? $geometry->toe_facility_group_2 : ''}}
+                        </option>
                         <option value="1(a)">1 (A)</option>
                         <option value="1(b)">1 (B)</option>
-
                         <option value="2(a)">2 (A)</option>
                         <option value="2(b)">2 (B)</option>
                         <option value="3">3</option>
@@ -780,7 +798,8 @@
                                 =
                                 -- m</label>
                             <input type="number" step="0.01" id="toe_l_2" name="toe_l_2" required
-                                :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}"
+                                :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}" value="{{isset($geometry->toe_l_2) ?
+                    $geometry->toe_l_2 : 0}}"
                                 class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                         </div>
 
@@ -789,7 +808,8 @@
                                 class="block mb-1 text-sm font-medium text-gray-500 dark:text-white">&#969;
                                 = -- Deg</label>
                             <input type="number" step="0.01" id="toe_w_2" name="toe_w_2" required
-                                :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}"
+                                :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}" value="{{isset($geometry->toe_w_2) ?
+                    $geometry->toe_w_2 : 0}}"
                                 class=" bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                         </div>
                     </div>
@@ -801,15 +821,19 @@
                 <td class="border border-gray-300 px-4 py-2">
                     <input type="text" id="crest_facility_type_2" required name="crest_facility_type_2"
                         :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}"
+                        value="{{isset($geometry->crest_facility_type_2) ? $geometry->crest_facility_type_2 : ''}}"
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 </td>
                 <td class="border border-gray-300 px-4 py-2">
                     <select id="crest_facility_group_2" name="crest_facility_group_2" :disabled="!section2Enabled"
                         :class="{'bg-slate-100': !section2Enabled}"
-                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">>
+                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                        <option hidden
+                            value="{{isset($geometry->crest_facility_group_2) ? $geometry->crest_facility_group_2 : ''}}">
+                            {{isset($geometry->crest_facility_group_2) ? $geometry->crest_facility_group_2 : ''}}
+                        </option>
                         <option value="1(a)">1 (A)</option>
                         <option value="1(b)">1 (B)</option>
-
                         <option value="2(a)">2 (A)</option>
                         <option value="2(b)">2 (B)</option>
                         <option value="3">3</option>
@@ -824,7 +848,8 @@
                         =
                         -- m</label>
                     <input type="number" step="0.01" id="crest_d_2" name="crest_d_2" required
-                        :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}"
+                        :disabled="!section2Enabled" :class="{'bg-slate-100': !section2Enabled}" value="{{isset($geometry->crest_d_2) ?
+                    $geometry->crest_d_2 : 0}}"
                         class="mb-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                 </td>
             </tr>
