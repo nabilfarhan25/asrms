@@ -1,4 +1,4 @@
-<x-forms.select_ctl />
+<x-forms.select_ctl ctl="{{isset($rating->consequence_to_life) ? $rating->consequence_to_life : 'category-1'}}" />
 <x-line />
 
 <div x-data="yearOfFormation()">
