@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/edit/geometry/{slug}', [InventoryController::class, 'change_geometry']);
     Route::get('/edit/characteristic/{slug}', [InventoryController::class, 'edit_characteristic']);
     Route::post('/edit/characteristic/{slug}', [InventoryController::class, 'change_characteristic']);
+    Route::get('/edit/rating/{slug}', [InventoryController::class, 'edit_rating']);
+    Route::post('/edit/rating/{slug}', [InventoryController::class, 'change_rating']);
 
     
     Route::get('/create/geometry/{slug}', [InventoryController::class, 'create_geometry']);

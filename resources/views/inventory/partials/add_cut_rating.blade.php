@@ -1,4 +1,4 @@
-<x-forms.select_ctl />
+<x-forms.select_ctl ctl="{{isset($rating->consequence_to_life) ? $rating->consequence_to_life : 'category-1'}}" />
 <x-line />
 
 <div x-data="yearOfFormation()">
@@ -79,8 +79,8 @@
     <script>
         function yearOfFormation() {
             return {
-                A1: 0,
-                A2: 0,
+                A1: {{isset($rating->A1) ? $rating->A1 : 0}},
+                A2: {{isset($rating->A2) ? $rating->A2 : 0}},
             }
         }
     </script>
@@ -126,7 +126,7 @@
     <script>
         function classificationForm() {
             return {
-                A3: 0,
+                A3: {{isset($rating->A3) ? $rating->A3 : 0}},
             }
         }       
     </script>
@@ -135,7 +135,8 @@
 <x-line />
 
 
-<div x-data="{ A4: '0', A4_pos: '', A5: '0', A5_pos: '' }" class="">
+<div x-data="{ A4: '{{isset($rating->A4) ? $rating->A4 : 0}}', A4_pos: '{{isset($rating->A4_pos) ? $rating->A4_pos : ''}}', A5: '{{isset($rating->A5) ? $rating->A5 : 0}}', A5_pos: '{{isset($rating->A5_pos) ? $rating->A5_pos : ''}}' }"
+    class="">
 
     <div>
         <div class="flex justify-between items-center mb-2">
@@ -387,7 +388,7 @@
     <script>
         function Disf() {
             return {
-                B1: 0,
+                B1: {{isset($rating->B1) ? $rating->B1 : 0}},
             }
         }       
     </script>
@@ -407,18 +408,18 @@
         </div>
 
         <ul>
-            <li class="mb-2" x-on:click="B2 = 10">
+            <li class="m">
                 <label class="inline-flex items-center">
-                    <input type="radio"
+                    <input type="radio" value="10" x-model="B2"
                         class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <p class="ms-2">
                         <span class="text-sm">Massive failures (> 500 m3)</span>
                     </p>
                 </label>
             </li>
-            <li class="mb-2" x-on:click="B2 = 5">
+            <li class="m">
                 <label class="inline-flex items-center">
-                    <input type="radio"
+                    <input type="radio" value="5" x-model="B2"
                         class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <p class="ms-2">
                         <span class="text-sm">Major or repeated minor failures or records of
@@ -426,9 +427,9 @@
                     </p>
                 </label>
             </li>
-            <li class="mb-2" x-on:click="B2 = 2">
+            <li class="m">
                 <label class="inline-flex items-center">
-                    <input type="radio"
+                    <input type="radio" value="2" x-model="B2"
                         class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <p class="ms-2">
                         <span class="text-sm">Minor failure or records of previous moderate
@@ -436,9 +437,9 @@
                     </p>
                 </label>
             </li>
-            <li class="mb-2" x-on:click="B2 = 1">
+            <li class="m">
                 <label class="inline-flex items-center">
-                    <input type="radio"
+                    <input type="radio" value="1" x-model="B2"
                         class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <p class="ms-2">
                         <span class="text-sm">No failure or records of previous minor signs of
@@ -452,10 +453,10 @@
 
     <script>
         function instabilityafterForm() {
-    return {
-        B2: 0,
-    }
-}
+            return {
+                B2: {{isset($rating->B2) ? $rating->B2 : 0}},
+            }
+        }
     </script>
 </div>
 <x-line />
@@ -532,7 +533,7 @@
             facilityGroup: '{{$geometry["crest_facility_group"];}}',
             distance: '{{$geometry["crest_d"];}}',
             height: '{{$geometry["feature_height"];}}',
-            tableChoice: 'buildings',
+            tableChoice: '{{isset($rating->crest_vulnerbility) ? ($rating->crest_vulnerbility=="buildings" ? "buildings" : "other")  : ""}}',
             get C1() {
                 const C1_values = {
                     '1(a)': 9,
@@ -670,7 +671,7 @@
                 distance: '{{$geometry["toe_l"];}}',
                 shadowAngle: '{{$geometry["toe_w"];}}',
                 height: '{{$geometry["feature_height"];}}',
-                tableChoice: 'buildings',
+                tableChoice: '{{isset($rating->toe_vulnerbility) ? ($rating->toe_vulnerbility=="buildings" ? "buildings" : "other")  : ""}}',
                 get D1() {
                     const D1_values = {
                         '1(a)': 9,

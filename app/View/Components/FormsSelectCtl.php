@@ -6,12 +6,12 @@ use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class forms.select_ctl extends Component
+class FormsSelectCtl extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(public string $ctl)
     {
         //
     }

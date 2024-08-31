@@ -3,8 +3,8 @@
 </h3>
 <ul class="grid w-full gap-6 md:grid-cols-3">
     <li>
-        <input type="radio" id="cat1" name="consequence_to_life" value="category-1" checked class="hidden peer"
-            required />
+        <input type="radio" id="cat1" name="consequence_to_life" value="category-1" class="hidden peer" required
+            {{$ctl=='category-1' ? 'checked' : '' }} />
         <label for="cat1"
             class="inline-flex w-full p-6 text-gray-500 border h-full pb-14 border-gray-400 rounded-2xl cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
             <div class="block">
@@ -27,7 +27,8 @@
         </label>
     </li>
     <li>
-        <input type="radio" id="cat2" name="consequence_to_life" value="category-2" class="hidden peer">
+        <input type="radio" id="cat2" name="consequence_to_life" value="category-2" class="hidden peer"
+            {{$ctl=='category-2' ? 'checked' : '' }} />
         <label for="cat2"
             class="inline-flex w-full p-6 text-gray-500 border h-full pb-14 border-gray-400 rounded-2xl cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
             <div class="block">
@@ -54,7 +55,8 @@
         </label>
     </li>
     <li>
-        <input type="radio" id="cat3" name="consequence_to_life" value="category-3" class="hidden peer">
+        <input type="radio" id="cat3" name="consequence_to_life" value="category-3" class="hidden peer"
+            {{$ctl=='category-3' ? 'checked' : '' }} />
         <label for="cat3"
             class="inline-flex w-full p-6 text-gray-500 border h-full pb-14 border-gray-400 rounded-2xl cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-lime-500 peer-checked:border-lime-600 peer-checked:text-lime-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
             <div class="block">
