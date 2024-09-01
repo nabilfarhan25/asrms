@@ -140,13 +140,13 @@
                                 <div class="w-full">
                                     Latest inspection :
                                     <h2 class="font-bold text-lg">
-                                        {{date('d M Y', strtotime($maintenance->updated_at))}}
+                                        {{date('d M Y', strtotime($maintenance->created_at))}}
                                     </h2>
                                 </div>
                                 <div class="w-full">
-                                    Next inspection :
+                                    Next Inspection :
                                     <h2 class="font-bold text-lg">
-                                        {{date('d M Y', strtotime($maintenance->maintenance_inspection))}}
+                                        {{date('d M Y', strtotime($slope->maintenance_inspection))}}
                                     </h2>
                                 </div>
                                 @else
@@ -299,7 +299,7 @@
                                 <div class="grid grid-cols-3 py-5">
                                     <div>
                                         <h4 class="font-semibold">Documentation</h4>
-                                        <p class="text-gray-500">Taken on : {{$maintenance->date_of_maintenance}}</p>
+                                        <p class="text-gray-500">Taken on : {{$maintenance->created_at}}</p>
                                     </div>
                                     @if($maintenance->img !== '[]')
                                     <div class="col-span-2">
@@ -348,14 +348,21 @@
                                             </div>
                                             <div class="ml-2">
                                                 <h4 class="font-bold text-lg">
-                                                    Maintenance {{$maintenance->date_of_maintenance}}
+                                                    Maintenance {{date('d M Y', strtotime($maintenance->created_at))}}
                                                 </h4>
-                                                <p>PDF File</p>
+                                                <p>Attacted File</p>
                                             </div>
                                         </div>
 
                                         <div>
-                                            Download
+                                            @foreach (json_decode($maintenance->img) as $i)
+                                            @if ($i->type == 'file_maintenance')
+                                            <a download target="_blank"
+                                                href="/storage/{{$slope->slug}}/maintenance-{{str_replace('/','',$maintenance->date_of_maintenance)}}/{{$i->file}}/{{$i->img}}">
+                                                Download
+                                            </a>
+                                            @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

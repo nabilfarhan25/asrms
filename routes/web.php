@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/inspection/characteristic/{slug}', [InspectionController::class, 'store_characteristic']);
     Route::get('/inspection/rating/{slug}', [InspectionController::class, 'create_rating']);
     Route::post('/inspection/rating/{slug}', [InspectionController::class, 'store_rating']);
+    Route::get('/create/maintenance/{slug}', [InspectionController::class, 'create_maintenance']);
+    Route::post('/create/maintenance/{slug}', [InspectionController::class, 'store_maintenance']);
     
 });
 

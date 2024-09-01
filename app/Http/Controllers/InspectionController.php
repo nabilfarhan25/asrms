@@ -69,7 +69,7 @@ class InspectionController extends Controller
     {
         $data = [
             'slope' => Slopes::where('slug', $slug)->first(),
-            'maintenance' => Maintenance::where('slug', $slug)->orderBy('date_of_maintenance', 'desc')->first(),
+            'maintenance' => Maintenance::where('slug', $slug)->latest('created_at')->first(),
 
             'img' => json_decode(Slopes::where('slug', $slug)->first()['img']),
         ];
@@ -81,7 +81,7 @@ class InspectionController extends Controller
         $data = [
             'slope' => Slopes::where('slug', $slug)->first(),
             'inspections' => Inspection::where('slug', $slug)->get(),
-            'maintenance' => Maintenance::where('slug', $slug)->orderBy('date_of_maintenance', 'desc')->first(),
+            'maintenance' => Maintenance::where('slug', $slug)->latest('created_at')->first(),
 
         ];
         return view('inspection.inspection', $data);
@@ -109,7 +109,7 @@ class InspectionController extends Controller
     {
         $data = [
             'slope' => Slopes::where('slug', $slug)->first(),
-            'maintenance' => Maintenance::where('slug', $slug)->orderBy('date_of_maintenance', 'desc')->first(),
+            'maintenance' => Maintenance::where('slug', $slug)->latest('created_at')->first(),
             'maintenances' => Maintenance::where('slug', $slug)->get(),
         ];
         return view('inspection.maintenance',$data);
@@ -340,12 +340,57 @@ class InspectionController extends Controller
         $slope->ranking = json_encode($ranking);
         $slope->img = json_encode($dir);
         $slope->engineer_inspection = Carbon::now()->addYear($inspection_date);
-        $slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
+        //$slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
 
         $slope->save();
 
         $request->session()->forget(['geometry', 'characteristic', 'rating']);
         return redirect('/management');
+    }
+
+    public function create_maintenance(string $slug)
+    {
+        $data = [
+            'slope' => Slopes::where('slug', $slug)->first(),
+        ];
+        return view('inspection.maintenance.add',$data);
+    }
+    public function store_maintenance(Request $request)
+    {
+        $slope = Slopes::where('slug',$request->slug)->first();
+        $rating = json_decode(Slopes::where('slug', $request->slug)->first()['rating']);
+        
+        $img = TemporaryFile::all();
+        $dir = TemporaryFile::select(['img', 'file','type'])->get();
+
+        foreach ($img as $i) {
+            Storage::move('temp/' . $i->file, $request->slug.'/maintenance-'.str_replace('/','',$request->date_of_maintenance).'/'. $i->file);
+            TemporaryFile::find($i->id)->delete();
+        }
+
+        $maintenance = new Maintenance();
+        $maintenance->slope_name = $slope->slope_name;
+        $maintenance->slug = $slope->slug;
+        $maintenance->slope_type = $slope->slope_type;
+        $maintenance->date_of_maintenance = $request->date_of_maintenance;
+        $maintenance->weather_condition = $request->weather_condition;
+        $maintenance->resume = $request->resume;
+        $maintenance->img = json_encode($dir);
+        $maintenance->save();
+
+        $cons = $rating->consequence_to_life;
+        if ($cons == 'category-1') {
+            $maintenance_date = 1;
+        } else if($cons == 'category-2'){
+            $maintenance_date = 1;
+        }else if($cons == 'category-3'){
+            $maintenance_date = 2;
+        }
+        $slope = Slopes::where('slug', $request->slug)->firstOrFail();
+        $slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
+        $slope->save();
+
+        return redirect('/inspection/'.$request->slug);
     }
 
 }
