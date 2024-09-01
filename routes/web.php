@@ -4,6 +4,7 @@ use App\Http\Controllers\InspectionController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\PreservationController;
+use App\Http\Controllers\MitigationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/preservation', [PreservationController::class, 'index']);
     Route::get('/preservation/{slug}', [PreservationController::class, 'detail']);
     Route::get('/preservation/{slug}/{id}', [PreservationController::class, 'preservation']);
-    Route::delete('/preservation/{slug}', [PreservationController::class, 'destroy']);
+
+    // Mitigation
+    Route::get('/mitigation', [MitigationController::class, 'index']);
+    Route::get('/mitigation/{slug}', [MitigationController::class, 'detail']);
+    Route::get('/mitigation/{slug}/{id}', [MitigationController::class, 'mitigation']);
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -80,6 +85,13 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     // Preservation
     Route::get('/create/preservation/{slug}', [PreservationController::class, 'create']);
     Route::post('/create/preservation/{slug}', [PreservationController::class, 'store']);
+    Route::delete('/preservation/{slug}', [PreservationController::class, 'destroy']);
+
+    // Mitigation
+    Route::get('/create/mitigation/{slug}', [MitigationController::class, 'create']);
+    Route::post('/create/mitigation/{slug}', [MitigationController::class, 'store']);
+    Route::delete('/mitigation/{slug}', [MitigationController::class, 'destroy']);
+
 });
 
 require __DIR__.'/auth.php';
