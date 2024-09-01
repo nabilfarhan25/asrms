@@ -5,6 +5,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\PreservationController;
 use App\Http\Controllers\MitigationController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/mitigation', [MitigationController::class, 'index']);
     Route::get('/mitigation/{slug}', [MitigationController::class, 'detail']);
     Route::get('/mitigation/{slug}/{id}', [MitigationController::class, 'mitigation']);
+
+    // PDF
+    Route::get('/pdf-inventory/{slug}', [PDFController::class, 'inventory']);
+    Route::get('/pdf-rating/{slug}', [PDFController::class, 'rating']);
+    Route::get('/pdf-mitigation/{id}', [PDFController::class, 'mitigation']);
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
