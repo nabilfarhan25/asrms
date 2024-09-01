@@ -3,6 +3,7 @@
 use App\Http\Controllers\InspectionController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\PreservationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/engineer-inspection/{slug}', [InspectionController::class, 'inspection']);
     Route::get('/engineer-inspection/{slug}/{id}', [InspectionController::class, 'detail_inspection']);
     Route::get('/maintenance-routine/{slug}', [InspectionController::class, 'maintenance']);
+
+    // Preservation
+    Route::get('/preservation', [PreservationController::class, 'index']);
+    Route::post('/preservation', [PreservationController::class, 'index']);
+    Route::get('/preservation/{slug}', [PreservationController::class, 'detail']);
+    Route::get('/preservation/{slug}/{id}', [PreservationController::class, 'preservation']);
+    Route::delete('/preservation/{slug}', [PreservationController::class, 'destroy']);
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -69,6 +77,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/create/maintenance/{slug}', [InspectionController::class, 'create_maintenance']);
     Route::post('/create/maintenance/{slug}', [InspectionController::class, 'store_maintenance']);
     
+    // Preservation
+    Route::get('/create/preservation/{slug}', [PreservationController::class, 'create']);
+    Route::post('/create/preservation/{slug}', [PreservationController::class, 'store']);
 });
 
 require __DIR__.'/auth.php';

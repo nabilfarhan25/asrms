@@ -618,6 +618,22 @@ class InventoryController extends Controller
             return $file_maintenance;
         }
 
+        if ($request->hasFile('file_preservation')) {
+            $img = $request->file('file_preservation');
+            $img_name = Str::random(40) . '.' . $img->getClientOriginalExtension();
+            $file_preservation = uniqid('file_preservation-');
+            $img->storeAs('temp/' . $file_preservation, $img_name);
+            TemporaryFile::create(
+                [
+                    'file' => $file_preservation,
+                    'img' => $img_name,
+                    'type' => 'file_preservation',
+
+                ]
+            );
+            return $file_preservation;
+        }
+
         return '';
     }
     public function tempDelete(Request $request)
