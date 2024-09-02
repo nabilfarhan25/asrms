@@ -337,7 +337,7 @@
 
     <script>
         // Create the map and set its view to the chosen coordinates and zoom level
-        var map = L.map('map').setView([lat, lon], 13);
+        var map = L.map('map').setView([lat, lon], 11);
 
         // Add a tile layer to the map (OpenStreetMap tiles in this case)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
