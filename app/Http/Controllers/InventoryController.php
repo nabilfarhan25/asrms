@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inspection;
+use App\Models\Maintenance;
+use App\Models\Mitigation;
+use App\Models\Preservation;
 use App\Models\Slopes;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
@@ -78,7 +82,7 @@ class InventoryController extends Controller
         $item = Slopes::where('slug',$slug)->first();
         $inspection = Inspection::where('slug',$slug)->get();
         $maintenance = Maintenance::where('slug',$slug)->get();
-        $maintenance = Preservation::where('slug',$slug)->get();
+        $preservation = Preservation::where('slug',$slug)->get();
         $mitigation = Mitigation::where('slug',$slug)->get();
 
         Storage::deleteDirectory($slug);
