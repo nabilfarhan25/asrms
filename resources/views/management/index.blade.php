@@ -199,7 +199,7 @@
                                     <div id="is">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            @if ($slope->slope_type == "fill-type")
+                                            @if ($selectedSlope->slope_type == "fill-type")
                                             {{round(json_decode($selectedSlope->ranking)->IS1,2)}}
                                             @else
                                             {{round(json_decode($selectedSlope->ranking)->IS,2)}}
@@ -217,7 +217,7 @@
                                     <div id="cs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            @if ($slope->slope_type == "fill-type")
+                                            @if ($selectedSlope->slope_type == "fill-type")
                                             {{round(json_decode($selectedSlope->ranking)->CS1,2)}}
                                             @else
                                             {{round(json_decode($selectedSlope->ranking)->CS,2)}}
@@ -291,6 +291,10 @@
     </div>
 
     <script>
+        // Define the coordinates for the center of the map
+        var lat = parseInt({{str_replace('°','',$selectedSlope->latitude)}}); // Example latitude
+        var lon = parseInt({{str_replace('°','',$selectedSlope->longtitude)}}); // Example longitude
+
         $(document).ready(function() {
             $('.getDataBtn').on('click', function() {
                 var slug = $(this).data('slug');
@@ -318,6 +322,10 @@
                         
                         $('.getDataBtn div').removeClass('bg-gray-200');
                         row.addClass('bg-gray-200');
+
+                        lat = parseInt(response.latitude);
+                        lon = parseInt(response.longtitude);
+
                     },
                     error: function(xhr) {
                         $('#result').html('<p>Error: ' + xhr.responseText + '</p>');
@@ -328,16 +336,18 @@
     </script>
 
     <script>
-        var map = L.map('map').setView([51.505, -0.09], 13);
+        // Create the map and set its view to the chosen coordinates and zoom level
+        var map = L.map('map').setView([lat, lon], 13);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        // Add a tile layer to the map (OpenStreetMap tiles in this case)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
         }).addTo(map);
 
-        L.marker([51.5, -0.09]).addTo(map)
-            .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+        // Optionally, add a marker at the center point
+        L.marker([lat, lon]).addTo(map)
+            .bindPopup('<b>{{$selectedSlope->slope_name}}</b><br> {{$selectedSlope->location}}')
             .openPopup();
-
 
         const gallery = new Viewer(document.getElementById('images'));
     </script>

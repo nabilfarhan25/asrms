@@ -189,16 +189,22 @@
             </div>
 
             <script>
-                var map = L.map('map').setView([51.505, -0.09], 13);
+                // Define the coordinates for the center of the map
+                var lat = parseInt({{str_replace('°','',$slope->latitude)}}); // Example latitude
+                var lon = parseInt({{str_replace('°','',$slope->longtitude)}}); // Example longitude
+                
+                // Create the map and set its view to the chosen coordinates and zoom level
+                var map = L.map('map').setView([lat, lon], 13);
 
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                // Add a tile layer to the map (OpenStreetMap tiles in this case)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
                 }).addTo(map);
 
-                L.marker([51.5, -0.09]).addTo(map)
-                    .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+                // Optionally, add a marker at the center point
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup('<b>{{$slope->slope_name}}</b><br> {{$slope->location}}')
                     .openPopup();
-
 
                 const gallery = new Viewer(document.getElementById('images'));
             </script>
