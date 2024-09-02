@@ -76,20 +76,24 @@ class InventoryController extends Controller
 
     public function destroy(string $slug){
         $item = Slopes::where('slug',$slug)->first();
-        // $inspection = Inspection::where('slug',$slug)->get();
-        // $maintenance = Maintenance::where('slug',$slug)->get();
-        // $mitigation = Mitigation::where('slug',$slug)->get();
+        $inspection = Inspection::where('slug',$slug)->get();
+        $maintenance = Maintenance::where('slug',$slug)->get();
+        $maintenance = Preservation::where('slug',$slug)->get();
+        $mitigation = Mitigation::where('slug',$slug)->get();
 
-        // Storage::deleteDirectory($slug);
-        // if ($inspection->isNotEmpty()) {
-        //     $inspection->each->delete();
-        // }
-        // if ($maintenance->isNotEmpty()) {
-        //     $maintenance->each->delete();
-        // }
-        // if ($mitigation->isNotEmpty()) {
-        //     $mitigation->each->delete();
-        // }
+        Storage::deleteDirectory($slug);
+        if ($inspection->isNotEmpty()) {
+            $inspection->each->delete();
+        }
+        if ($maintenance->isNotEmpty()) {
+            $maintenance->each->delete();
+        }
+        if ($mitigation->isNotEmpty()) {
+            $mitigation->each->delete();
+        }
+        if ($preservation->isNotEmpty()) {
+            $preservation->each->delete();
+        }
         $item->delete();
 
         return redirect('/inventory')->with('success', 'Item deleted successfully.');
