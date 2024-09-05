@@ -280,14 +280,35 @@ class InventoryController extends Controller
             'CS1' => $CS1,
             'CS2' => $CS2,
             'CS3' => $CS3,
+
+            'IS' => '-',
+            'CS' => '-',
             'TS' => $TS,
         ];
         } else {
             $TS = $IS * $CS;
+
+            // Ranking Score
+            $RS = 0;
+            if ($slope->slope_type == 'cut-type') {
+                $RS = $TS * 0.063;
+            } else if($slope->slope_type == 'rock-type'){
+                $RS = $TS * 0.022;
+            } else if($slope->slope_type == 'fill-type'){
+                $RS = $TS * 0.006;
+            } else if($slope->slope_type == 'retaining-type'){
+                $RS = $TS * 0.027;
+            }
+            else if($slope->slope_type == 'combine-type'){
+                $RS = ($TS * 0.063) + ($TS * 0.027);
+            } else {
+                $RS = '-';
+            }
             $ranking = [
             'IS' =>$IS,
             'CS' =>$CS,
             'TS' =>$TS,
+            'RS' =>$RS,
         ];
         }
 
