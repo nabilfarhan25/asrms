@@ -67,7 +67,7 @@
                 Mitigation
             </div>
         </a>
-        <a href="/map">
+        <a href="https://map-srms.gwadestek.com/" target="_blank">
             <div
                 class=" border-2 border-white px-5 py-3 sm:mr-2 mb-2 flex rounded-full hover:bg-white transition duration-150 hover:text-gray-800">
                 <svg class="w-6 h-6 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"

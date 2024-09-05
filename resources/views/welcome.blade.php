@@ -227,7 +227,7 @@
                         </div>
                     </a>
 
-                    <a class="" href="/slopes">
+                    <a class="" href="https://map-srms.gwadestek.com/" target="_blank">
                         <div
                             class="h-full w-full border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600">
 
