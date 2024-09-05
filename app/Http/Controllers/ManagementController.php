@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Slopes;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class ManagementController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $select = Slopes::whereNotNull('geometry')
                         ->whereNotNull('characteristic')
@@ -16,12 +16,41 @@ class ManagementController extends Controller
                         ->whereNotNull('ranking')
                         ->get()
                         ->first();
-        $data = [
-            'slopes' => slopes::whereNotNull('geometry')
+        
+        $slopes = Slopes::whereNotNull('geometry')
+                        ->whereNotNull('characteristic')
+                        ->whereNotNull('rating')
+                        ->whereNotNull('ranking')
+                        ->get();
+
+        if($request->all() !== []){
+            if ($request->filter == 'high') {
+                $slopes = Slopes::whereNotNull('geometry')
                                 ->whereNotNull('characteristic')
                                 ->whereNotNull('rating')
                                 ->whereNotNull('ranking')
-                                ->get(),
+                                ->orderBy(DB::raw('JSON_EXTRACT(ranking, "$.TS") + 0'), 'desc')
+                                ->get();
+            }
+            if ($request->filter == 'low') {
+                $slopes = Slopes::whereNotNull('geometry')
+                                ->whereNotNull('characteristic')
+                                ->whereNotNull('rating')
+                                ->whereNotNull('ranking')
+                                ->orderBy(DB::raw('JSON_EXTRACT(ranking, "$.TS") + 0'), 'asc')
+                                ->get();
+            }
+            if ($request->filter == 'name') {
+                $slopes = Slopes::whereNotNull('geometry')
+                                ->whereNotNull('characteristic')
+                                ->whereNotNull('rating')
+                                ->whereNotNull('ranking')
+                                ->orderBy('slope_name', 'asc')
+                                ->get();
+            }
+        }
+        $data = [
+            'slopes' => $slopes,
             'sideA' => count(Slopes::where('side_of_road', 'A')->get()),
             'sideB' => count(Slopes::where('side_of_road', 'B')->get()),
             'selectedSlope' => $select,

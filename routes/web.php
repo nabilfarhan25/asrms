@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
     // Management
     Route::get('/management', [ManagementController::class, 'index']);
+    Route::post('/management', [ManagementController::class, 'index']);
     Route::post('/find', [ManagementController::class, 'get']);
     Route::get('/management/{slug}', [ManagementController::class, 'detail']);
 

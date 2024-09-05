@@ -107,6 +107,21 @@
 
                             </div>
                         </div>
+
+                        <div x-data="{ filter: '' }">
+                            <form x-ref="filter" action="" method="POST">
+                                @csrf
+                                <select
+                                    class="block p-3 px-6 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                    name="filter" x-model="filter" @change="$refs.filter.submit()">
+                                    <option value="">Sort By ...</option>
+                                    <option value="name">Name</option>
+                                    <option value="low">Lowest Rank</option>
+                                    <option value="high">Highest Rank</option>
+                                </select>
+                            </form>
+                        </div>
+
                     </div>
 
                     @foreach ($slopes as $slope)
