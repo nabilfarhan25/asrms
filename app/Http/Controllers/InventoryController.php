@@ -129,7 +129,7 @@ class InventoryController extends Controller
         $geo = $request->all();
         unset($geo['_token']);
 
-        //dd($geo);
+        dd($geo);
         $request->session()->put('geometry', $geo);
         return redirect('/create/characteristic/' . $request->slug);
     }
