@@ -25,7 +25,6 @@
             });
         </script>
 
-
     </div>
     <div class="col-span-3">
         <div class="grid sm:grid-cols-3 mb-3">
@@ -1397,7 +1396,7 @@
 
             <div id="accordion-open-body-2" class="hidden" aria-labelledby="accordion-open-heading-2">
                 <div class="p-4 border border-gray-300 rounded-xl">
-                    <img src="/components/slope.png" class="w-full" alt="" id="figureA1">
+                    <img src="/components/slope-combine.png" class="w-full" alt="" id="figureA1">
                 </div>
 
                 <script>
@@ -1826,28 +1825,29 @@
     <script>
         function formHandler() {
                     return {
-                        soil_slope_height: 0,
-                        soil_slope_height_2: 0,
-                        rock_slope_height: 0,
-                        rock_slope_height_2: 0,
-                        height_r: 0,
-                        height_r_2: 0,
-                        crest_wall_height: 0,
-                        crest_wall_height_2: 0,
-                        toe_wall_height: 0,
-                        toe_wall_height_2: 0,
-                        upslope_angle: 0,
-                        upslope_angle_2: 0,
-                        surchange_above_slope_crest: 0,
-                        surchange_above_slope_crest_2: 0,
-                        soil_slope_angle: 0,
-                        soil_slope_angle_2: 0,
-                        average_slope_angle: 0,
-                        average_slope_angle_2: 0,
-                        downslope_gradient: 0,
-                        downslope_gradient_2: 0,
-                        soil_bulk_unit_weight: 1,
-                        section2Enabled: false,
+                        soil_slope_height: {{isset($geometry->soil_slope_height) ? $geometry->soil_slope_height : 0}},
+                        soil_slope_height_2: {{isset($geometry->soil_slope_height_2) ? $geometry->soil_slope_height_2 : 0}},
+                        rock_slope_height: {{isset($geometry->rock_slope_height) ? $geometry->rock_slope_height : 0}},
+                        rock_slope_height_2: {{isset($geometry->rock_slope_height_2) ? $geometry->rock_slope_height_2 : 0}},
+                        height_r: {{isset($geometry->height_r) ? $geometry->height_r : 0}},
+                        height_r_2: {{isset($geometry->height_r_2) ? $geometry->height_r_2 : 0}},
+                        crest_wall_height: {{isset($geometry->crest_wall_height) ? $geometry->crest_wall_height : 0}},
+                        crest_wall_height_2: {{isset($geometry->crest_wall_height_2) ? $geometry->crest_wall_height_2 : 0}},
+                        toe_wall_height: {{isset($geometry->toe_wall_height) ? $geometry->toe_wall_height : 0}},
+                        toe_wall_height_2: {{isset($geometry->toe_wall_height_2) ? $geometry->toe_wall_height_2 : 0}},
+                        upslope_angle: {{isset($geometry->upslope_angle) ? $geometry->upslope_angle : 0}},
+                        upslope_angle_2: {{isset($geometry->upslope_angle_2) ? $geometry->upslope_angle_2 : 0}},
+                        surchange_above_slope_crest: {{isset($geometry->surchange_above_slope_crest) ? $geometry->surchange_above_slope_crest : 0}},
+                        surchange_above_slope_crest_2: {{isset($geometry->surchange_above_slope_crest_2) ? $geometry->surchange_above_slope_crest_2 : 0}},
+                        soil_slope_angle: {{isset($geometry->soil_slope_angle) ? $geometry->soil_slope_angle : 0}},
+                        soil_slope_angle_2: {{isset($geometry->soil_slope_angle_2) ? $geometry->soil_slope_angle_2 : 0}},
+                        average_slope_angle:{{isset($geometry->average_slope_angle) ? $geometry->average_slope_angle : 0}},
+                        average_slope_angle_2: {{isset($geometry->average_slope_angle_2) ? $geometry->average_slope_angle_2 : 0}},
+                        downslope_gradient: {{isset($geometry->downslope_gradient) ? $geometry->downslope_gradient : 0}},
+                        downslope_gradient_2:{{isset($geometry->downslope_gradient_2) ? $geometry->downslope_gradient_2 : 0}},
+                        soil_bulk_unit_weight: {{isset($geometry->soil_bulk_unit_weight) ? $geometry->soil_bulk_unit_weight : 1}},
+                        section2Enabled: {{isset($geometry->section) ? 'true' : 'false'}},
+
                         get featureHeight1() {
                             return this.soil_slope_height + this.rock_slope_height + this.crest_wall_height + this.toe_wall_height;
                         },
