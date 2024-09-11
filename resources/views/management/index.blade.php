@@ -250,7 +250,7 @@
                                     <div id="rs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            {{isset(json_decode($slope->ranking)->RS) ?
+                                            {{isset(json_decode($selectedSlope->ranking)->RS) ?
                                             round(json_decode($selectedSlope->ranking)->RS,2) : '-'}}
                                         </h2>
                                     </div>
