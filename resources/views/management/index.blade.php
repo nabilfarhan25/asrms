@@ -147,7 +147,8 @@
                             </div>
                             <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
                                 <p class="text-sm my-auto text-gray-500">Ranking Score : <span
-                                        class="font-semibold text-gray-800">{{round(json_decode($slope->ranking)->RS,2)}}</span>
+                                        class="font-semibold text-gray-800">{{isset(json_decode($slope->ranking)->RS) ?
+                                        round(json_decode($slope->ranking)->RS,2) : '-' }}</span>
                                 </p>
                             </div>
                             <div class="w-full sm:flex hidden items-center justify-center">
@@ -188,7 +189,8 @@
                             <x-line />
                             <div id="ranking">
                                 <h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-4xl">
-                                    {{ round(json_decode($selectedSlope->ranking)->RS,2)}}</h2>
+                                    {{isset(json_decode($slope->ranking)->RS) ?
+                                    round(json_decode($selectedSlope->ranking)->RS,2) : '-'}}</h2>
                             </div>
 
                         </div>
@@ -248,7 +250,8 @@
                                     <div id="rs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            {{round(json_decode($selectedSlope->ranking)->RS,2)}}
+                                            {{isset(json_decode($slope->ranking)->RS) ?
+                                            round(json_decode($selectedSlope->ranking)->RS,2) : '-'}}
                                         </h2>
                                     </div>
                                 </div>

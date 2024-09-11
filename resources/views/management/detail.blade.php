@@ -244,7 +244,8 @@
                             </p>
                             <x-line />
                             <h2 class="text-4xl text-bold">
-                                {{round(json_decode($slope->ranking)->RS,2)}}
+                                {{isset(json_decode($slope->ranking)->RS) ? round(json_decode($slope->ranking)->RS,2) :
+                                '-'}}
                             </h2>
                         </div>
                     </div>
