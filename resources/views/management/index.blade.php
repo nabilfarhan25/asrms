@@ -147,7 +147,7 @@
                             </div>
                             <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
                                 <p class="text-sm my-auto text-gray-500">Ranking Score : <span
-                                        class="font-semibold text-gray-800">{{round(json_decode($slope->ranking)->TS*0.062,2)}}</span>
+                                        class="font-semibold text-gray-800">{{round(json_decode($slope->ranking)->RS,2)}}</span>
                                 </p>
                             </div>
                             <div class="w-full sm:flex hidden items-center justify-center">
@@ -188,7 +188,7 @@
                             <x-line />
                             <div id="ranking">
                                 <h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-4xl">
-                                    {{ round(json_decode($selectedSlope->ranking)->TS*0.062,2)}}</h2>
+                                    {{ round(json_decode($selectedSlope->ranking)->RS,2)}}</h2>
                             </div>
 
                         </div>
@@ -248,7 +248,7 @@
                                     <div id="rs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            {{round(json_decode($selectedSlope->ranking)->TS*0.062,2)}}
+                                            {{round(json_decode($selectedSlope->ranking)->RS,2)}}
                                         </h2>
                                     </div>
                                 </div>
@@ -322,11 +322,11 @@
                         slug: slug
                     },
                     success: function(response) {
-                        $('#ranking').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-4xl">' + parseFloat(JSON.parse(response.ranking).TS*0.062).toFixed(2)  + '</h2>');
+                        $('#ranking').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-4xl">' + parseFloat(JSON.parse(response.ranking).RS).toFixed(2)  + '</h2>');
                         $('#ts').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).TS).toFixed(2)  + '</h2>');
                         $('#is').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).IS).toFixed(2)  + '</h2>');
                         $('#cs').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).CS).toFixed(2)  + '</h2>');
-                        $('#rs').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).TS*0.062).toFixed(2)  + '</h2>');
+                        $('#rs').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).RS).toFixed(2)  + '</h2>');
 
                         $('#title').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in font-bold mb-3 text-2xl">' + response.slope_name + '</h2>');
                         $('#location').html('<p class="animate-fade-up animate-once animate-duration-200 animate-ease-in">' + response.location + '</p>');

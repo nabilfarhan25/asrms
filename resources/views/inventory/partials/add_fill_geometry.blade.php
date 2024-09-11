@@ -1,30 +1,3 @@
-<div class="mb-3">
-    <div class="mb-2">
-        <label for="" class="font-bold text-lg">Section :</label>
-        <p class="font-medium text-gray-800">
-            Check if H1 &#8805; 75% x H2. If yes, consider Section 1-1 only; If No, consider
-            both
-            Sections
-            1-1 and 2-2
-        </p>
-    </div>
-    <div class="flex items-center mb-2">
-        <input disabled checked id="" type="checkbox" value="notused"
-            class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 rounded focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-        <label for="" class="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500">1-1
-            (Most Severe Consequence)</label>
-    </div>
-    <div class="flex items-center">
-        <input type="checkbox" name="section" value="use" id="section2Toggle" x-model="section2Enabled"
-            {{isset($geometry->section) ? 'checked' : ''}}
-        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 rounded focus:ring-lime-500 dark:focus:ring-lime-600
-        dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-        <label for="section2Toggle" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">2-2
-            (Maximum Feature Height)</label>
-    </div>
-</div>
-<x-line />
-
 @include('inventory.partials.geometry')
 
 @include('inventory.partials.affected_facilities')

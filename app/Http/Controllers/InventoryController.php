@@ -406,6 +406,15 @@ class InventoryController extends Controller
         $characteristic = $request->session()->get('characteristic');
         $rating = $request->session()->get('rating');
 
+        // File Handling
+        $img = TemporaryFile::all();
+        $dir = TemporaryFile::select(['img', 'file','type'])->get();
+
+        foreach ($img as $i) {
+            Storage::move('temp/' . $i->file, $request->slug.'/'. $i->file);
+            TemporaryFile::find($i->id)->delete();
+        }
+
         if ($slope->slope_type == 'cut-type' || $slope->slope_type == 'combine-type') {
             $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['A5'] * $rating['B1'] * $rating['B2'];
             $CS = (($rating['C1'] * $rating['C2']) + ($rating['D1'] * $rating['D2'])) * $geometry['feature_height'];
@@ -454,14 +463,35 @@ class InventoryController extends Controller
             'CS1' => $CS1,
             'CS2' => $CS2,
             'CS3' => $CS3,
+
+            'IS' => '-',
+            'CS' => '-',
             'TS' => $TS,
         ];
         } else {
             $TS = $IS * $CS;
+
+            // Ranking Score
+            $RS = 0;
+            if ($slope->slope_type == 'cut-type') {
+                $RS = $TS * 0.063;
+            } else if($slope->slope_type == 'rock-type'){
+                $RS = $TS * 0.022;
+            } else if($slope->slope_type == 'fill-type'){
+                $RS = $TS * 0.006;
+            } else if($slope->slope_type == 'retaining-type'){
+                $RS = $TS * 0.027;
+            }
+            else if($slope->slope_type == 'combine-type'){
+                $RS = ($TS * 0.063) + ($TS * 0.027);
+            } else {
+                $RS = '-';
+            }
             $ranking = [
             'IS' =>$IS,
             'CS' =>$CS,
             'TS' =>$TS,
+            'RS' =>$RS,
         ];
         }
 
@@ -482,6 +512,7 @@ class InventoryController extends Controller
         $slope->characteristic = $characteristic;
         $slope->rating = $rating;
         $slope->ranking = json_encode($ranking);
+        $slope->img = json_encode($dir);
         $slope->engineer_inspection = Carbon::now()->addYear($inspection_date);
         $slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
 

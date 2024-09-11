@@ -65,16 +65,15 @@
             </div>
             <div>
                 <div class="flex items-center mb-2">
-                    <input id="slope_surface1" type="radio" name="slope_surface" value="Substantially protected (>75%)"
-                        @if(isset($characteristic->slope_surface))
-                    {{$characteristic->slope_surface == "Substantially protected (>75%)" ? 'checked' : 'checked' }}
+                    <input id="slope_surface1" type="radio" name="slope_surface"
+                        value="Substantially protected (&gt; 75%)" @if(isset($characteristic->slope_surface))
+                    {{$characteristic->slope_surface == "Substantially protected (&gt; 75%)" ? 'checked' : '' }}
                     @endif
                     class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
                     dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                    dark:border-gray-600">
+                    dark:border-gray-600" />
                     <label for="slope_surface1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
-                        protected (>
-                        75%)</label>
+                        protected (&gt; 75%)</label>
                 </div>
                 <div class="flex items-center mb-2">
                     <input id="slope_surface2" type="radio" name="slope_surface" value="Partially protected (25% - 75%)"
@@ -82,19 +81,20 @@
                     {{$characteristic->slope_surface == "Partially protected (25% - 75%)" ? 'checked' : '' }} @endif
                     class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
                     dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                    dark:border-gray-600">
+                    dark:border-gray-600" />
                     <label for="slope_surface2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Partially
-                        protected
-                        (25% -
-                        75%)</label>
+                        protected (25% - 75%)</label>
                 </div>
                 <div class="flex items-center mb-2">
-                    <input id="slope_surface3" type="radio" name="slope_surface" value="Substantially unprotected (<25)"
-                        @if(isset($characteristic->slope_surface))
-                    {{$characteristic->slope_surface == "Substantially unprotected (<25)" ? 'checked' : '' }} @endif
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="slope_surface3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
-                            unprotected (< 25)</label>
+                    <input id="slope_surface3" type="radio" name="slope_surface"
+                        value="Substantially unprotected (&lt; 25)" @if(isset($characteristic->slope_surface))
+                    {{$characteristic->slope_surface == "Substantially unprotected (&lt; 25)" ? 'checked' : '' }} @else
+                    checked @endif
+                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600" />
+                    <label for="slope_surface3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
+                        unprotected (&lt; 25)</label>
                 </div>
             </div>
         </div>
