@@ -26,203 +26,239 @@
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Soil Slope
-                                    Height,<span class="italic text-gray-600">
-                                        H<sub>s</sub>
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Wall Height,<span
+                                        class="italic text-gray-600">
+                                        H<sub>w</sub>
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
-                                {{$geometry->soil_slope_height}} m
+                                @isset($geometry->wall_height)
+                                {{$geometry->wall_height}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
-                                {{$geometry->soil_slope_height_2}} m
+                                @isset($geometry->wall_height_2)
+                                {{$geometry->wall_height_2}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
+                        </tr>
+
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Rock Slope
-                                    Height,<span class="italic text-gray-600">
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Rock Slope Height,<span
+                                        class="italic text-gray-600">
                                         H<sub>r</sub>
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
+                                @isset($geometry->rock_slope_height)
                                 {{$geometry->rock_slope_height}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
+                                @isset($geometry->rock_slope_height_2)
                                 {{$geometry->rock_slope_height_2}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
                         </tr>
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Rock Slope
-                                    Height,<span class="italic text-gray-600">
-                                        H<sub>r'</sub>
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Soil Slope Height,<span
+                                        class="italic text-gray-600">
+                                        H<sub>s</sub>
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
-                                {{$geometry->height_r}} m
+                                @isset($geometry->soil_slope_height)
+                                {{$geometry->soil_slope_height}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
-                                {{$geometry->height_r_2}} m
+                                @isset($geometry->soil_slope_height_2)
+                                {{$geometry->soil_slope_height_2}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
                         </tr>
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Crest Wall
-                                    Height,<span class="italic text-gray-600">
-                                        H<sub>cw</sub>
-                                    </span>
-                                </label>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{$geometry->crest_wall_height}} m
-                            </td>
-                            @isset($geometry->section)
-                            <td class="px-6 py-4">
-                                {{$geometry->crest_wall_height_2}} m
-                            </td>
-                            @endisset
-                        </tr>
-                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Toe Wall
-                                    Height,<span class="italic text-gray-600">
-                                        H<sub>tw</sub>
-                                    </span>
-                                </label>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{$geometry->toe_wall_height}} m
-                            </td>
-                            @isset($geometry->section)
-                            <td class="px-6 py-4">
-                                {{$geometry->toe_wall_height_2}} m
-                            </td>
-                            @endisset
-                        </tr>
-                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Upslope
-                                    Angle,
-                                    <span class="italic text-gray-600">
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Upslope Angle,<span
+                                        class="italic text-gray-600">
                                         β
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
-                                {{$geometry->upslope_angle}} Deg
+                                @isset($geometry->upslope_angle)
+                                {{$geometry->upslope_angle}} deg
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
-                                {{$geometry->upslope_angle_2}} Deg
+                                @isset($geometry->upslope_angle_2)
+                                {{$geometry->upslope_angle_2}} deg
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
                         </tr>
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Surcharge
-                                    above
-                                    <br>
-                                    the
-                                    Slope Crest,
-                                    <span class="italic text-gray-600">
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Wall Face Angle,<span
+                                        class="italic text-gray-600">
+                                        θ<sub>w</sub>
+                                    </span>
+                                </label>
+                            </th>
+                            <td class="px-6 py-4">
+                                @isset($geometry->wall_face_angle)
+                                {{$geometry->wall_face_angle}} deg
+                                @else
+                                N/A
+                                @endisset
+                            </td>
+                            @isset($geometry->section)
+                            <td class="px-6 py-4">
+                                @isset($geometry->wall_face_angle_2)
+                                {{$geometry->wall_face_angle_2}} deg
+                                @else
+                                N/A
+                                @endisset
+                            </td>
+                            @endisset
+                        </tr>
+                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Surcharge at Crest of Wall,<span
+                                        class="italic text-gray-600">
                                         s
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
-                                {{$geometry->surchange_above_slope_crest}} kPa
+                                @isset($geometry->surcharge_crest)
+                                {{$geometry->surcharge_crest}} kPa
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
-                                {{$geometry->surchange_above_slope_crest_2}} kPa
+                                @isset($geometry->surcharge_crest_2)
+                                {{$geometry->surcharge_crest_2}} kPa
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
                         </tr>
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Soil Slope
-                                    Angle,
-                                    <span class="italic text-gray-600">
-                                        θ<sub>s</sub>
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Base Width,<span
+                                        class="italic text-gray-600">
+                                        B<sub>w</sub>
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
-                                {{$geometry->soil_slope_angle}} Deg
+                                @isset($geometry->base_width)
+                                {{$geometry->base_width}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
-                                {{$geometry->soil_slope_angle_2}} Deg
+                                @isset($geometry->base_width_2)
+                                {{$geometry->base_width_2}} m
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
                         </tr>
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Average Slope
-                                    Angle,
-                                    <span class="italic text-gray-600">
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Average Wall Face Angle,<span
+                                        class="italic text-gray-600">
                                         θ
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
-                                {{$geometry->average_slope_angle}} Deg
+                                @isset($geometry->average_wall)
+                                {{$geometry->average_wall}} deg
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
-                                {{$geometry->average_slope_angle_2}} Deg
+                                @isset($geometry->average_wall_2)
+                                {{$geometry->average_wall_2}} deg
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
                         </tr>
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Downslope
-                                    Gradient,
-                                    <span class="italic text-gray-600">
-                                        α
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Average Wall Face Angle,<span
+                                        class="italic text-gray-600">
+                                        θ
                                     </span>
                                 </label>
                             </th>
                             <td class="px-6 py-4">
-                                {{$geometry->downslope_gradient}} Deg
+                                @isset($geometry->average_wall)
+                                {{$geometry->average_wall}} deg
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @isset($geometry->section)
                             <td class="px-6 py-4">
-                                {{$geometry->downslope_gradient_2}} Deg
+                                @isset($geometry->average_wall_2)
+                                {{$geometry->average_wall_2}} deg
+                                @else
+                                N/A
+                                @endisset
                             </td>
                             @endisset
                         </tr>
-                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">Soil bulk
-                                    unit weight,<span class="italic text-gray-600">
-                                        γ<sub>b</sub>
-                                    </span>
-                                </label>
-                            </th>
-                            <td class="px-6 py-4" colspan="2">
-                                {{$geometry->soil_bulk_unit_weight}} kN/m<sup>3</sup>
-                            </td>
-                        </tr>
+
                         <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -237,51 +273,6 @@
                             @isset($geometry->section)
                             <td class="px-6 py-4">
                                 {{$geometry->feature_height_2}} m
-                            </td>
-                            @endisset
-                        </tr>
-                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">H<sub>w</sub>
-                                </label>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{$geometry->height_w}} m
-                            </td>
-                            @isset($geometry->section)
-                            <td class="px-6 py-4">
-                                {{$geometry->height_w_2}} m
-                            </td>
-                            @endisset
-                        </tr>
-                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">H<sub>c</sub>
-                                </label>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{$geometry->height_c}} m
-                            </td>
-                            @isset($geometry->section)
-                            <td class="px-6 py-4">
-                                {{$geometry->height_c_2}} m
-                            </td>
-                            @endisset
-                        </tr>
-                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">H<sub>o</sub>
-                                </label>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{$geometry->height_o}} m
-                            </td>
-                            @isset($geometry->section)
-                            <td class="px-6 py-4">
-                                {{$geometry->height_o_2}} m
                             </td>
                             @endisset
                         </tr>
@@ -303,6 +294,31 @@
                             </td>
                             @endisset
                         </tr>
+                        <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <label class="text-sm sm:font-medium sm:mb-0 mb-2">B<sub>w</sub>/H<sub>e</sub>
+                                    </span>
+                                </label>
+                            </th>
+                            <td class="px-6 py-4">
+                                @isset($geometry->hb)
+                                {{$geometry->hb}} m
+                                @else
+                                N/A
+                                @endisset
+                            </td>
+                            @isset($geometry->section)
+                            <td class="px-6 py-4">
+                                @isset($geometry->hb_2)
+                                {{$geometry->hb_2}} m
+                                @else
+                                N/A
+                                @endisset
+                            </td>
+                            @endisset
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
