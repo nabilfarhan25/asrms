@@ -1,6 +1,7 @@
 <x-form-layout>
     <div class="p-5">
-        <div class="flex justify-between p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+        <div
+            class="flex items-center justify-between p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
             <div>
                 <!-- Breadcrumb -->
                 <div>

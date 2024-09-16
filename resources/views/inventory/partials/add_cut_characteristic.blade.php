@@ -4,141 +4,116 @@
 
     </div>
     <div>
-        <div x-data="{ surface_opt: '{{isset($characteristic->surface_cover) ? explode(" :", $characteristic->
-            surface_cover)[0] : 'Vegetation'}}', coverPercentage: {{isset($characteristic->surface_cover) ?
-            explode(" :", $characteristic->
-            surface_cover)[1] : 0}} }"
-            class="mb-3">
-            <div class="mb-2">
-                <p class="font-medium text-gray-800">
-                    Surface cover with :
-                </p>
-            </div>
+        <div
+            x-data="{ surface_cover: '{{isset($characteristic->surface_cover) ? $characteristic->surface_cover : ''}}' }">
+            <p class="font-medium text-gray-800 mb-1">
+                Surface cover with :
+            </p>
+            <!-- Input Field -->
+            <input type="text" placeholder="Write or choose option to fill input" name="surface_cover"
+                class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                x-model="surface_cover" />
 
-            <div class="flex items-center mb-2">
-                <input type="radio" value="Vegetation" x-model="surface_opt" id="surface_cover1" name="surface_cover"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_cover1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Vegetation
-                    <input type="number" step="0.01" x-show="surface_opt === 'Vegetation'" x-model="coverPercentage"
-                        placeholder="%" required
-                        class=" p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                    <span class="ml-1">(including grass/shrubs/trees)</span></label>
-            </div>
-
-            <div class="flex items-center mb-2">
-                <input type="radio" value="Hard cover" x-model="surface_opt" id="surface_cover2" name="surface_cover"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_cover2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Hard cover
-                    <input type="number" step="0.01" x-show="surface_opt === 'Hard cover'" x-model="coverPercentage"
-                        placeholder="%" required
-                        class=" p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                    <span class="ml-1">(including concrete/chunam)</span></label>
-            </div>
-
-            <div class="flex items-center mb-2">
-                <input type="radio" value="Bare surface" x-model="surface_opt" id="surface_cover3" name="surface_cover"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_cover3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">
-                    Bare surface
-                    <input type="number" step="0.01" x-show="surface_opt === 'Bare surface'" x-model="coverPercentage"
-                        placeholder="%" required
-                        class=" p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </label>
-            </div>
-
-            <div class="flex items-center mb-2">
-                <input type="radio" value="Others" x-model="surface_opt" id="surface_cover4" name="surface_cover"
-                    required
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_cover4" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Others</label>
-            </div>
-            <input type="text" x-show="surface_opt === 'Others'" x-model="coverPercentage" required
-                class=" p-2 w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-            <input type="hidden" name="surface_cover" readonly x-bind:value="surface_opt + ' : ' + coverPercentage">
-        </div>
-
-        <div class="mb-3">
-            <div class="mb-2">
-                <p class="font-medium text-gray-800">
-                    1. Based on above, slope surface is:
-                </p>
-            </div>
-            <div>
+            <!-- Radio Buttons -->
+            <div class="mt-3">
                 <div class="flex items-center mb-2">
-                    <input id="slope_surface1" type="radio" name="slope_surface"
-                        value="Substantially protected (&gt; 75%)" @if(isset($characteristic->slope_surface))
-                    {{$characteristic->slope_surface == "Substantially protected (&gt; 75%)" ? 'checked' : '' }}
-                    @endif
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    <input type="radio" id="surface_opt1" value="Vegetation : 0 %" x-model="surface_cover" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
                     dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
                     dark:border-gray-600" />
-                    <label for="slope_surface1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
+                    <label for="surface_opt1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Vegetation
+                        (including grass/shrubs/trees)</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="surface_opt2" value="Hard Cover : 0 %" x-model="surface_cover" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600" />
+                    <label for="surface_opt2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Hard Cover
+                        (including concrete/chunam)</label>
+                </div>
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="surface_opt3" value="Bare Surface : 0 %" x-model="surface_cover" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600" />
+                    <label for="surface_opt3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Bare Surface</label>
+                </div>
+            </div>
+        </div>
+        <x-line />
+        <div
+            x-data="{ slope_surface: '{{isset($characteristic->slope_surface) ? $characteristic->slope_surface : ''}}' }">
+            <p class="font-medium text-gray-800 mb-1">
+                1. Based on above, slope surface is:
+            </p>
+            <!-- Input Field -->
+            <input type="text" placeholder="Write or choose option to fill input" name="slope_surface"
+                class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                x-model="slope_surface" readonly />
+
+            <!-- Radio Buttons -->
+            <div class="mt-3">
+                <div class="flex items-center mb-2">
+                    <input type="radio" id="cover_opt1" value="Substantially protected (&gt; 75%)"
+                        x-model="slope_surface" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                    dark:border-gray-600" />
+                    <label for="cover_opt1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
                         protected (&gt; 75%)</label>
                 </div>
                 <div class="flex items-center mb-2">
-                    <input id="slope_surface2" type="radio" name="slope_surface" value="Partially protected (25% - 75%)"
-                        @if(isset($characteristic->slope_surface))
-                    {{$characteristic->slope_surface == "Partially protected (25% - 75%)" ? 'checked' : '' }} @endif
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    <input type="radio" id="cover_opt2" value="Partially protected (25% - 75%)" x-model="slope_surface"
+                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
                     dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
                     dark:border-gray-600" />
-                    <label for="slope_surface2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Partially
-                        protected (25% - 75%)</label>
+                    <label for="cover_opt2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Partially protected
+                        (25% - 75%)</label>
                 </div>
                 <div class="flex items-center mb-2">
-                    <input id="slope_surface3" type="radio" name="slope_surface"
-                        value="Substantially unprotected (&lt; 25)" @if(isset($characteristic->slope_surface))
-                    {{$characteristic->slope_surface == "Substantially unprotected (&lt; 25)" ? 'checked' : '' }} @else
-                    checked @endif
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    <input type="radio" id="cover_opt3" value="Substantially unprotected (&#60; 25)"
+                        x-model="slope_surface" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
                     dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
                     dark:border-gray-600" />
-                    <label for="slope_surface3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
-                        unprotected (&lt; 25)</label>
+                    <label for="cover_opt3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Substantially
+                        unprotected (&#60; 25)</label>
                 </div>
             </div>
         </div>
+        <x-line />
+        <div
+            x-data="{ zone_of_depression: '{{isset($characteristic->zone_of_depression) ? $characteristic->zone_of_depression : ''}}' }">
+            <p class="font-medium text-gray-800 mb-1">
+                2. Zone(s) of depression or potential ponding exist within the crest area (within H/2):
+            </p>
+            <!-- Input Field -->
+            <input type="text" placeholder="Write or choose option to fill input" name="zone_of_depression"
+                class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                x-model="zone_of_depression" readonly />
 
-        <div class="mb-3">
-            <div class="mb-2">
-                <p class="font-medium text-gray-800">
-                    2. Zone(s) of depression or potential ponding exist within the crest area (within H/2):
-                </p>
-            </div>
-            <div class="mb-2">
+            <!-- Radio Buttons -->
+            <div class="mt-3">
                 <div class="flex items-center mb-2">
-                    <input id="zone1" type="radio" name="zone_of_depression" value="Yes"
-                        @if(isset($characteristic->zone_of_depression))
-                    {{$characteristic->slope_surface == "Yes" ? 'checked' : '' }} @endif
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    <input type="radio" id="zone_opt1" value="Yes" x-model="zone_of_depression" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
                     dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                    dark:border-gray-600">
-                    <label for="zone1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Yes</label>
+                    dark:border-gray-600" />
+                    <label for="zone_opt1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Yes</label>
                 </div>
                 <div class="flex items-center mb-2">
-                    <input id="zone2" type="radio" name="zone_of_depression" value="No"
-                        @if(isset($characteristic->zone_of_depression))
-                    {{$characteristic->slope_surface == "No" ? 'checked' : 'checked' }} @endif
-                    checked
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                    <input type="radio" id="zone_opt2" value="No" x-model="zone_of_depression" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
                     dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                    dark:border-gray-600">
-                    <label for="zone2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No</label>
+                    dark:border-gray-600" />
+                    <label for="zone_opt2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No</label>
                 </div>
-                <p class="text-sm text-gray-500">
-                    If yes, mark the extent of depression or ponding zones on plan and adopt the score of
-                    the next higher category in slope protection
-                </p>
             </div>
+            <p class="text-sm text-gray-500">
+                If yes, mark the extent of depression or ponding zones on plan and adopt the score of
+                the next higher category in slope protection
+            </p>
         </div>
-        <div class="border border-gray-300 rounded-lg p-3 mb-2">
-            <h2 class="font-bold text-lg mb-2">Slope Protection Documentation</h2>
-            <input type="file" multiple name="img_slope_protection" class="filestyle" data-max-files="3"
-                data-max-file-size="40MB" />
-            <div class="">
+        <x-line />
+
+        <x-file-upload name="img_slope_protection" title="Slope Protection Documentation" maxFileSize="20MB"
+            accept="image/png, image/jpeg, image/gif" type="image" multiple="true" maxFiles="3" notes="
                 <p>Upload Documentation with Maximum : 3 Image</p>
-            </div>
-        </div>
+        " />
     </div>
 </div>
 <x-line />
@@ -373,61 +348,55 @@
     </div>
 
     <div class="sm:flex">
-        <div class="sm:w-1/2 mr-2" x-data="{ surface_opt: '', otherObservation: '' }">
+        <div class="sm:w-1/2 mr-2">
+            <div
+                x-data="{ surface_drainage_provision: '{{isset($characteristic->surface_drainage_provision) ? $characteristic->surface_drainage_provision : ''}}' }">
+                <!-- Input Field -->
+                <input type="text" placeholder="Write or choose option to fill input" name="surface_drainage_provision"
+                    class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                    x-model="surface_drainage_provision" />
 
-            <div class="flex mb-2">
-                <input type="radio" id="surface_drainage_provision1" name="surface_drainage_provision"
-                    value="Potential surface runoff converge onto the crest area due to topography"
-                    x-model="surface_opt"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_drainage_provision1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Potential
-                    surface runoff converge onto the crest area due to
-                    topography (observed or inferred from topographic plan or aerial
-                    photos)</label>
+                <!-- Radio Buttons -->
+                <div class="mt-3">
+                    <div class="flex  mb-2">
+                        <input type="radio" id="sdp_opt1"
+                            value="Potential surface runoff converge onto the crest area due to topography (observed or inferred from topographic plan or aerial photos)"
+                            x-model="surface_drainage_provision" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="sdp_opt1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Potential
+                            surface runoff converge onto the crest area due to
+                            topography (observed or inferred from topographic plan or aerial
+                            photos)</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="sdp_opt2" value="Slope located on a drainage line/zone of depression"
+                            x-model="surface_drainage_provision" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="sdp_opt2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Slope located on a
+                            drainage line/zone of depression</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="sdp_opt3"
+                            value="Inadequate surface drainage evident by surface erosion or erosion gully, etc."
+                            x-model="surface_drainage_provision" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="sdp_opt3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Inadequate
+                            surface drainage evident by surface erosion or erosion
+                            gully, etc.</label>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex items-center mb-2">
-                <input type="radio" id="surface_drainage_provision2" name="surface_drainage_provision"
-                    value="Slope located on a drainage line/zone of depression" x-model="surface_opt"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_drainage_provision2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Slope
-                    located
-                    on a drainage line/zone of depression</label>
-            </div>
-
-            <div class="flex items-center mb-2">
-                <input type="radio" id="surface_drainage_provision3" name="surface_drainage_provision"
-                    value="Inadequate surface drainage evident by surface erosion or erosion gully, etc."
-                    x-model="surface_opt"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_drainage_provision3"
-                    class="ms-2 text-sm text-gray-900 dark:text-gray-300">Inadequate
-                    surface drainage evident by surface erosion or erosion
-                    gully, etc.</label>
-            </div>
-
-            <div class="flex items-center mb-2">
-                <input type="radio" id="surface_drainage_provision4" name="surface_drainage_provision" value="Others"
-                    x-model="surface_opt"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="surface_drainage_provision4" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Others
-                    observations/records:
-                </label>
-            </div>
-            <input type="text" x-show="surface_opt === 'Others'" x-model="otherObservation"
-                placeholder="Your observation"
-                class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-
-            <input type="hidden" name="surface_drainage_provision" readonly
-                x-bind:value="surface_opt === 'Others' ? otherObservation : surface_opt">
         </div>
-        <div class="sm:w-1/2 border border-gray-300 rounded-lg p-3 mb-2">
-            <h2 class="font-bold text-lg mb-2">Surface Drainage Provision Documentation</h2>
-            <input type="file" multiple name="img_surface_drainage_provision" class="filestyle" data-max-files="3"
-                data-max-file-size="40MB" />
-            <div class="">
-                <p>Upload Documentation with Maximum : 3 Image</p>
-            </div>
+        <div class="sm:w-1/2">
+            <x-file-upload name="img_surface_drainage_provision" title="Surface Drainage Provision Documentation"
+                maxFileSize="20MB" accept="image/png, image/jpeg, image/gif" type="image" multiple="true" maxFiles="3"
+                notes="
+                    <p>Upload Documentation with Maximum : 3 Image</p>
+            " />
         </div>
     </div>
 </div>
@@ -442,97 +411,90 @@
             extent on plan &
             cross-sections)</p>
     </div>
-    <div x-data="{ seepage: 'No', above_mid_height: '', below_mid_height: '', otherObservations: '' }">
+    <div>
         <div class="mb-3">
             <legend class="font-semibold mb-2">Signs of Seepage</legend>
+            <div
+                x-data="{above_mid_height: '{{isset($characteristic->above_mid_height) ? $characteristic->above_mid_height : ''}}', below_mid_height: '{{isset($characteristic->below_mid_height) ? $characteristic->below_mid_height : ''}}', seepage: '{{isset($characteristic->signs_of_seepage) ? $characteristic->signs_of_seepage : 'No'}}' }">
+                <!-- Input Field -->
+                <input type="text" placeholder="Write or choose option to fill input" name="signs_of_seepage"
+                    class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                    x-model="seepage" />
 
-            <div class="mb-2">
-                <div class="mr-4">
-                    <input id="signs_of_seepage1" type="radio" name="signs_of_seepage" value="Yes" x-model="seepage"
-                        class=" w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="signs_of_seepage1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Yes</label>
+                <!-- Radio Buttons -->
+                <div class="mt-3">
+                    <div class="flex  mb-2">
+                        <input type="radio" id="signs_of_seepage1" value="Yes" x-model="seepage" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="signs_of_seepage1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Yes</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="signs_of_seepage2" value="No" x-model="seepage" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="signs_of_seepage2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No</label>
+                    </div>
+
                 </div>
-                <div class="mr-4">
-                    <input id="signs_of_seepage2" type="radio" name="signs_of_seepage" value="No" x-model="seepage"
-                        checked
-                        class=" w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="signs_of_seepage2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No
-                    </label>
+
+                <div x-show="seepage === 'Yes'" class="mb-4">
+                    <p class="mb-2">If Yes, provide following details:</p>
+                    <table class="text-sm w-full bg-white border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="border border-gray-300 px-4 py-2 text-left">Seepage
+                                    Location</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Copious</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">
+                                    Trickling/damp</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Stain</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 px-4 py-2">At or above mid-height
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-center"><input
+                                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        type="radio" name="above_mid_height" value="copious" x-model="above_mid_height">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-center"><input
+                                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        type="radio" name="above_mid_height" value="trickling/damp"
+                                        x-model="above_mid_height">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-center"><input
+                                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        type="radio" name="above_mid_height" value="stain" x-model="above_mid_height">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 px-4 py-2">Below mid-height</td>
+                                <td class="border border-gray-300 px-4 py-2 text-center"><input
+                                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        type="radio" name="below_mid_height" value="copious" x-model="below_mid_height">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-center"><input
+                                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        type="radio" name="below_mid_height" value="trickling/damp"
+                                        x-model="below_mid_height">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2 text-center"><input
+                                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        type="radio" name="below_mid_height" value="stain" x-model="below_mid_height">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-
-            <div x-show="seepage === 'Yes'" class="mb-4">
-                <p class="mb-2">If Yes, provide following details:</p>
-                <table class="text-sm w-full bg-white border border-gray-300">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="border border-gray-300 px-4 py-2 text-left">Seepage
-                                Location</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Copious</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">
-                                Trickling/damp</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Stain</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">At or above mid-height
-                            </td>
-                            <td class="border border-gray-300 px-4 py-2 text-center"><input
-                                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                    type="radio" name="above_mid_height" value="copious" x-model="above_mid_height">
-                            </td>
-                            <td class="border border-gray-300 px-4 py-2 text-center"><input
-                                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                    type="radio" name="above_mid_height" value="trickling/damp"
-                                    x-model="above_mid_height">
-                            </td>
-                            <td class="border border-gray-300 px-4 py-2 text-center"><input
-                                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                    type="radio" name="above_mid_height" value="stain" x-model="above_mid_height">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-gray-300 px-4 py-2">Below mid-height</td>
-                            <td class="border border-gray-300 px-4 py-2 text-center"><input
-                                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                    type="radio" name="below_mid_height" value="copious" x-model="below_mid_height">
-                            </td>
-                            <td class="border border-gray-300 px-4 py-2 text-center"><input
-                                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                    type="radio" name="below_mid_height" value="trickling/damp"
-                                    x-model="below_mid_height">
-                            </td>
-                            <td class="border border-gray-300 px-4 py-2 text-center"><input
-                                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                    type="radio" name="below_mid_height" value="stain" x-model="below_mid_height">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="flex items-center mb-2">
-                <input type="radio" id="other_signs" name="signs_of_seepage" value="Others" x-model="seepage"
-                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="other_signs" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Others
-                    observations/records:
-                </label>
-            </div>
-            <input type="text" x-show="seepage === 'Others'" x-model="otherObservations"
-                placeholder="Describe other observations" name="other_signs"
-                class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
         </div>
-        <div class="border border-gray-300 rounded-lg p-3 mb-2">
-            <h2 class="font-bold text-lg mb-2">Hydrogeological Settings Documentation</h2>
-            <input type="file" multiple name="img_hydrogeological_settings" class="filestyle" data-max-files="3"
-                data-max-file-size="40MB" />
-            <div class="">
+        <x-file-upload name="img_hydrogeological_settings" title="Hydrogeological Settings Documentation"
+            maxFileSize="20MB" accept="image/png, image/jpeg, image/gif" type="image" multiple="true" maxFiles="3"
+            notes="
                 <p>Upload Documentation with Maximum : 3 Image</p>
-            </div>
-        </div>
+        " />
     </div>
 </div>
 <x-line />
@@ -549,80 +511,89 @@
         <div class="mb-3">
             <legend class=" font-semibold mb-2">Presence of the following based on site
                 observations or available records (please tick):</legend>
+            <div
+                x-data="{ geological_features: '{{isset($characteristic->geological_features) ? $characteristic->geological_features : ''}}' }">
+                <!-- Input Field -->
+                <input type="text" placeholder="Write or choose option to fill input" name="geological_features"
+                    class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                    x-model="geological_features" />
 
-            <div class="flex flex-col space-y-2 mb-2">
-
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features"
-                        value="No potential adverse geological features observed or recorded"
-                        x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    No potential adverse geological features observed or recorded
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features"
-                        value="Possible relict failure (concave shaped profile)" x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Possible relict failure (concave shaped profile)
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features" value="Shear surfaces/zone"
-                        x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Shear surfaces/zone
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features" value="Clay or silt filled discontinuities"
-                        x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Clay or silt filled discontinuities
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features" value="Slickensided discontinuities"
-                        x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Slickensided discontinuities
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features"
-                        value="Discontinuities heavily coated with dark minerals or kaolinite"
-                        x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Discontinuities heavily coated with dark minerals or kaolinite
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features" value="Significantly kaolinised granite or volcanics"
-                        x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Significantly kaolinised granite or volcanics
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features"
-                        value="Weathered dykes/sedimentary layers within volcanic formations"
-                        x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Weathered dykes/sedimentary layers within volcanic formations
-                </label>
-                <label class="flex items-center text-sm">
-                    <input type="radio" name="geological_features" value="Others" x-model="geological_features_opt"
-                        class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2">
-                    Others
-                </label>
+                <!-- Radio Buttons -->
+                <div class="mt-3">
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt1"
+                            value="No potential adverse geological features observed or recorded"
+                            x-model="geological_features" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No potential adverse
+                            geological features observed or recorded</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt2" value="Possible relict failure (concave shaped profile)"
+                            x-model="geological_features" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Possible relict
+                            failure (concave shaped profile)</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt3" value="Shear surfaces/zone" x-model="geological_features"
+                            class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Shear
+                            surfaces/zone</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt4" value="Clay or silt filled discontinuities"
+                            x-model="geological_features" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt4" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Clay or silt filled
+                            discontinuities</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt5" value="Slickensided discontinuities"
+                            x-model="geological_features" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt5" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Slickensided
+                            discontinuities</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt6"
+                            value="Discontinuities heavily coated with dark minerals or kaolinite"
+                            x-model="geological_features" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt6" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Discontinuities
+                            heavily coated with dark minerals or kaolinite</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt7" value="Significantly kaolinised granite or volcanics"
+                            x-model="geological_features" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt7" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Significantly
+                            kaolinised granite or volcanics</label>
+                    </div>
+                    <div class="flex  mb-2">
+                        <input type="radio" id="geo_opt8"
+                            value="Weathered dykes/sedimentary layers within volcanic formations"
+                            x-model="geological_features" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                        dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                        dark:border-gray-600" />
+                        <label for="geo_opt8" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Weathered
+                            dykes/sedimentary layers within volcanic formations</label>
+                    </div>
+                </div>
             </div>
-            <input type="text" x-show="geological_features_opt === 'Others'" x-model="otherObservation"
-                placeholder="Describe other observations"
-                class=" p-2 w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-            <input type="hidden" name="geological_features" readonly
-                x-bind:value="geological_features_opt === 'Others' ? otherObservation : geological_features_opt">
         </div>
-        <div class="border border-gray-300 rounded-lg p-3 mb-2">
-            <h2 class="font-bold text-lg mb-2">Geological Features Documentation</h2>
-            <input type="file" multiple name="img_geological_features" class="filestyle" data-max-files="3"
-                data-max-file-size="40MB" />
-            <div class="">
+        <x-file-upload name="img_geological_features" title="Geological Features Documentation" maxFileSize="20MB"
+            accept="image/png, image/jpeg, image/gif" type="image" multiple="true" maxFiles="3" notes="
                 <p>Upload Documentation with Maximum : 3 Image</p>
-            </div>
-        </div>
+        " />
     </div>
 </div>
 <x-line />
@@ -638,145 +609,111 @@
     </div>
     <div x-data="distressData()">
         <div class="mb-3">
-            <div class="flex items-center mb-2">
-                <input id="distress1" type="radio" name="signs_of_distress"
-                    value="No indication of any signs of distress" x-model="signsOfDistress"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                <label for="distress1" class="ms-2 text-sm text-gray-900">No indication of any signs of
-                    distress</label>
+
+            <div
+                x-data="{ signs_of_distress: '{{ isset($characteristic->signs_of_distress) ? $characteristic->signs_of_distress : '' }}' }">
+                <!-- Input Field -->
+                <input type="text" placeholder="Write or choose option to fill input" name="signs_of_distress"
+                    class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                    x-model="signs_of_distress" />
+
+                <!-- Radio Buttons -->
+                <div class="mt-3">
+                    <div class="flex mb-2">
+                        <input type="radio" id="distress1" value="No indication of any signs of distress"
+                            x-model="signs_of_distress" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                dark:border-gray-600" />
+                        <label for="distress1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No
+                            indication of any signs of distress</label>
+                    </div>
+                    <div class="flex mb-2">
+                        <input type="radio" id="distress2"
+                            value="Reported signs of distress in inspection or maintenance records"
+                            x-model="signs_of_distress" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                dark:border-gray-600" />
+                        <label for="distress2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Reported
+                            signs of distress in inspection or maintenance records</label>
+                    </div>
+                    <div class="flex mb-2">
+                        <input type="radio" id="distress3" value="Observed signs of distress"
+                            x-model="signs_of_distress" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                dark:border-gray-600" />
+                        <label for="distress3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Observed
+                            signs of distress</label>
+                    </div>
+                </div>
+
+                <!-- Observed Signs of Distress Section -->
+                <div x-show="signs_of_distress === 'Observed signs of distress'" class="ml-4">
+                    <div class="mb-2">
+                        <label for="" class="font-bold">Observed Signs of Distress :</label>
+                    </div>
+
+                    <div class="flex items-center mb-2">
+                        <input id="observed_distress4" type="radio"
+                            value="Large tension cracks behind crest (approx. -- mm wide)" x-model="signs_of_distress"
+                            class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
+                        <label for="observed_distress4" class="ms-2 text-sm text-gray-900">Large tension cracks behind
+                            crest
+                            (approx. -- mm wide)
+                        </label>
+                    </div>
+
+                    <div class="flex items-center mb-2">
+                        <input id="observed_distress5" type="radio"
+                            value="Significant distortion/damage of channels and berms" x-model="signs_of_distress"
+                            class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
+                        <label for="observed_distress5" class="ms-2 text-sm text-gray-900">Significant distortion/damage
+                            of
+                            channels and berms</label>
+                    </div>
+
+                    <div class="flex items-center mb-2">
+                        <input id="observed_distress6" type="radio"
+                            value="Severe cracking and bulging of hard surfacing" x-model="signs_of_distress"
+                            class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
+                        <label for="observed_distress6" class="ms-2 text-sm text-gray-900">Severe cracking and bulging
+                            of hard
+                            surfacing</label>
+                    </div>
+
+                    <div class="flex items-center mb-2">
+                        <input id="observed_distress7" type="radio" value="Subsidence within crest area or on slope"
+                            x-model="signs_of_distress"
+                            class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
+                        <label for="observed_distress7" class="ms-2 text-sm text-gray-900">Subsidence within crest area
+                            or on
+                            slope</label>
+                    </div>
+
+                    <div class="flex items-center mb-2">
+                        <input id="observed_distress8" type="radio" value="Extensive cracking of slope cover"
+                            x-model="signs_of_distress"
+                            class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
+                        <label for="observed_distress8" class="ms-2 text-sm text-gray-900">Extensive cracking of slope
+                            cover</label>
+                    </div>
+
+                    <div class="flex items-center mb-2">
+                        <input id="observed_distress9" type="radio"
+                            value="Isolated minor cracking of slope cover/isolated cracking of channels"
+                            x-model="signs_of_distress"
+                            class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
+                        <label for="observed_distress9" class="ms-2 text-sm text-gray-900">Isolated minor cracking of
+                            slope
+                            cover/isolated cracking of channels</label>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex items-center mb-2">
-                <input id="distress2" type="radio" name="signs_of_distress"
-                    value="Reported signs of distress in inspection or maintenance records" x-model="signsOfDistress"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                <label for="distress2" class="ms-2 text-sm text-gray-900">Reported signs of distress in
-                    inspection
-                    or maintenance records</label>
-            </div>
-
-            <div class="flex items-center mb-2">
-                <input id="distress3" type="radio" name="signs_of_distress" value="Observed signs of distress"
-                    x-model="signsOfDistress"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                <label for="distress3" class="ms-2 text-sm text-gray-900">Observed signs of distress (please
-                    tick)</label>
-            </div>
-
-            <div x-show="signsOfDistress === 'Observed signs of distress'" class="ml-4">
-                <div class="mb-2">
-                    <label for="" class="font-bold">Observed Signs of Distress :</label>
-                </div>
-
-                <div class="flex items-center mb-2">
-                    <input id="observed_distress1" type="radio" name="signs_of_distress"
-                        value="Large tension cracks behind crest" x-model="observedDistress"
-                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                    <label for="observed_distress1" class="ms-2 text-sm text-gray-900">Large tension cracks
-                        behind
-                        crest (approx.
-                        <input type="text" x-show="observedDistress === 'Large tension cracks behind crest'"
-                            x-model="largeTensionCracks" placeholder="mm"
-                            class="ml-1 p-1 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500">
-                        mm wide)
-                    </label>
-                </div>
-
-                <div class="flex items-center mb-2">
-                    <input id="observed_distress2" type="radio" name="signs_of_distress"
-                        value="Significant distortion/damage of channels and berms" x-model="observedDistress"
-                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                    <label for="observed_distress2" class="ms-2 text-sm text-gray-900">Significant
-                        distortion/damage
-                        of channels and berms</label>
-                </div>
-
-                <div class="flex items-center mb-2">
-                    <input id="observed_distress3" type="radio" name="signs_of_distress"
-                        value="Severe cracking and bulging of hard surfacing" x-model="observedDistress"
-                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                    <label for="observed_distress3" class="ms-2 text-sm text-gray-900">Severe cracking and
-                        bulging
-                        of hard surfacing</label>
-                </div>
-
-                <div class="flex items-center mb-2">
-                    <input id="observed_distress4" type="radio" name="signs_of_distress"
-                        value="Subsidence within crest area or on slope" x-model="observedDistress"
-                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                    <label for="observed_distress4" class="ms-2 text-sm text-gray-900">Subsidence within
-                        crest
-                        area
-                        or on slope</label>
-                </div>
-
-                <div class="flex items-center mb-2">
-                    <input id="observed_distress5" type="radio" name="signs_of_distress"
-                        value="Extensive cracking of slope cover" x-model="observedDistress"
-                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                    <label for="observed_distress5" class="ms-2 text-sm text-gray-900">Extensive cracking of
-                        slope
-                        cover</label>
-                </div>
-
-                <div class="flex items-center mb-2">
-                    <input id="observed_distress6" type="radio" name="signs_of_distress"
-                        value="Isolated minor cracking of slope cover/isolated cracking of channels"
-                        x-model="observedDistress"
-                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                    <label for="observed_distress6" class="ms-2 text-sm text-gray-900">Isolated minor
-                        cracking
-                        of
-                        slope cover/isolated cracking of channels</label>
-                </div>
-
-                <div class="flex items-center mb-2">
-                    <input id="observed_distress7" type="radio" name="signs_of_distress" value="Others"
-                        x-model="observedDistress"
-                        class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500">
-                    <label for="observed_distress7" class="ms-2 text-sm text-gray-900">Others:
-                    </label>
-                </div>
-                <input type="text" x-show="observedDistress === 'Others'" x-model="otherObservation"
-                    placeholder="Please specify"
-                    class="w-full p-1 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500">
-            </div>
         </div>
-        <input type="hidden" readonly x-model="userResponse" name="signs_of_distress">
-        <div class="border border-gray-300 rounded-lg p-3 mb-2">
-            <h2 class="font-bold text-lg mb-2">Signs of Distress Documentation</h2>
-            <input type="file" multiple name="img_signs_of_distress" class="filestyle" data-max-files="3"
-                data-max-file-size="40MB" />
-            <div class="">
+        <x-file-upload name="img_signs_of_distress" title="Signs of Distress Documentation" maxFileSize="20MB"
+            accept="image/png, image/jpeg, image/gif" type="image" multiple="true" maxFiles="3" notes="
                 <p>Upload Documentation with Maximum : 3 Image</p>
-            </div>
-        </div>
-        <script>
-            function distressData() {
-            return {
-                signsOfDistress: 'No indication of any signs of distress',
-                observedDistress: '',
-                largeTensionCracks: '',
-                otherObservation: '',
-                get userResponse() {
-                    let response = this.signsOfDistress;
-                    if (this.signsOfDistress === 'Observed signs of distress') {
-                        switch (this.observedDistress) {
-                            case 'Large tension cracks behind crest':
-                                response += `: ${this.observedDistress} (approx. ${this.largeTensionCracks} mm wide)`;
-                                break;
-                            case 'Others':
-                                response += `: ${this.otherObservation}`;
-                                break;
-                            default:
-                                response += `: ${this.observedDistress}`;
-                        }
-                    }
-                    return response;
-                }
-            }
-        }
-        </script>
+        " />
     </div>
 
 </div>
@@ -794,115 +731,54 @@
             cross-sections)</p>
     </div>
 
-    <div x-data="{ 
-        selectedOption: 'No indication of any failure occurred after formation or treatment', 
-        reportedFailure: '', 
-        possibleFailureLocation: '', 
-        possibleFailureVolume: '', 
-        debrisObservation: '', 
-        otherText: '', 
-        userResponse: 'No indication of any failure occurred after formation or treatment' 
-        }" @input="userResponse = generateResponse()">
+    <div
+        x-data="{ instability_after_slope: '{{ isset($characteristic->instability_after_slope) ? $characteristic->instability_after_slope : '' }}' }">
+        <!-- Input Field -->
+        <input type="text" placeholder="Write or choose option to fill input" name="instability_after_slope"
+            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+            x-model="instability_after_slope" />
 
-        <div class="mb-3">
-            <div class="flex items-center mb-2">
-                <input id="instability_after1" type="radio" name="instability_after_slope"
-                    value="No indication of any failure occurred after formation or treatment" x-model="selectedOption"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="instability_after1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No
-                    indication of any failure occurred after formation or treatment
-                </label>
+        <!-- Radio Buttons -->
+        <div class="mt-3">
+            <div class="flex mb-2">
+                <input type="radio" id="inst_opt1"
+                    value="No indication of any failure occurred after formation or treatment"
+                    x-model="instability_after_slope" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                dark:border-gray-600" />
+                <label for="inst_opt1" class="ms-2 text-sm text-gray-900 dark:text-gray-300">No indication of any
+                    failure occurred after formation or treatment</label>
             </div>
-
-            <div class="flex items-center mb-2">
-                <input id="instability_after2" type="radio" name="instability_after_slope" value="Reported failure"
-                    x-model="selectedOption"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="instability_after2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Reported
-                    failure:
-                    <input type="text" x-show="selectedOption === 'Reported failure'" x-model="reportedFailure"
-                        placeholder="Describe the failure"
-                        class=" p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </label>
+            <div class="flex mb-2">
+                <input type="radio" id="inst_opt2" value="Reported failure: ___" x-model="instability_after_slope"
+                    class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                dark:border-gray-600" />
+                <label for="inst_opt2" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Reported failure:
+                    ___</label>
             </div>
-
-            <div class="flex items-center mb-2">
-                <input id="instability_after3" type="radio" name="instability_after_slope"
-                    value="Possible failure scar observed" x-model="selectedOption"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="instability_after3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Possible
-                    failure
-                    scar
-                    observed at:
-                    <input type="text" x-show="selectedOption === 'Possible failure scar observed'"
-                        x-model="possibleFailureLocation" placeholder="Location of the slope"
-                        class=" p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                    , Estimated failure volume:
-                    <input type="text" x-show="selectedOption === 'Possible failure scar observed'"
-                        x-model="possibleFailureVolume" placeholder="Volume in m3"
-                        class=" p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </label>
+            <div class="flex mb-2">
+                <input type="radio" id="inst_opt3"
+                    value="Possible failure scar observed at: ____ , Estimated failure volume: ____"
+                    x-model="instability_after_slope" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                dark:border-gray-600" />
+                <label for="inst_opt3" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Possible failure scar
+                    observed at: ____ , Estimated failure volume: ____</label>
             </div>
-
-            <div class="flex items-center mb-2">
-                <input id="instability_after4" type="radio" name="instability_after_slope"
-                    value="Debris observed on site/Other observations" x-model="selectedOption"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="instability_after4" class="ms-2 text-sm text-gray-900 dark:text-gray-300">
-                    Debris
-                    observed
-                    on
-                    site/Other observations:
-                    <input type="text" x-show="selectedOption === 'Debris observed on site/Other observations'"
-                        x-model="debrisObservation" placeholder="Describe the debris/observations"
-                        class=" p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </label>
-            </div>
-
-            <div class="flex items-center mb-2">
-                <input id="instability_after5" type="radio" name="instability_after_slope" value="Other"
-                    x-model="selectedOption"
-                    class="mt-0.5 w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="instability_after5" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Other:
-                </label>
-            </div>
-            <input type="text" x-show="selectedOption === 'Other'" x-model="otherText" placeholder="Please specify"
-                class=" p-2 w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-
-        </div>
-        <input type="hidden" readonly x-model="userResponse" name="instability_after_slope">
-        <div class="border border-gray-300 rounded-lg p-3 mb-2">
-            <h2 class="font-bold text-lg mb-2">Instability after Formation/Treatment Documentation</h2>
-            <input type="file" multiple name="img_instability_after" class="filestyle" data-max-files="3"
-                data-max-file-size="40MB" />
-            <div class="">
-                <p>Upload Documentation with Maximum : 3 Image</p>
+            <div class="flex mb-2">
+                <input type="radio" id="inst_opt4" value="Debris observed on site/Other observations: ____"
+                    x-model="instability_after_slope" class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 focus:ring-lime-500
+                dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                dark:border-gray-600" />
+                <label for="inst_opt4" class="ms-2 text-sm text-gray-900 dark:text-gray-300">Debris observed on
+                    site/Other observations: ____</label>
             </div>
         </div>
-
-        <script>
-            function generateResponse() {
-            return function() {
-                let response = this.selectedOption;
-                
-                switch(this.selectedOption) {
-                    case 'Reported failure':
-                        response += `: ${this.reportedFailure}`;
-                        break;
-                    case 'Possible failure scar observed':
-                        response += ` at ${this.possibleFailureLocation}, volume: ${this.possibleFailureVolume} m3`;
-                        break;
-                    case 'Debris observed on site/Other observations':
-                        response += `: ${this.debrisObservation}`;
-                        break;
-                    case 'Other':
-                        response += `: ${this.otherText}`;
-                        break;
-                }
-                
-                return response;
-            }
-        }
-        </script>
+        <x-file-upload name="img_instability_after" title="Instability after Formation/Treatment Documentation"
+            maxFileSize="20MB" accept="image/png, image/jpeg, image/gif" type="image" multiple="true" maxFiles="3"
+            notes="
+                    <p>Upload Documentation with Maximum : 3 Image</p>
+            " />
     </div>
 </div>

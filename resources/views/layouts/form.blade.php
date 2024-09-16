@@ -31,6 +31,8 @@
     <script
         src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
     </script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js">
+    </script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
     <script>
@@ -39,9 +41,11 @@
 
         // loop over input elements
         Array.from(inputElements).forEach(inputElement => {
-        FilePond.registerPlugin(FilePondPluginImagePreview,FilePondPluginFileValidateSize,FilePondPluginImageExifOrientation);
+        FilePond.registerPlugin(FilePondPluginImagePreview,FilePondPluginFileValidateSize,FilePondPluginImageExifOrientation,FilePondPluginFileValidateType);
         FilePond.create(inputElement);
         FilePond.setOptions({
+            labelFileTypeNotAllowed: 'Invalid file type.',
+            fileValidateTypeLabelExpectedTypes: 'Expects {allButLastType} or {lastType}',
             server: {
                 process: '/temp-upload',
                 revert: '/temp-delete',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InspectionController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManagementController;
@@ -59,8 +60,8 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // File Uploader
-    Route::post('/temp-upload', [InventoryController::class, 'tempUpload']);
-    Route::delete('/temp-delete', [InventoryController::class, 'tempDelete']);
+    Route::post('/temp-upload', [ImageController::class, 'tempUpload']);
+    Route::delete('/temp-delete', [ImageController::class, 'tempDelete']);
 
     // Inventory
     Route::post('/inventory', [InventoryController::class, 'store']);

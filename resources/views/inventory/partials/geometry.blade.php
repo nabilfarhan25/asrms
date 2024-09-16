@@ -1100,8 +1100,8 @@
 {{-- COMBINE TYPE --}}
 @if ($slope->slope_type == 'combine-type')
 
-<div class="grid sm:grid-cols-2 gap-4">
-    <div>
+<div class="grid sm:grid-cols-5 gap-4">
+    <div class="col-span-2">
         <h4 class="font-bold">Geometry</h4>
         <div id="accordion-open" data-accordion="open">
             <p class="text-gray-800 mb-5" id="accordion-open-heading-2">
@@ -1111,7 +1111,7 @@
 
             <div id="accordion-open-body-2" class="hidden" aria-labelledby="accordion-open-heading-2">
                 <div class="p-4 border border-gray-300 rounded-xl">
-                    <img src="/components/slope.png" class="w-full" alt="" id="figureA1">
+                    <img src="/components/slope-combine.png" class="w-full" alt="" id="figureA1">
                 </div>
 
                 <script>
@@ -1127,7 +1127,7 @@
 
 
     </div>
-    <div>
+    <div class="col-span-3">
         <div class="grid sm:grid-cols-3 mb-3">
             <div class="flex items-center">
                 <label class="text-sm sm:font-medium sm:mb-0 mb-2">Soil Slope

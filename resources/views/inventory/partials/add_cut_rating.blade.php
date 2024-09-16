@@ -485,6 +485,10 @@
                 (C2) for Crest Facility :</label>
             <select id="tableChoice" x-model="tableChoice" name="crest_vulnerbility"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                @isset($rating->crest_vulnerbility)
+                <option hidden value="{{$rating->crest_vulnerbility}}">{{$rating->crest_vulnerbility == 'other' ? 'Other
+                    than Buildings' : 'Buildings'}}</option>
+                @endisset
                 <option value="buildings">Buildings</option>
                 <option value="other">Other than Buildings</option>
             </select>
@@ -618,6 +622,10 @@
                     Factor (D2) for Toe Facility:</label>
                 <select id="tableChoice" x-model="tableChoice" name="toe_vulnerbility"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    @isset($rating->toe_vulnerbility)
+                    <option hidden value="{{$rating->toe_vulnerbility}}">{{$rating->toe_vulnerbility == 'other' ? 'Other
+                        than Buildings' : 'Buildings'}}</option>
+                    @endisset
                     <option value="buildings">Buildings</option>
                     <option value="other">Other than Buildings</option>
                 </select>
