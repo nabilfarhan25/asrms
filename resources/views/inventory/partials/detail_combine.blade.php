@@ -647,7 +647,7 @@
                     </p>
                 </div>
                 <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                    {{$characteristic->surface_cover}} %
+                    {{$characteristic->surface_cover}}
                 </div>
             </div>
 

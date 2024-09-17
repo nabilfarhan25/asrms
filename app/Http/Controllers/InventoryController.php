@@ -284,6 +284,7 @@ class InventoryController extends Controller
             'IS' => '-',
             'CS' => '-',
             'TS' => $TS,
+            'RS' => $TS * 0.006,
         ];
         } else {
             $TS = $IS * $CS;
@@ -410,6 +411,10 @@ class InventoryController extends Controller
         $img = TemporaryFile::all();
         $dir = TemporaryFile::select(['img', 'file','type'])->get();
 
+        $old_img = json_decode($slope->img,true);
+        $new_img = array_merge_recursive($dir->toArray(), $old_img);
+        //dd(json_encode($new_img));
+
         foreach ($img as $i) {
             Storage::move('temp/' . $i->file, $request->slug.'/'. $i->file);
             TemporaryFile::find($i->id)->delete();
@@ -455,19 +460,20 @@ class InventoryController extends Controller
         }
         $ranking = [];
         if ($slope->slope_type == 'fill-type') {
-            $TS = ($IS1 * $CS1) + ($IS2 * $CS2) + ($IS3 * $CS3);
-            $ranking =  [
-            'IS1' => $IS1,
-            'IS2' => $IS2,
-            'IS3' => $IS3,
-            'CS1' => $CS1,
-            'CS2' => $CS2,
-            'CS3' => $CS3,
+                $TS = ($IS1 * $CS1) + ($IS2 * $CS2) + ($IS3 * $CS3);
+                $ranking =  [
+                'IS1' => $IS1,
+                'IS2' => $IS2,
+                'IS3' => $IS3,
+                'CS1' => $CS1,
+                'CS2' => $CS2,
+                'CS3' => $CS3,
 
-            'IS' => '-',
-            'CS' => '-',
-            'TS' => $TS,
-        ];
+                'IS' => '-',
+                'CS' => '-',
+                'TS' => $TS,
+                'RS' => $TS * 0.006,
+            ];
         } else {
             $TS = $IS * $CS;
 
@@ -477,8 +483,6 @@ class InventoryController extends Controller
                 $RS = $TS * 0.063;
             } else if($slope->slope_type == 'rock-type'){
                 $RS = $TS * 0.022;
-            } else if($slope->slope_type == 'fill-type'){
-                $RS = $TS * 0.006;
             } else if($slope->slope_type == 'retaining-type'){
                 $RS = $TS * 0.027;
             }
@@ -512,7 +516,7 @@ class InventoryController extends Controller
         $slope->characteristic = $characteristic;
         $slope->rating = $rating;
         $slope->ranking = json_encode($ranking);
-        $slope->img = json_encode($dir);
+        $slope->img = json_encode($new_img);
         $slope->engineer_inspection = Carbon::now()->addYear($inspection_date);
         $slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
 

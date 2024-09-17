@@ -107,6 +107,65 @@
                     @include('inventory.partials.add_combine_geometry')
                     @endif
                 </form>
+
+                @isset($slope->img)
+                @if ($slope->img !== '[]')
+                <x-line />
+
+                @php
+                $images = json_decode($slope->img, true);
+                @endphp
+
+                @if(is_array($images))
+                <div class="flex flex-wrap">
+                    @foreach($images as $key => $image)
+                    <div class="w-40 h-40 bg-white rounded-xl p-2 border border-gray-300 me-2 mt-2">
+                        <div class="text-center flex justify-between flex-col bg-center bg-cover w-full h-full rounded-xl p-2"
+                            style="background-image:url('/storage/{{$slope->slug}}/{{$image['file']}}/{{$image['img']}}')">
+                            <!-- Tombol Hapus -->
+                            @php
+                            $typeMeaning = '';
+
+                            if ($image['type'] == 'plan') {
+                            $typeMeaning = 'PLAN SECTION';
+                            } elseif ($image['type'] == 'cross') {
+                            $typeMeaning = 'CROSS SECTION';
+                            } elseif ($image['type'] == 'img_slope_protection') {
+                            $typeMeaning = 'SLOPE PROTECTION';
+                            } elseif ($image['type'] == 'img_surface_drainage_provision') {
+                            $typeMeaning = 'SURFACE DRAINAGE PROVISION';
+                            } elseif ($image['type'] == 'img_hydrogeological_settings') {
+                            $typeMeaning = 'HYDROGEOLOGICAL SETTINGS';
+                            } elseif ($image['type'] == 'img_geological_features') {
+                            $typeMeaning = 'GEOLOGICAL FEATURES';
+                            } elseif ($image['type'] == 'img_signs_of_distress') {
+                            $typeMeaning = 'SIGNS OF DISTRESS';
+                            } elseif ($image['type'] == 'img_instability_after') {
+                            $typeMeaning = 'INSTABILITY';
+                            } else {
+                            $typeMeaning = 'UNKNOWN TYPE';
+                            }
+                            @endphp
+                            <h4 class="text-gray-200 text-xs font-bold">{{$typeMeaning}}</h4>
+                            <form action="{{ route('images.delete', ['slug' => $slope->slug, 'key' => $key]) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="btn px-3 py-1 bg-red-600 rounded-full hover:bg-red-700 text-white">Delete</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                    @endforeach
+                </div>
+                @else
+                <p>Invalid JSON format.</p>
+                @endif
+
+                @endif
+                @endisset
             </div>
 
             @if ($slope->slope_type == 'cut-type')

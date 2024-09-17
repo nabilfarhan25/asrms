@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/temp-upload', [ImageController::class, 'tempUpload']);
     Route::delete('/temp-delete', [ImageController::class, 'tempDelete']);
 
+    // Img Delete
+    Route::delete('/images-del/{slug}/{key}', [ImageController::class, 'deleteImage'])->name('images.delete');
     // Inventory
     Route::post('/inventory', [InventoryController::class, 'store']);
     Route::delete('/slope/{slug}', [InventoryController::class, 'destroy']);

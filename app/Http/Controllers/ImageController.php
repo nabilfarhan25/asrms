@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Slopes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\TemporaryFile;
@@ -193,4 +194,20 @@ class ImageController extends Controller
             return response('');
         }
     }
+    public function deleteImage($slug, $key){
+
+        $slope = Slopes::where('slug', $slug)->firstOrFail();
+
+        $images = json_decode($slope->img, true);
+
+        if (isset($images[$key])) {
+            Storage::deleteDirectory($slug .'/' . $images[$key]['file']);
+            unset($images[$key]);
+            $slope->img = json_encode($images);
+            $slope->save();
+        }
+
+        return redirect()->back()->with('success', 'Image deleted successfully');
+    }
+
 }
