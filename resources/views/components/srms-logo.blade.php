@@ -1,1 +1,1 @@
-<img src="/icons/icon-srms.svg" {{ $attributes }} alt="Slope Risk Management Logo">
+<img src="/components/icons/icon-srms.svg" {{ $attributes }} alt="Slope Risk Management Logo">
