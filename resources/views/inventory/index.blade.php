@@ -182,7 +182,8 @@
                                                 <div
                                                     class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
                                                     <div>
-                                                        <img src="/icons/cut-type.svg" class="w-10 h-10" alt="">
+                                                        <img src="/components/icons/cut-type.svg" class="w-10 h-10"
+                                                            alt="">
                                                         <div class="font-bold">Cut Slope</div>
                                                     </div>
                                                 </div>
@@ -194,7 +195,8 @@
                                                 <div
                                                     class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
                                                     <div>
-                                                        <img src="/icons/fill-type.svg" class="w-10 h-10" alt="">
+                                                        <img src="/components/icons/fill-type.svg" class="w-10 h-10"
+                                                            alt="">
                                                         <div class="font-bold">Fill Slope</div>
                                                     </div>
                                                 </div>
@@ -206,7 +208,8 @@
                                                 <div
                                                     class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
                                                     <div>
-                                                        <img src="/icons/rock-type.svg" class="w-10 h-10" alt="">
+                                                        <img src="/components/icons/rock-type.svg" class="w-10 h-10"
+                                                            alt="">
                                                         <div class="font-bold">Rock Slope</div>
                                                     </div>
                                                 </div>
@@ -218,7 +221,8 @@
                                                 <div
                                                     class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
                                                     <div>
-                                                        <img src="/icons/retaining-type.svg" class="w-10 h-10" alt="">
+                                                        <img src="/components/icons/retaining-type.svg"
+                                                            class="w-10 h-10" alt="">
                                                         <div class="font-bold">Retaining Wall</div>
                                                     </div>
                                                 </div>
@@ -230,7 +234,8 @@
                                                 <div
                                                     class="cursor-pointer py-4 px-3 flex items-center border-2 border-gray-300 rounded-xl peer-checked:border-lime-500">
                                                     <div>
-                                                        <img src="/icons/combine-type.svg" class="w-10 h-10" alt="">
+                                                        <img src="/components/icons/combine-type.svg" class="w-10 h-10"
+                                                            alt="">
                                                         <div class="font-bold">Combine Slope</div>
                                                     </div>
                                                 </div>
