@@ -15,5 +15,5 @@
         </h4>
         <span class="font-semibold text-gray-600">Side {{$side}}</span>
     </div>
-    <img src="/icons/{{$type}}.svg" class="w-10 h-10" alt="">
+    <img src="/components/icons/{{$type}}.svg" class="w-10 h-10" alt="">
 </div>
