@@ -39,7 +39,7 @@
     <div class="border-2 border-gray-300 border-dashed rounded-xl p-2">
         <input type="file" name="{{ $name }}" class="filestyle" @if($multiple) multiple @endif @if($maxFileSize)
             data-max-file-size="{{ $maxFileSize }}" @endif @if($maxFiles) data-max-files="{{ $maxFiles }}" @endif
-            accept="{{ $accept }}" />
+            @if($accept !=='' ) accept="{{$accept}}" @endif />
     </div>
     @if($notes)
     <div class="pt-3">

@@ -74,6 +74,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/edit/characteristic/{slug}', [InventoryController::class, 'change_characteristic']);
     Route::get('/edit/rating/{slug}', [InventoryController::class, 'edit_rating']);
     Route::post('/edit/rating/{slug}', [InventoryController::class, 'change_rating']);
+    Route::post('/upload-doc/{slug}', [InventoryController::class, 'upload_doc']);
+    Route::delete('/delete-doc/{id}', [InventoryController::class, 'delete_doc']);
+
 
     Route::get('/create/geometry/{slug}', [InventoryController::class, 'create_geometry']);
     Route::post('/create/geometry/{slug}', [InventoryController::class, 'store_geometry']);

@@ -176,6 +176,12 @@
                                         role="tab" aria-controls="settings" aria-selected="false">Slope
                                         Characteristic</button>
                                 </li>
+                                <li class="me-2" role="presentation">
+                                    <button
+                                        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                        id="files-styled-tab" data-tabs-target="#styled-files" type="button" role="tab"
+                                        aria-controls="files" aria-selected="false">Slope Documentation</button>
+                                </li>
 
                             </ul>
                         </div>
@@ -231,6 +237,107 @@
                             @endif
 
                         </div>
+                        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-files" role="tabpanel"
+                            aria-labelledby="files-tab">
+                            <div class="grid sm:grid-cols-2 gap-2">
+
+                                <div class="">
+                                    <h4 class="font-bold mb-2 text-gray-800">Slope Documentation</h4>
+                                </div>
+                                <form action="/upload-doc/{{$slope->slug}}" enctype="multipart/form-data" method="POST">
+                                    <div>
+                                        @csrf
+                                        <x-file-upload name="doc" title="Upload Slope Document" required="true"
+                                            maxFileSize="10MB" type="document" notes="
+                                        Input your slope document and click upload to save the file 
+                                    " />
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <x-primary-button>Upload</x-primary-button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <x-line />
+                            <h4 class="font-bold mb-3">Documentation</h4>
+
+                            @foreach ($document as $doc)
+
+                            <div
+                                class="flex justify-between items-center mb-2 bg-gray-100 border border-gray-300 px-2 py-1 rounded-lg hover:bg-gray-200 cursor-pointer hover:underline">
+                                <p class="text-gray-700 font-semibold flex items-center">
+                                    <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                                    </svg>
+                                    {{$doc->original_name}}
+                                </p>
+                                <div class="flex items-center">
+                                    <a href="/storage/{{$slope->slug}}/files/{{$doc->direction}}/{{$doc->file_name}}"
+                                        download class="hover:text-lime-600 mr-3" target="_blank">
+                                        Download
+                                    </a>
+                                    <button type="button" data-modal-target="popup-{{$doc->id}}"
+                                        data-modal-toggle="popup-{{$doc->id}}"
+                                        class="p-1 text-red-600 hover:text-red-700 hover:bg-gray-300 rounded-full"
+                                        type="button">
+                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div id="popup-{{$doc->id}}" tabindex="-1"
+                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative p-4 w-full max-w-md max-h-full">
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <button type="button"
+                                            class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                            data-modal-hide="popup-{{$doc->id}}">
+                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                        <div class="p-4 md:p-5 text-center">
+                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                Are you sure you want to delete this document?</h3>
+
+                                            <form action="/delete-doc/{{$doc->id}}" method="POST"
+                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center text-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="px-5 py-2.5">
+                                                    Delete
+                                                </button>
+                                            </form>
+
+                                            <button data-modal-hide="popup-{{$doc->id}}" type="button"
+                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-lime-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                                                cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
                     </div>
 
                 </div>
@@ -317,6 +424,39 @@
                 </div>
             </div>
 
+            <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js">
+            </script>
+            <script
+                src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js">
+            </script>
+            <script
+                src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+            </script>
+            <script
+                src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js">
+            </script>
+            <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+            <script>
+                // get a collection of elements with class filepond
+                const inputElements = document.querySelectorAll('input.filestyle');
+
+                // loop over input elements
+                Array.from(inputElements).forEach(inputElement => {
+                FilePond.registerPlugin(FilePondPluginImagePreview,FilePondPluginFileValidateSize,FilePondPluginImageExifOrientation,FilePondPluginFileValidateType);
+                FilePond.create(inputElement);
+                FilePond.setOptions({
+                        fileValidateTypeLabelExpectedTypes: 'Expects {allButLastType} or {lastType}',
+                        server: {
+                            process: '/temp-upload',
+                            revert: '/temp-delete',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{csrf_token()}}'
+                            },
+                        },
+                    });
+                })
+            </script>
             <script>
                 // Define the coordinates for the center of the map
                 var lat = parseInt({{str_replace('°','',$slope->latitude)}}); // Example latitude

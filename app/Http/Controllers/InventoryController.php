@@ -7,12 +7,14 @@ use App\Models\Inspection;
 use App\Models\Maintenance;
 use App\Models\Mitigation;
 use App\Models\Preservation;
+use App\Models\SlopeDocumentation;
 use App\Models\Slopes;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 
 class InventoryController extends Controller
@@ -72,6 +74,7 @@ class InventoryController extends Controller
             'slope' => $slope,
             'geometry' => json_decode(Slopes::where('slug', $slug)->first()['geometry']),
             'characteristic' => json_decode(Slopes::where('slug', $slug)->first()['characteristic']),
+            'document' => SlopeDocumentation::where('slug', $slug)->get(),
 
             'img' => json_decode(Slopes::where('slug', $slug)->first()['img']),
         ];
@@ -526,5 +529,33 @@ class InventoryController extends Controller
         return redirect('/management');
     }
 
+    public function upload_doc(Request $request,$slug){
+        $request->validate([
+            'doc' => 'required',
+        ]);
+
+        $dir = TemporaryFile::select(['id','img','file'])->latest()->first();
+        Storage::move('temp/' . $dir->file , $request->slug.'/files/'. $dir->file);
+        TemporaryFile::find($dir->id)->delete();
+
+        $doc = $request->input('doc');
+        $document = new SlopeDocumentation();
+        $document->file_name = $dir->img;
+        $document->direction = $dir->file;
+        $document->slug = $slug;
+        $document->extension = pathinfo($doc, PATHINFO_EXTENSION);
+        $document->uploader = Auth::user()->name;
+        $document->original_name = $doc;
+        $document->save();
+
+        return redirect()->back();
+    }
+    public function delete_doc($id){
+        $file = SlopeDocumentation::where('id',$id)->first();
+        Storage::deleteDirectory( '/'.$file->slug . '/files/' . $file->direction);
+
+        $file->delete();
+        return redirect()->back();
+    }
 
 }

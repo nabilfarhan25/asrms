@@ -182,6 +182,22 @@ class ImageController extends Controller
             return $file_preservation;
         }
 
+        if ($request->hasFile('doc')) {
+            $img = $request->file('doc');
+            $img_name = Str::random(40) . '.' . $img->getClientOriginalExtension();
+            $doc = uniqid('doc-');
+            $img->storeAs('temp/' . $doc, $img_name);
+            TemporaryFile::create(
+                [
+                    'file' => $doc,
+                    'img' => $img_name,
+                    'type' => 'doc',
+
+                ]
+            );
+            return $img->getClientOriginalName();
+        }
+
         return '';
     }
 

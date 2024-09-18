@@ -608,7 +608,7 @@
                     </p>
                 </div>
                 <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                    {{$characteristic->surface_cover}}
+                    {{isset($characteristic->surface_cover) ? $characteristic->surface_cover : '-'}}
                 </div>
             </div>
 
@@ -619,7 +619,7 @@
                     </p>
                 </div>
                 <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                    {{$characteristic->slope_surface}}
+                    {{isset($characteristic->slope_surface) ? $characteristic->slope_surface : '-'}}
                 </div>
             </div>
 
@@ -631,7 +631,7 @@
                     </p>
                 </div>
                 <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                    {{$characteristic->zone_of_depression}}
+                    {{isset($characteristic->zone_of_depression) ? $characteristic->zone_of_depression : '-'}}
                 </div>
             </div>
         </div>
@@ -851,7 +851,7 @@
 
                 </div>
                 <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                    {{$characteristic->signs_of_seepage}}
+                    {{isset($characteristic->signs_of_seepage) ? $characteristic->signs_of_seepage : '-'}}
                 </div>
             </div>
 
@@ -922,7 +922,7 @@
                 observations or available records:
             </legend>
             <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                {{$characteristic->geological_features}}
+                {{isset($characteristic->geological_features) ? $characteristic->geological_features : '-'}}
             </div>
         </div>
     </div>
@@ -940,7 +940,7 @@
         <div>
             <div class="mb-3">
                 <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                    {{$characteristic->signs_of_distress}}
+                    {{isset($characteristic->signs_of_distress) ? $characteristic->signs_of_distress : '-'}}
                 </div>
             </div>
         </div>
@@ -961,7 +961,7 @@
         <div>
             <div class="mb-3">
                 <div class="font-bold bg-gray-100 p-3 rounded-xl  border border-gray-300">
-                    {{$characteristic->instability_after_slope}}
+                    {{isset($characteristic->instability_after_slope) ? $characteristic->instability_after_slope : '-'}}
                 </div>
             </div>
         </div>
