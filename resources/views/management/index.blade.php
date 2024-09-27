@@ -84,10 +84,10 @@
         </div>
 
 
-        <div class="grid grid-cols-3 gap-4">
-            <div class="col-span-2 ">
-                <div class="p-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+        <div x-data="mapComponent()" x-init="init()" class="grid grid-cols-3 gap-4">
 
+            <div class="col-span-2">
+                <div class="p-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
                     <div class="sm:flex justify-between mb-5">
                         <div>
                             <div class="relative">
@@ -123,45 +123,64 @@
                         </div>
 
                     </div>
+                    <div>
+                        @php
+                        $i=0;
+                        @endphp
+                        @foreach ($slopes as $slope)
+                        <button @click="changeLocation($event)" data-title="{{$slope->slope_name}}"
+                            data-latitude="{{str_replace('°','',$slope->latitude)}}"
+                            data-longitude="{{str_replace('°','',$slope->longtitude)}}"
+                            data-RS="{{isset(json_decode($slope->ranking)->RS) ? round(json_decode($slope->ranking)->RS,2) : '-'}}"
+                            data-TS="{{isset(json_decode($slope->ranking)->TS) ? round(json_decode($slope->ranking)->TS,2) : '-'}}"
+                            data-IS="{{isset(json_decode($slope->ranking)->IS) ? round(json_decode($slope->ranking)->IS,2) : '-'}}"
+                            data-CS="{{isset(json_decode($slope->ranking)->CS) ? round(json_decode($slope->ranking)->CS,2) : '-'}}"
+                            data-location="{{$slope->location}}" data-slope_type="{{$slope->slope_type}}"
+                            data-slug="{{$slope->slug }}"
+                            :class="activeContent === {{$i}} ? 'border-lime-600 bg-gray-200' : 'border-gray-200'"
+                            class="w-full text-left mb-4 rounded-xl border hover:border-lime-600">
+                            <div class="flex px-5 py-3 ">
 
-                    @foreach ($slopes as $slope)
-                    <button class="getDataBtn w-full text-left mb-4" data-slug="{{$slope->slug}}">
-                        <div class="flex px-5 py-3 rounded-lg  border border-gray-200  hover:border-lime-600">
-                            <div class="w-full border-r border-gray-300">
-                                <div class="text-lg font-bold">{{$slope->slope_name}}</div>
-                                <p class="text-sm text-gray-500">
-                                    Updated at: {{$slope->updated_at}}
-                                </p>
-                            </div>
-                            <div class="w-full text-center border-r border-gray-300">
-                                <p class="text-sm text-gray-500">
-                                    Location :
-                                </p>
-                                <div class=" font-semibold">{{$slope->location}}</div>
-                            </div>
+                                <div class="w-full border-r border-gray-300">
+                                    <div class="text-lg font-bold">{{$slope->slope_name}}</div>
+                                    <p class="text-sm text-gray-500">
+                                        Updated at: {{$slope->updated_at}}
+                                    </p>
+                                </div>
+                                <div class="w-full text-center border-r border-gray-300">
+                                    <p class="text-sm text-gray-500">
+                                        Location :
+                                    </p>
+                                    <div class=" font-semibold">{{$slope->location}}</div>
+                                </div>
 
-                            <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
-                                <p class="text-sm my-auto text-gray-500">Side of Road : <span
-                                        class="font-semibold text-gray-800">{{$slope->side_of_road}}</span>
-                                </p>
-                            </div>
-                            <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
-                                <p class="text-sm my-auto text-gray-500">Ranking Score : <span
-                                        class="font-semibold text-gray-800">{{isset(json_decode($slope->ranking)->RS) ?
-                                        round(json_decode($slope->ranking)->RS,2) : '-' }}</span>
-                                </p>
-                            </div>
-                            <div class="w-full sm:flex hidden items-center justify-center">
-                                <p class="text-sm my-auto text-gray-500">Slope Type : <span
-                                        class="text-base font-semibold border-2 border-gray-300 px-3 rounded-full text-gray-800">
-                                        {{$slope->slope_type}}</span>
-                                </p>
+                                <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
+                                    <p class="text-sm my-auto text-gray-500">Side of Road : <span
+                                            class="font-semibold text-gray-800">{{$slope->side_of_road}}</span>
+                                    </p>
+                                </div>
+                                <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
+                                    <p class="text-sm my-auto text-gray-500">Ranking Score : <span
+                                            class="font-semibold text-gray-800">{{isset(json_decode($slope->ranking)->RS)
+                                            ?
+                                            round(json_decode($slope->ranking)->RS,2) : '-' }}</span>
+                                    </p>
+                                </div>
+                                <div class="w-full sm:flex hidden items-center justify-center">
+                                    <p class="text-sm my-auto text-gray-500">Slope Type : <span
+                                            class="text-base font-semibold border-2 border-gray-300 px-3 rounded-full text-gray-800">
+                                            {{$slope->slope_type}}</span>
+                                    </p>
+
+                                </div>
 
                             </div>
-
-                        </div>
-                    </button>
-                    @endforeach
+                        </button>
+                        @php
+                        $i++;
+                        @endphp
+                        @endforeach
+                    </div>
                     @if(!isset($slopes))
                     <div>
                         <p class=" text-center text-gray-500 font-semibold py-2 bg-stone-100">No Data can be
@@ -176,11 +195,12 @@
             <div class="">
                 <div class="p-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
                     <div id="title">
-                        <h2
+                        <h2 x-text="selectedItem.title"
                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in font-bold mb-3 text-2xl">
-                            {{$selectedSlope->slope_name}}</h2>
+                        </h2>
                     </div>
-                    <div class="h-72 shadow-sm rounded-xl" id="map"></div>
+                    <div id="map" class="w-full rounded-xl h-64 mb-4 bg-gray-200"></div>
+
                     <div class="flex my-5">
                         <div class="w-1/3">
                             <p class="text-sm">
@@ -189,8 +209,8 @@
                             <x-line />
                             <div id="ranking">
                                 <h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-4xl">
-                                    {{isset(json_decode($selectedSlope->ranking)->RS) ?
-                                    round(json_decode($selectedSlope->ranking)->RS,2) : '-'}}</h2>
+                                    <span x-text="selectedItem.RS"></span>
+                                </h2>
                             </div>
 
                         </div>
@@ -204,7 +224,7 @@
                                     <div id="ts">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            {{round(json_decode($selectedSlope->ranking)->TS,2)}}
+                                            <span x-text="selectedItem.TS"></span>
                                         </h2>
                                     </div>
                                 </div>
@@ -216,11 +236,7 @@
                                     <div id="is">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            @if ($selectedSlope->slope_type == "fill-type")
-                                            {{round(json_decode($selectedSlope->ranking)->IS1,2)}}
-                                            @else
-                                            {{round(json_decode($selectedSlope->ranking)->IS,2)}}
-                                            @endif
+                                            <span x-text="selectedItem.IS"></span>
                                         </h2>
                                     </div>
                                 </div>
@@ -234,11 +250,7 @@
                                     <div id="cs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            @if ($selectedSlope->slope_type == "fill-type")
-                                            {{round(json_decode($selectedSlope->ranking)->CS1,2)}}
-                                            @else
-                                            {{round(json_decode($selectedSlope->ranking)->CS,2)}}
-                                            @endif
+                                            <span x-text="selectedItem.CS"></span>
                                         </h2>
                                     </div>
                                 </div>
@@ -250,8 +262,7 @@
                                     <div id="rs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            {{isset(json_decode($selectedSlope->ranking)->RS) ?
-                                            round(json_decode($selectedSlope->ranking)->RS,2) : '-'}}
+                                            <span x-text="selectedItem.RS"></span>
                                         </h2>
                                     </div>
                                 </div>
@@ -273,7 +284,8 @@
                                         <div id="location">
                                             <p
                                                 class="animate-fade-left animate-once animate-duration-200 animate-ease-in">
-                                                {{$selectedSlope->location}}</p>
+                                                <span x-text="selectedItem.location"></span>
+                                            </p>
                                         </div>
                                     </td>
                                 </tr>
@@ -286,7 +298,8 @@
                                         <div id="type">
                                             <p
                                                 class="animate-fade-left animate-once animate-duration-200 animate-ease-in">
-                                                {{$selectedSlope->slope_type}}</p>
+                                                <span x-text="selectedItem.slope_type"></span>
+                                            </p>
                                         </div>
                                     </td>
                                 </tr>
@@ -294,7 +307,7 @@
                         </table>
                     </div>
 
-                    <a id='link' href="/management/{{$selectedSlope->slug}}">
+                    <a id='link' x-bind:href="`/management/${selectedItem.slug}`">
                         <div
                             class="text-lime-700 hover:text-white border border-lime-700 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-full w-full text-sm px-5 py-2.5 text-center mb-2">
                             More
@@ -305,68 +318,64 @@
                 </div>
             </div>
             @endif
+
         </div>
-    </div>
 
-    <script>
-        // Define the coordinates for the center of the map
-        var lat = parseInt({{str_replace('°','',$selectedSlope->latitude)}}); // Example latitude
-        var lon = parseInt({{str_replace('°','',$selectedSlope->longtitude)}}); // Example longitude
-
-        $(document).ready(function() {
-            $('.getDataBtn').on('click', function() {
-                var slug = $(this).data('slug');
-                var row = $(this).children();
-                $.ajax({
-                    url: '/find',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        slug: slug
+        <script>
+            function mapComponent() {
+                return {
+                    map: null,
+                    marker: null,
+                    activeContent: 0,
+                    selectedItem: { title: '', latitude: '', longitude: '',RS: '',TS: '',CS: '',IS: '',location: '',slope_type: '',slug: '' },
+    
+                    initMap() {
+                        this.map = new google.maps.Map(document.getElementById('map'), {
+                            center: { lat: {{str_replace('°','',$selectedSlope->latitude)}}, lng: {{str_replace('°','',$selectedSlope->longtitude)}} },
+                            zoom: 13,
+                        });
+    
+                        this.marker = new google.maps.Marker({
+                            position: { lat: {{str_replace('°','',$selectedSlope->latitude)}}, lng: {{str_replace('°','',$selectedSlope->longtitude)}} },
+                            map: this.map,
+                        });
+                        this.selectedItem = { title: '{{$selectedSlope->slope_name}}', latitude: {{str_replace('°','',$selectedSlope->latitude)}}, longitude: {{str_replace('°','',$selectedSlope->longtitude)}},RS:{{isset(json_decode($selectedSlope->ranking)->RS) ? round(json_decode($selectedSlope->ranking)->RS,2) : '-'}},TS:{{isset(json_decode($selectedSlope->ranking)->TS) ? round(json_decode($selectedSlope->ranking)->TS,2) : '-'}}, IS:{{isset(json_decode($selectedSlope->ranking)->IS) ? round(json_decode($selectedSlope->ranking)->IS,2) : '-'}}, CS:{{isset(json_decode($selectedSlope->ranking)->CS) ? round(json_decode($selectedSlope->ranking)->CS,2) : '-'}},location:'{{$selectedSlope->location}}',slope_type:'{{$selectedSlope->slope_type}}',slug:'{{$selectedSlope->slug}}'  };
                     },
-                    success: function(response) {
-                        $('#ranking').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-4xl">' + parseFloat(JSON.parse(response.ranking).RS).toFixed(2)  + '</h2>');
-                        $('#ts').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).TS).toFixed(2)  + '</h2>');
-                        $('#is').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).IS).toFixed(2)  + '</h2>');
-                        $('#cs').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).CS).toFixed(2)  + '</h2>');
-                        $('#rs').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">' + parseFloat(JSON.parse(response.ranking).RS).toFixed(2)  + '</h2>');
+                    
+                    changeLocation(event) {
+                        const title = event.currentTarget.getAttribute('data-title');
+                        const latitude = parseFloat(event.currentTarget.getAttribute('data-latitude'));
+                        const longitude = parseFloat(event.currentTarget.getAttribute('data-longitude'));
+                        const RS = parseFloat(event.currentTarget.getAttribute('data-RS'));
+                        const TS = parseFloat(event.currentTarget.getAttribute('data-TS'));
+                        const IS = parseFloat(event.currentTarget.getAttribute('data-IS'));
+                        const CS = parseFloat(event.currentTarget.getAttribute('data-CS'));
+                        const location = event.currentTarget.getAttribute('data-location');
+                        const slope_type = event.currentTarget.getAttribute('data-slope_type');
+                        const slug = event.currentTarget.getAttribute('data-slug');
 
-                        $('#title').html('<h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in font-bold mb-3 text-2xl">' + response.slope_name + '</h2>');
-                        $('#location').html('<p class="animate-fade-up animate-once animate-duration-200 animate-ease-in">' + response.location + '</p>');
-                        $('#type').html('<p class="animate-fade-up animate-once animate-duration-200 animate-ease-in">' + response.slope_type + '</p>');
-
-                        // $('#link').html('<a href="/management/'.response.slug .'">Detail</a>');
-                        $('#link').attr('href', '/management/'+ response.slug);
+                        this.selectedItem = { title, latitude, longitude, RS, TS, IS, CS,location, slope_type, slug };
                         
-                        $('.getDataBtn div').removeClass('bg-gray-200');
-                        row.addClass('bg-gray-200');
-
-                        lat = parseInt(response.latitude);
-                        lon = parseInt(response.longtitude);
-
+                        this.activeContent = Array.from(event.currentTarget.parentNode.children).indexOf(event.currentTarget);
+    
+                        this.marker.setPosition({ lat: latitude, lng: longitude });
+    
+                        this.map.setCenter({ lat: latitude, lng: longitude });
                     },
-                    error: function(xhr) {
-                        $('#result').html('<p>Error: ' + xhr.responseText + '</p>');
+    
+                    init() {
+                        this.initMap();
                     }
-                });
+                };
+            }
+    
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('mapComponent', mapComponent);
             });
-        });
-    </script>
+        </script>
 
-    <script>
-        // Create the map and set its view to the chosen coordinates and zoom level
-        var map = L.map('map').setView([lat, lon], 11);
-
-        // Add a tile layer to the map (OpenStreetMap tiles in this case)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-        }).addTo(map);
-
-        // Optionally, add a marker at the center point
-        L.marker([lat, lon]).addTo(map)
-            .bindPopup('<b>{{$selectedSlope->slope_name}}</b><br> {{$selectedSlope->location}}')
-            .openPopup();
-
-        const gallery = new Viewer(document.getElementById('images'));
-    </script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB3p0lYewi613mDaZlpy_MTipe4gh47kE&callback=initMap">
+        </script>
+    </div>
 </x-app-layout>

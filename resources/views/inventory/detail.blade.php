@@ -424,6 +424,26 @@
                 </div>
             </div>
 
+            <script>
+                function initMap() {
+                    var location = { lat: {{str_replace('°','',$slope->latitude)}}, lng: {{str_replace('°','',$slope->longtitude)}} }; // Contoh Jakarta
+
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 12,
+                        center: location 
+                    });
+    
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                }
+            </script>
+
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB3p0lYewi613mDaZlpy_MTipe4gh47kE&callback=initMap">
+            </script>
+
             <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js">
             </script>
             <script
@@ -456,26 +476,6 @@
                         },
                     });
                 })
-            </script>
-            <script>
-                // Define the coordinates for the center of the map
-                var lat = parseInt({{str_replace('°','',$slope->latitude)}}); // Example latitude
-                var lon = parseInt({{str_replace('°','',$slope->longtitude)}}); // Example longitude
-                
-                // Create the map and set its view to the chosen coordinates and zoom level
-                var map = L.map('map').setView([lat, lon], 11);
-
-                // Add a tile layer to the map (OpenStreetMap tiles in this case)
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 20,
-                }).addTo(map);
-
-                // Optionally, add a marker at the center point
-                L.marker([lat, lon]).addTo(map)
-                    .bindPopup('<b>{{$slope->slope_name}}</b><br> {{$slope->location}}')
-                    .openPopup();
-
-                const gallery = new Viewer(document.getElementById('images'));
             </script>
         </div>
     </div>
