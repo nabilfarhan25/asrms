@@ -1,19 +1,17 @@
 <x-form-layout>
     <div class="p-5">
-        <div
-            class="flex justify-between items-center p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
-            <div>
-                <!-- Breadcrumb -->
-                @php
-                $bread = [
-                ['url' => '/inventory', 'label' => 'Slope Inventory'],
-                ['url' => '', 'label' => 'Create - '.$slope->slope_name,'active' => true],
+        <x-header />
+        <div class="flex justify-between py-2 px-3 sm:px-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+            <!-- Breadcrumb -->
+            @php
+            $bread = [
+            ['url' => '/inventory', 'label' => 'Slope Inventory'],
+            ['url' => '', 'label' => 'Create - '.$slope->slope_name,'active' => true],
 
-                ];
-                @endphp
-                <x-bread :items="$bread" />
+            ];
+            @endphp
+            <x-bread :items="$bread" />
 
-            </div>
             <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
                 class="inline-flex items-center p-2 text-sm font-medium text-center rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 type="button">
@@ -75,6 +73,32 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                     </div>
                     <x-line />
+                    <div class="mb-3">
+                        <div class="mb-2">
+                            <label for="" class="font-bold text-lg">Section :</label>
+                            <p class="font-medium text-gray-800">
+                                Check if H1 &#8805; 75% x H2. If yes, consider Section 1-1 only; If No, consider
+                                both
+                                Sections
+                                1-1 and 2-2
+                            </p>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <input disabled checked id="" type="checkbox" value="notused"
+                                class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 rounded focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="" class="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500">1-1
+                                (Most Severe Consequence)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" name="section" value="use" id="section2Toggle"
+                                x-model="section2Enabled"
+                                class="w-4 h-4 text-lime-600 bg-gray-100 border-gray-300 rounded focus:ring-lime-500 dark:focus:ring-lime-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="section2Toggle"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">2-2
+                                (Maximum Feature Height)</label>
+                        </div>
+                    </div>
+                    <x-line />
 
                     @if ($slope->slope_type === 'cut-type')
                     @include('inventory.partials.add_cut_geometry')
@@ -91,4 +115,222 @@
             </div>
         </div>
     </div>
+
+    @if ($slope->slope_type == 'cut-type')
+    <script>
+        function formHandler() {
+                    return {
+                        soil_slope_height: {{isset($geometry->soil_slope_height) ? $geometry->soil_slope_height : 0}},
+                        soil_slope_height_2: {{isset($geometry->soil_slope_height_2) ? $geometry->soil_slope_height_2 : 0}},
+                        rock_slope_height: {{isset($geometry->rock_slope_height) ? $geometry->rock_slope_height : 0}},
+                        rock_slope_height_2: {{isset($geometry->rock_slope_height_2) ? $geometry->rock_slope_height_2 : 0}},
+                        height_r: {{isset($geometry->height_r) ? $geometry->height_r : 0}},
+                        height_r_2: {{isset($geometry->height_r_2) ? $geometry->height_r_2 : 0}},
+                        crest_wall_height: {{isset($geometry->crest_wall_height) ? $geometry->crest_wall_height : 0}},
+                        crest_wall_height_2: {{isset($geometry->crest_wall_height_2) ? $geometry->crest_wall_height_2 : 0}},
+                        toe_wall_height: {{isset($geometry->toe_wall_height) ? $geometry->toe_wall_height : 0}},
+                        toe_wall_height_2: {{isset($geometry->toe_wall_height_2) ? $geometry->toe_wall_height_2 : 0}},
+                        upslope_angle: {{isset($geometry->upslope_angle) ? $geometry->upslope_angle : 0}},
+                        upslope_angle_2: {{isset($geometry->upslope_angle_2) ? $geometry->upslope_angle_2 : 0}},
+                        surchange_above_slope_crest: {{isset($geometry->surchange_above_slope_crest) ? $geometry->surchange_above_slope_crest : 0}},
+                        surchange_above_slope_crest_2: {{isset($geometry->surchange_above_slope_crest_2) ? $geometry->surchange_above_slope_crest_2 : 0}},
+                        soil_slope_angle: {{isset($geometry->soil_slope_angle) ? $geometry->soil_slope_angle : 0}},
+                        soil_slope_angle_2: {{isset($geometry->soil_slope_angle_2) ? $geometry->soil_slope_angle_2 : 0}},
+                        average_slope_angle:{{isset($geometry->average_slope_angle) ? $geometry->average_slope_angle : 0}},
+                        average_slope_angle_2: {{isset($geometry->average_slope_angle_2) ? $geometry->average_slope_angle_2 : 0}},
+                        downslope_gradient: {{isset($geometry->downslope_gradient) ? $geometry->downslope_gradient : 0}},
+                        downslope_gradient_2:{{isset($geometry->downslope_gradient_2) ? $geometry->downslope_gradient_2 : 0}},
+                        soil_bulk_unit_weight: {{isset($geometry->soil_bulk_unit_weight) ? $geometry->soil_bulk_unit_weight : 1}},
+                        section2Enabled: {{isset($geometry->section) ? 'true' : 'false'}},
+                        get featureHeight1() {
+                            return this.soil_slope_height + this.rock_slope_height + this.crest_wall_height + this.toe_wall_height;
+                        },
+                        get featureHeight2() {
+                            return this.soil_slope_height_2 + this.rock_slope_height_2 + this.crest_wall_height_2 + this.toe_wall_height_2;
+                        },
+                        get H_w_1() {
+                            return this.crest_wall_height + this.toe_wall_height;
+                        },
+                        get H_w_2() {
+                            return this.crest_wall_height_2 + this.toe_wall_height_2;
+                        },
+                        get H_c_1() {
+                            return this.soil_slope_height + this.rock_slope_height;
+                        },
+                        get H_c_2() {
+                            return this.soil_slope_height_2 + this.rock_slope_height_2;
+                        },
+                        get H_o_1() {
+                            return this.soil_slope_height + this.height_r + this.crest_wall_height;
+                        },
+                        get H_o_2() {
+                            return this.soil_slope_height_2 + this.height_r_2 + this.crest_wall_height_2;
+                        },
+                        get effectiveHeight1() {
+                            return this.H_o_1 * (1 + 0.35 * Math.tan(this.upslope_angle * Math.PI / 180)) + this.surchange_above_slope_crest / this.soil_bulk_unit_weight;
+                        },
+                        get effectiveHeight2() {
+                            return this.H_o_2 * (1 + 0.35 * Math.tan(this.upslope_angle_2 * Math.PI / 180)) + this.surchange_above_slope_crest_2 / this.soil_bulk_unit_weight;
+                        }
+                    }
+                }
+    </script>
+
+    @elseif ($slope->slope_type == 'fill-type')
+    <script>
+        function formHandler() {
+            return {
+                fill_slope_height: {{isset($geometry->fill_slope_height) ? $geometry->fill_slope_height : 0}},
+                crest_wall_height: {{isset($geometry->crest_wall_height) ? $geometry->crest_wall_height : 0}},
+                toe_wall_height: {{isset($geometry->toe_wall_height) ? $geometry->toe_wall_height : 0}},
+                fill_slope_angle: {{isset($geometry->fill_slope_angle) ? $geometry->fill_slope_angle : 0}},
+                average_slope_angle: {{isset($geometry->average_slope_angle) ? $geometry->average_slope_angle : 0}},
+                section2Enabled: {{isset($geometry->section) ? 'true' : 'false'}},
+
+                get featureHeight() {
+                    return this.fill_slope_height + this.crest_wall_height + this.toe_wall_height;
+                }
+            }
+        }
+    </script>
+
+    @elseif ($slope->slope_type == 'rock-type')
+    <script>
+        function formHandler() {
+            return {
+                rock_slope_height: {{isset($geometry->rock_slope_height) ? $geometry->rock_slope_height : 0}},
+                soil_slope_height: {{isset($geometry->soil_slope_height) ? $geometry->soil_slope_height : 0}},
+                crest_wall_height: {{isset($geometry->crest_wall_height) ? $geometry->crest_wall_height : 0}},
+                toe_wall_height: {{isset($geometry->toe_wall_height) ? $geometry->toe_wall_height : 0}},
+                rock_slope_angle: {{isset($geometry->rock_slope_angle) ? $geometry->rock_slope_angle : 0}},
+                soil_slope_angle: {{isset($geometry->soil_slope_angle) ? $geometry->soil_slope_angle : 0}},
+                section2Enabled: {{isset($geometry->section) ? 'true' : 'false'}},
+
+                get featureHeight() {
+                    return this.soil_slope_height + this.rock_slope_height + this.crest_wall_height + this.toe_wall_height;
+                }
+            }
+        }
+    </script>
+
+    @elseif ($slope->slope_type == 'retaining-type')
+    <script>
+        function formHandler() {
+                    return {
+                        wall_height: {{isset($geometry->wall_height) ? $geometry->wall_height : 0}},
+                        wall_height_2: {{isset($geometry->wall_height_2) ? $geometry->wall_height_2 : 0}},
+                        rock_slope_height: {{isset($geometry->rock_slope_height) ? $geometry->rock_slope_height : 0}},
+                        rock_slope_height_2: {{isset($geometry->rock_slope_height_2) ? $geometry->rock_slope_height_2 : 0}},
+                        soil_slope_height: {{isset($geometry->soil_slope_height) ? $geometry->soil_slope_height : 0}},
+                        soil_slope_height_2: {{isset($geometry->soil_slope_height_2) ? $geometry->soil_slope_height_2 : 0}},
+                        upslope_angle: {{isset($geometry->upslope_angle) ? $geometry->upslope_angle : 0}},
+                        upslope_angle_2: {{isset($geometry->upslope_angle_2) ? $geometry->upslope_angle_2 : 0}},
+                        wall_face_angle: {{isset($geometry->wall_face_angle) ? $geometry->wall_face_angle : 0}},
+                        wall_face_angle_2: {{isset($geometry->wall_face_angle_2) ? $geometry->wall_face_angle_2 : 0}},
+                        surcharge_crest: {{isset($geometry->surcharge_crest) ? $geometry->surcharge_crest : 0}},
+                        surcharge_crest_2: {{isset($geometry->surcharge_crest_2) ? $geometry->surcharge_crest_2 : 0}},
+                        base_width: {{isset($geometry->base_width) ? $geometry->base_width : 0}},
+                        base_width_2: {{isset($geometry->base_width_2) ? $geometry->base_width_2 : 0}},
+                        average_wall: {{isset($geometry->average_wall) ? $geometry->average_wall : 0}},
+                        average_wall_2: {{isset($geometry->average_wall_2) ? $geometry->average_wall_2 : 0}},
+                        soil_bulk_unit_weight: {{isset($geometry->soil_bulk_unit_weight) ? $geometry->soil_bulk_unit_weight : 1}},
+                        section2Enabled: {{isset($geometry->section) ? 'true' : 'false'}},
+
+                        get featureHeight1() {
+                            return this.soil_slope_height + this.rock_slope_height + this.wall_height ;
+                        },
+                        get featureHeight2() {
+                            return this.soil_slope_height_2 + this.rock_slope_height_2 + this.wall_height_2;
+                        },
+                        get effectiveHeight1() {
+                            return this.wall_height * (1 + 0.35 * Math.tan(this.upslope_angle * Math.PI / 180)) + this.surcharge_crest / this.soil_bulk_unit_weight;
+                        },
+                        get effectiveHeight2() {
+                            return this.wall_height_2 * (1 + 0.35 * Math.tan(this.upslope_angle_2 * Math.PI / 180)) + this.surcharge_crest_2 / this.soil_bulk_unit_weight;
+                        },
+                        get HB1() {
+                            if (this.base_width === 0) {
+                                if (this.effectiveHeight1 === 0) {
+                                    return 0;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                            return this.effectiveHeight1 / this.base_width;
+                        },
+                        get HB2() {
+                            if (this.base_width_2 === 0) {
+                                if (this.effectiveHeight2 === 0) {
+                                    return 0;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                            return this.effectiveHeight2 / this.base_width_2;
+                        },
+                    }
+                }
+    </script>
+
+    @elseif ($slope->slope_type == 'combine-type')
+    <script>
+        function formHandler() {
+                    return {
+                        soil_slope_height: {{isset($geometry->soil_slope_height) ? $geometry->soil_slope_height : 0}},
+                        soil_slope_height_2: {{isset($geometry->soil_slope_height_2) ? $geometry->soil_slope_height_2 : 0}},
+                        rock_slope_height: {{isset($geometry->rock_slope_height) ? $geometry->rock_slope_height : 0}},
+                        rock_slope_height_2: {{isset($geometry->rock_slope_height_2) ? $geometry->rock_slope_height_2 : 0}},
+                        height_r: {{isset($geometry->height_r) ? $geometry->height_r : 0}},
+                        height_r_2: {{isset($geometry->height_r_2) ? $geometry->height_r_2 : 0}},
+                        crest_wall_height: {{isset($geometry->crest_wall_height) ? $geometry->crest_wall_height : 0}},
+                        crest_wall_height_2: {{isset($geometry->crest_wall_height_2) ? $geometry->crest_wall_height_2 : 0}},
+                        toe_wall_height: {{isset($geometry->toe_wall_height) ? $geometry->toe_wall_height : 0}},
+                        toe_wall_height_2: {{isset($geometry->toe_wall_height_2) ? $geometry->toe_wall_height_2 : 0}},
+                        upslope_angle: {{isset($geometry->upslope_angle) ? $geometry->upslope_angle : 0}},
+                        upslope_angle_2: {{isset($geometry->upslope_angle_2) ? $geometry->upslope_angle_2 : 0}},
+                        surchange_above_slope_crest: {{isset($geometry->surchange_above_slope_crest) ? $geometry->surchange_above_slope_crest : 0}},
+                        surchange_above_slope_crest_2: {{isset($geometry->surchange_above_slope_crest_2) ? $geometry->surchange_above_slope_crest_2 : 0}},
+                        soil_slope_angle: {{isset($geometry->soil_slope_angle) ? $geometry->soil_slope_angle : 0}},
+                        soil_slope_angle_2: {{isset($geometry->soil_slope_angle_2) ? $geometry->soil_slope_angle_2 : 0}},
+                        average_slope_angle:{{isset($geometry->average_slope_angle) ? $geometry->average_slope_angle : 0}},
+                        average_slope_angle_2: {{isset($geometry->average_slope_angle_2) ? $geometry->average_slope_angle_2 : 0}},
+                        downslope_gradient: {{isset($geometry->downslope_gradient) ? $geometry->downslope_gradient : 0}},
+                        downslope_gradient_2:{{isset($geometry->downslope_gradient_2) ? $geometry->downslope_gradient_2 : 0}},
+                        soil_bulk_unit_weight: {{isset($geometry->soil_bulk_unit_weight) ? $geometry->soil_bulk_unit_weight : 1}},
+                        section2Enabled: {{isset($geometry->section) ? 'true' : 'false'}},
+
+                        get featureHeight1() {
+                            return this.soil_slope_height + this.rock_slope_height + this.crest_wall_height + this.toe_wall_height;
+                        },
+                        get featureHeight2() {
+                            return this.soil_slope_height_2 + this.rock_slope_height_2 + this.crest_wall_height_2 + this.toe_wall_height_2;
+                        },
+                        get H_w_1() {
+                            return this.crest_wall_height + this.toe_wall_height;
+                        },
+                        get H_w_2() {
+                            return this.crest_wall_height_2 + this.toe_wall_height_2;
+                        },
+                        get H_c_1() {
+                            return this.soil_slope_height + this.rock_slope_height;
+                        },
+                        get H_c_2() {
+                            return this.soil_slope_height_2 + this.rock_slope_height_2;
+                        },
+                        get H_o_1() {
+                            return this.soil_slope_height + this.height_r + this.crest_wall_height;
+                        },
+                        get H_o_2() {
+                            return this.soil_slope_height_2 + this.height_r_2 + this.crest_wall_height_2;
+                        },
+                        get effectiveHeight1() {
+                            return this.H_o_1 * (1 + 0.35 * Math.tan(this.upslope_angle * Math.PI / 180)) + this.surchange_above_slope_crest / this.soil_bulk_unit_weight;
+                        },
+                        get effectiveHeight2() {
+                            return this.H_o_2 * (1 + 0.35 * Math.tan(this.upslope_angle_2 * Math.PI / 180)) + this.surchange_above_slope_crest_2 / this.soil_bulk_unit_weight;
+                        }
+                    }
+                }
+    </script>
+    @endif
 </x-form-layout>

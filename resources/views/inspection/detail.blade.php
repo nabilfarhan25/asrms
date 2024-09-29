@@ -3,20 +3,19 @@
     <x-header /> --}}
     <div class="h-screen">
         <div class="p-5 h-full">
+            <x-header />
             <div
-                class="flex items-center justify-between p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
-                <div>
-                    <!-- Breadcrumb -->
-                    @php
-                    $bread = [
-                    ['url' => '/inspection', 'label' => 'Inspections'],
-                    ['url' => '/inspection/'.$slope->slug, 'label' => $slope->slope_name,'active' => true],
+                class="flex justify-between py-2 px-3 sm:px-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+                <!-- Breadcrumb -->
+                @php
+                $bread = [
+                ['url' => '/inspection', 'label' => 'Inspections'],
+                ['url' => '/inspection/'.$slope->slug, 'label' => $slope->slope_name,'active' => true],
 
-                    ];
-                    @endphp
-                    <x-bread :items="$bread" />
+                ];
+                @endphp
+                <x-bread :items="$bread" />
 
-                </div>
                 <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
                     class="inline-flex items-center p-2 text-sm font-medium text-center bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     type="button">
@@ -169,16 +168,7 @@
                             </div>
 
                             <div class="flex">
-                                <div class="w-1/3">
-                                    <p class="text-sm">
-                                        Ranking Score (RS) :
-                                    </p>
-                                    <x-line />
-                                    <h2 class="text-5xl text-bold">
-                                        {{round(json_decode($slope->ranking)->TS*0.062,2)}}
-                                    </h2>
-                                </div>
-                                <div class="w-2/3">
+                                <div class="w-full">
                                     <div class="flex mb-10">
                                         <div class="w-full px-2">
                                             <p class="text-sm">
@@ -211,7 +201,7 @@
                                         </div>
                                         @endif
                                     </div>
-                                    <div class="flex">
+                                    <div class="flex mb-10">
                                         @if($slope->slope_type == 'fill-type')
                                         <div class="w-full px-2">
                                             <p class="text-sm">

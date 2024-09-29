@@ -1,9 +1,9 @@
-<nav class=" bg-white relative z-40 w-full border border-gray-200">
-    <div class="flex flex-wrap justify-between items-center mx-auto py-2 px-5">
+<nav class=" relative z-40 w-full">
+    <div class="flex flex-wrap justify-between items-center mx-auto py-3 px-5">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <div class="flex items-center">
-                <x-srms-logo class="w-10 mr-2" />
-                <p class="font-bold uppercase">
+                <x-srms-logo class="w-8 mr-2" />
+                <p class="font-bold text-sm uppercase">
                     Slope Risk<br> Management System
                 </p>
             </div>
@@ -20,7 +20,7 @@
         <div id="mega-menu-full"
             class="items-center justify-between font-medium hidden w-full md:flex md:w-auto md:order-1">
             <ul
-                class="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white ">
+                class="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
 
                 <li>
                     <a href="#"

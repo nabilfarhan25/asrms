@@ -4,7 +4,7 @@
         {{$title}}
     </h2>
 
-    <div class="text-white sm:flex">
+    <div class="flex flex-wrap text-white sm:flex">
 
         <a href="/inventory">
             <div

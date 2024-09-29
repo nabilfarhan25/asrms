@@ -1,7 +1,8 @@
 <x-app-layout>
 
     <div class="p-5">
-        <div class="flex justify-between p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+        <x-header />
+        <div class="flex justify-between py-2 px-3 sm:px-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
             <!-- Breadcrumb -->
             @php
             $bread = [
@@ -354,12 +355,7 @@
                         Updated at: {{$slope->updated_at}}
                     </p>
                 </div>
-                <div class="w-full text-center border-r border-gray-300">
-                    <p class="text-sm text-gray-500">
-                        Location :
-                    </p>
-                    <div class=" font-semibold">{{$slope->location}}</div>
-                </div>
+
                 <div class="w-full md:block hidden text-center border-r border-gray-300">
                     <p class="text-sm text-gray-500">
                         KM :
@@ -372,7 +368,7 @@
                     </p>
                 </div>
                 <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
-                    <p class="text-sm my-auto text-gray-500">Slope Type : <span
+                    <p class="text-sm my-auto text-gray-500 text-center">Slope Type : <br><span
                             class="text-base font-semibold border-2 border-gray-300 px-3 rounded-full text-gray-800">
                             {{$slope->slope_type}}</span>
                     </p>

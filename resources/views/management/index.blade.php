@@ -1,7 +1,8 @@
 <x-app-layout>
 
     <div class="p-5">
-        <div class="flex justify-between p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+        <x-header />
+        <div class="flex justify-between py-2 px-3 sm:px-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
             <!-- Breadcrumb -->
             @php
             $bread = [
@@ -147,12 +148,6 @@
                                         Updated at: {{$slope->updated_at}}
                                     </p>
                                 </div>
-                                <div class="w-full text-center border-r border-gray-300">
-                                    <p class="text-sm text-gray-500">
-                                        Location :
-                                    </p>
-                                    <div class=" font-semibold">{{$slope->location}}</div>
-                                </div>
 
                                 <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
                                     <p class="text-sm my-auto text-gray-500">Side of Road : <span
@@ -202,20 +197,21 @@
                     <div id="map" class="w-full rounded-xl h-64 mb-4 bg-gray-200"></div>
 
                     <div class="flex my-5">
-                        <div class="w-1/3">
-                            <p class="text-sm">
-                                Ranking Score (RS) :
-                            </p>
-                            <x-line />
-                            <div id="ranking">
-                                <h2 class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-4xl">
-                                    <span x-text="selectedItem.RS"></span>
-                                </h2>
-                            </div>
 
-                        </div>
-                        <div class="w-2/3">
+                        <div class="w-full">
                             <div class="flex mb-10">
+                                <div class="w-full px-2">
+                                    <p class="text-sm">
+                                        Ranking Score (RS) :
+                                    </p>
+                                    <x-line />
+                                    <div id="rs">
+                                        <h2
+                                            class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
+                                            <span x-text="selectedItem.RS"></span>
+                                        </h2>
+                                    </div>
+                                </div>
                                 <div class="w-full px-2">
                                     <p class="text-sm">
                                         Total Score (TS) :
@@ -228,6 +224,8 @@
                                         </h2>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="flex mb-10">
                                 <div class="w-full px-2">
                                     <p class="text-sm">
                                         Instability Score (IS) :
@@ -240,8 +238,6 @@
                                         </h2>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex">
                                 <div class="w-full px-2">
                                     <p class="text-sm">
                                         Consequence Score (CS) :
@@ -251,18 +247,6 @@
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
                                             <span x-text="selectedItem.CS"></span>
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="w-full px-2">
-                                    <p class="text-sm">
-                                        Ranking Score (RS) :
-                                    </p>
-                                    <x-line />
-                                    <div id="rs">
-                                        <h2
-                                            class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            <span x-text="selectedItem.RS"></span>
                                         </h2>
                                     </div>
                                 </div>

@@ -1,19 +1,18 @@
 <x-app-layout>
     <div class="p-5">
-        <div
-            class="flex justify-between items-center p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
-            <div>
-                <!-- Breadcrumb -->
-                @php
-                $bread = [
-                ['url' => '/management', 'label' => 'Slope Priority'],
-                ['url' => '/management/'.$slope->slug, 'label' => $slope->slope_name,'active' => true],
+        <x-header />
+        <div class="flex justify-between py-2 px-3 sm:px-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
 
-                ];
-                @endphp
-                <x-bread :items="$bread" />
+            <!-- Breadcrumb -->
+            @php
+            $bread = [
+            ['url' => '/management', 'label' => 'Slope Priority'],
+            ['url' => '/management/'.$slope->slug, 'label' => $slope->slope_name,'active' => true],
 
-            </div>
+            ];
+            @endphp
+            <x-bread :items="$bread" />
+
             <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
                 class="inline-flex items-center p-2 text-sm font-medium text-center bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 type="button">
@@ -299,7 +298,7 @@
                         @endphp
                         <h2 id="{{$r}}">
                             <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                class="text-left flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                                 data-accordion-target="#n-{{$r}}" aria-expanded="false" aria-controls="n-{{$r}}">
                                 <span>{{ucwords(str_replace("_", " ", $val))}}</span>
                                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
@@ -311,7 +310,7 @@
                         </h2>
                         <div id="n-{{$r}}" class="hidden" aria-labelledby="{{$r}}">
                             <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 ">
-                                <ul id="p-{{$r}}" class="grid grid-cols-3 gap-2">
+                                <ul id="p-{{$r}}" class="flex flex-wrap">
                                     @foreach ($img as $i)
                                     @if ($i->type == $r)
                                     @php
@@ -319,7 +318,7 @@
                                     @endphp
                                     <li>
                                         <img id="p-{{$r}}" src="/storage/{{$slope->slug}}/{{$i->file}}/{{$i->img}}"
-                                            class="w-full rounded-lg h-44 object-cover" alt="">
+                                            class="m-1 rounded-lg h-40 w-40 object-cover" alt="">
                                     </li>
 
                                     @endif

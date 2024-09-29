@@ -2,18 +2,16 @@
     {{--
     <x-header /> --}}
     <div class="p-5">
-        <div
-            class="flex items-center justify-between p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
-            <div>
-                <!-- Breadcrumb -->
-                @php
-                $bread = [
-                ['url' => '/preservation', 'label' => 'Preservation','active' => true],
-                ];
-                @endphp
-                <x-bread :items="$bread" />
+        <x-header />
+        <div class="flex justify-between py-2 px-3 sm:px-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+            <!-- Breadcrumb -->
+            @php
+            $bread = [
+            ['url' => '/preservation', 'label' => 'Preservation','active' => true],
+            ];
+            @endphp
+            <x-bread :items="$bread" />
 
-            </div>
             <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
                 class="inline-flex items-center p-2 text-sm font-medium text-center bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 type="button">
@@ -153,17 +151,11 @@
                         Updated at: {{$slope->updated_at}}
                     </p>
                 </div>
-                <div class="w-full text-center border-r border-gray-300">
-                    <p class="text-sm text-gray-500">
-                        Location :
-                    </p>
-                    <div class=" font-semibold">{{$slope->location}}</div>
-                </div>
                 <div class="w-full md:block hidden text-center border-r border-gray-300">
                     <p class="text-sm text-gray-500">
                         Coordinate :
                     </p>
-                    <div class=" font-semibold">Long: {{$slope->longtitude}} - Lat : {{$slope->latitude}}</div>
+                    <div class=" font-semibold text-sm">Long: {{$slope->longtitude}} - Lat : {{$slope->latitude}}</div>
                 </div>
                 <div class="w-full md:block hidden text-center border-r border-gray-300">
                     <p class="text-sm text-gray-500">
@@ -177,7 +169,7 @@
                     </p>
                 </div>
                 <div class="w-full sm:flex hidden items-center justify-center border-r border-gray-300">
-                    <p class="text-sm my-auto text-gray-500">Slope Type : <span
+                    <p class="text-sm my-auto text-gray-500 text-center">Slope Type : <br> <span
                             class="text-base font-semibold border-2 border-gray-300 px-3 rounded-full text-gray-800">
                             {{$slope->slope_type}}</span>
                     </p>

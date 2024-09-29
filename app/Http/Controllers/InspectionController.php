@@ -119,6 +119,7 @@ class InspectionController extends Controller
     {
         $data = [
             'slope' => Slopes::where('slug', $slug)->first(),
+            'geometry' => json_decode(Slopes::where('slug', $slug)->first()['geometry']),
         ];
 
         // Reseting Files
@@ -151,6 +152,8 @@ class InspectionController extends Controller
         $geo = $request->session()->get('geometry');
         $data = [
             'slope' => Slopes::where('slug', $geo['slug'])->first(),
+            'characteristic' => json_decode(Slopes::where('slug', $geo['slug'])->first()['characteristic']),
+
         ];
 
         // Reseting Files
@@ -219,6 +222,8 @@ class InspectionController extends Controller
             'slope' => Slopes::where('slug', $geo['slug'])->first(),
             'geometry' => $geo,
             'characteristic' => $char,
+            'rating' => json_decode(Slopes::where('slug', $geo['slug'])->first()['rating']),
+
         ];
 
         return view('inspection.rating', $data);
@@ -345,7 +350,7 @@ class InspectionController extends Controller
         $slope->save();
 
         $request->session()->forget(['geometry', 'characteristic', 'rating']);
-        return redirect('/management');
+        return redirect('/engineer-inspection/'.$request->slug);
     }
 
     public function create_maintenance(string $slug)

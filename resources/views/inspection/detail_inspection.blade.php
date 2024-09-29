@@ -1,19 +1,17 @@
 <x-app-layout>
     <div class="p-5">
-        <div
-            class="flex justify-between items-center p-3 sm:p-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
-            <div>
-                <!-- Breadcrumb -->
-                @php
-                $bread = [
-                ['url' => '/inventory', 'label' => 'Slope Inventory'],
-                ['url' => '/inventory/'.$slope->slug, 'label' => $slope->slope_name,'active' => true],
+        <x-header />
+        <div class="flex justify-between py-2 px-3 sm:px-5 mb-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
+            <!-- Breadcrumb -->
+            @php
+            $bread = [
+            ['url' => '/inventory', 'label' => 'Slope Inventory'],
+            ['url' => '/inventory/'.$slope->slug, 'label' => $slope->slope_name,'active' => true],
 
-                ];
-                @endphp
-                <x-bread :items="$bread" />
+            ];
+            @endphp
+            <x-bread :items="$bread" />
 
-            </div>
             <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
                 class="inline-flex items-center p-2 text-sm font-medium text-center bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 type="button">
