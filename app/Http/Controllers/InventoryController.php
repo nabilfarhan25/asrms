@@ -340,7 +340,7 @@ class InventoryController extends Controller
         $slope->save();
 
         $request->session()->forget(['geometry', 'characteristic', 'rating']);
-        return redirect('/management');
+        return redirect('/inventory/'.$request->slug);
     }
 
     public function edit_geometry(string $slug)
@@ -526,7 +526,7 @@ class InventoryController extends Controller
         $slope->save();
 
         $request->session()->forget(['geometry', 'characteristic', 'rating']);
-        return redirect('/management');
+        return redirect('/inventory/'.$request->slug);
     }
 
     public function upload_doc(Request $request,$slug){

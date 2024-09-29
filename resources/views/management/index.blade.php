@@ -132,10 +132,10 @@
                         <button @click="changeLocation($event)" data-title="{{$slope->slope_name}}"
                             data-latitude="{{str_replace('°','',$slope->latitude)}}"
                             data-longitude="{{str_replace('°','',$slope->longtitude)}}"
-                            data-RS="{{isset(json_decode($slope->ranking)->RS) ? round(json_decode($slope->ranking)->RS,2) : '-'}}"
-                            data-TS="{{isset(json_decode($slope->ranking)->TS) ? round(json_decode($slope->ranking)->TS,2) : '-'}}"
-                            data-IS="{{isset(json_decode($slope->ranking)->IS) ? round(json_decode($slope->ranking)->IS,2) : '-'}}"
-                            data-CS="{{isset(json_decode($slope->ranking)->CS) ? round(json_decode($slope->ranking)->CS,2) : '-'}}"
+                            data-RS="{{isset(json_decode($slope->ranking)->RS) ? round((float)json_decode($slope->ranking)->RS,2) : '-'}}"
+                            data-TS="{{isset(json_decode($slope->ranking)->TS) ? round((float)json_decode($slope->ranking)->TS,2) : '-'}}"
+                            data-IS="{{isset(json_decode($slope->ranking)->IS) ? round((float)json_decode($slope->ranking)->IS,2) : '-'}}"
+                            data-CS="{{isset(json_decode($slope->ranking)->CS) ? round((float)json_decode($slope->ranking)->CS,2) : '-'}}"
                             data-location="{{$slope->location}}" data-slope_type="{{$slope->slope_type}}"
                             data-slug="{{$slope->slug }}"
                             :class="activeContent === {{$i}} ? 'border-lime-600 bg-gray-200' : 'border-gray-200'"
@@ -158,7 +158,7 @@
                                     <p class="text-sm my-auto text-gray-500">Ranking Score : <span
                                             class="font-semibold text-gray-800">{{isset(json_decode($slope->ranking)->RS)
                                             ?
-                                            round(json_decode($slope->ranking)->RS,2) : '-' }}</span>
+                                            round((float)json_decode($slope->ranking)->RS,2) : '-' }}</span>
                                     </p>
                                 </div>
                                 <div class="w-full sm:flex hidden items-center justify-center">
