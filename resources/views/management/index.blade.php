@@ -162,7 +162,7 @@
                                     </p>
                                 </div>
                                 <div class="w-full sm:flex hidden items-center justify-center">
-                                    <p class="text-sm my-auto text-gray-500">Slope Type : <span
+                                    <p class="text-sm my-auto text-gray-500 text-center">Slope Type : <br><span
                                             class="text-base font-semibold border-2 border-gray-300 px-3 rounded-full text-gray-800">
                                             {{$slope->slope_type}}</span>
                                     </p>
