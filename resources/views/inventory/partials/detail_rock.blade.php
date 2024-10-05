@@ -119,122 +119,124 @@
     </div>
     <x-line />
 
-    <table class="bg-slate-50 border border-gray-300 w-full text-sm">
-        <thead>
-            <tr class="bg-gray-200">
-                <th rowspan="2" class="border border-gray-300 px-4 py-2 text-left">FEATURE NO.</th>
-                <th colspan="4" class="border border-gray-300 px-4 py-2 text-left">
-                    SITE OBSERVATIONS/FINDINGS
-                </th>
-            </tr>
-            <tr class="bg-gray-200">
-                <th class="border border-gray-300 px-4 py-2 text-left">RAVELLING</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">TOPPLING</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">WEDGE</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">PLANAR</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="border border-gray-300 px-4 py-2">Rock lithology and nature of
-                    discontinuity (see Remark A)</td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling1"
-                        name="ravelling1" value="{{$geometry->ravelling1}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling1" name="toppling1"
-                        value="{{$geometry->toppling1}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge1" name="wedge1"
-                        value="{{$geometry->wedge1}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar1" name="planar1"
-                        value="{{$geometry->planar1}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 px-4 py-2">Dips of discontinuities/line of
-                    intersection of discontinuities (°)</td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling2"
-                        name="ravelling2" value="{{$geometry->ravelling2}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling2" name="toppling2"
-                        value="{{$geometry->toppling2}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge2" name="wedge2"
-                        value="{{$geometry->wedge2}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar2" name="planar2"
-                        value="{{$geometry->planar2}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 px-4 py-2">Persistence of discontinuity (m) (i.e.
-                    max. dimension of trace length exposed)</td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling3"
-                        name="ravelling3" value="{{$geometry->ravelling3}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling3" name="toppling3"
-                        value="{{$geometry->toppling3}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge3" name="wedge3"
-                        value="{{$geometry->wedge3}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar3" name="planar3"
-                        value="{{$geometry->planar3}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 px-4 py-2">Discontinuity spacing (m)</td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling4"
-                        name="ravelling4" value="{{$geometry->ravelling4}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling4" name="toppling4"
-                        value="{{$geometry->toppling4}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge4" name="wedge4"
-                        value="{{$geometry->wedge4}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar4" name="planar4"
-                        value="{{$geometry->planar4}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 px-4 py-2">Roughness of discontinuities</td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling5"
-                        name="ravelling5" value="{{$geometry->ravelling5}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling5" name="toppling5"
-                        value="{{$geometry->toppling5}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge5" name="wedge5"
-                        value="{{$geometry->wedge5}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-                <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar5" name="planar5"
-                        value="{{$geometry->planar5}}"
-                        class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="relative overflow-x-auto">
+        <table class="bg-slate-50 border border-gray-300 w-full text-sm">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th rowspan="2" class="border border-gray-300 px-4 py-2 text-left">FEATURE NO.</th>
+                    <th colspan="4" class="border border-gray-300 px-4 py-2 text-left">
+                        SITE OBSERVATIONS/FINDINGS
+                    </th>
+                </tr>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-300 px-4 py-2 text-left">RAVELLING</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">TOPPLING</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">WEDGE</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">PLANAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">Rock lithology and nature of
+                        discontinuity (see Remark A)</td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling1"
+                            name="ravelling1" value="{{$geometry->ravelling1}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling1"
+                            name="toppling1" value="{{$geometry->toppling1}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge1" name="wedge1"
+                            value="{{$geometry->wedge1}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar1" name="planar1"
+                            value="{{$geometry->planar1}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">Dips of discontinuities/line of
+                        intersection of discontinuities (°)</td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling2"
+                            name="ravelling2" value="{{$geometry->ravelling2}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling2"
+                            name="toppling2" value="{{$geometry->toppling2}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge2" name="wedge2"
+                            value="{{$geometry->wedge2}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar2" name="planar2"
+                            value="{{$geometry->planar2}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">Persistence of discontinuity (m) (i.e.
+                        max. dimension of trace length exposed)</td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling3"
+                            name="ravelling3" value="{{$geometry->ravelling3}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling3"
+                            name="toppling3" value="{{$geometry->toppling3}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge3" name="wedge3"
+                            value="{{$geometry->wedge3}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar3" name="planar3"
+                            value="{{$geometry->planar3}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">Discontinuity spacing (m)</td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling4"
+                            name="ravelling4" value="{{$geometry->ravelling4}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling4"
+                            name="toppling4" value="{{$geometry->toppling4}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge4" name="wedge4"
+                            value="{{$geometry->wedge4}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar4" name="planar4"
+                            value="{{$geometry->planar4}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">Roughness of discontinuities</td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="ravelling5"
+                            name="ravelling5" value="{{$geometry->ravelling5}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="toppling5"
+                            name="toppling5" value="{{$geometry->toppling5}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="wedge5" name="wedge5"
+                            value="{{$geometry->wedge5}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2"><input type="text" readonly id="planar5" name="planar5"
+                            value="{{$geometry->planar5}}"
+                            class="block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <x-line />
 
     <div>

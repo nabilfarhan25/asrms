@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::delete('/images-del/{slug}/{key}', [ImageController::class, 'deleteImage'])->name('images.delete');
     // Inventory
     Route::post('/inventory', [InventoryController::class, 'store']);
+    Route::post('/inventory/{slug}', [InventoryController::class, 'edit']);
     Route::delete('/slope/{slug}', [InventoryController::class, 'destroy']);
     Route::get('/edit/geometry/{slug}', [InventoryController::class, 'edit_geometry']);
     Route::post('/edit/geometry/{slug}', [InventoryController::class, 'change_geometry']);

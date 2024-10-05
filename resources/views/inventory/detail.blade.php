@@ -185,43 +185,225 @@
                             </ul>
                         </div>
                         <div id="default-styled-tab-content">
-                            <div class="hidden px-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile"
+                            <div class="hidden rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile"
                                 role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="relative overflow-x-auto">
+                                    <table class="w-full text-left text-gray-500 dark:text-gray-400">
+                                        <thead class=" text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                                            <tr>
+                                                <th class="px-4 py-3">Field</th>
+                                                <th colspan="2" class="px-4 py-3">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Slope Name -->
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3 font-bold">Slope Name</td>
+                                                <td colspan="2" class="px-4 py-3">{{$slope->slope_name}}</td>
+                                            </tr>
 
-                                <div class="grid grid-cols-2 ">
-                                    <div class="border-b border-gray-300 py-5 font-bold">
-                                        Location
-                                    </div>
-                                    <div class="border-b border-gray-300 py-5">
-                                        {{$slope->location}}
-                                    </div>
-                                    <div class="border-b border-gray-300 py-5 font-bold">
-                                        Slope Type
-                                    </div>
-                                    <div class="border-b border-gray-300 py-5">
-                                        {{$slope->slope_type}}
-                                    </div>
-                                    <div class="border-b border-gray-300 py-5 font-bold">
-                                        Side of Road
-                                    </div>
-                                    <div class="border-b border-gray-300 py-5">
-                                        {{$slope->side_of_road}}
-                                    </div>
-                                    <div class="border-b border-gray-300 py-5 font-bold">
-                                        KM :
-                                    </div>
-                                    <div class="border-b border-gray-300 py-5">
-                                        {{$slope->sta1}} |
-                                        {{$slope->sta1}}
-                                    </div>
-                                    <div class="py-5  font-bold">
-                                        Coordinate :
-                                    </div>
-                                    <div class="py-5">
-                                        {{$slope->gps1}} |
-                                        {{$slope->gps2}}
-                                    </div>
+                                            <!-- Location -->
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3 font-bold">Location</td>
+                                                <td colspan="2" class="px-4 py-3">{{$slope->location}}</td>
+                                            </tr>
+
+                                            <!-- Side of Road -->
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3 font-bold">Side of Road</td>
+                                                <td colspan="2" class="px-4 py-3">{{$slope->side_of_road}}</td>
+                                            </tr>
+
+                                            <!-- KM (STA) with rowspan -->
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3 font-bold" rowspan="2">KM (STA)</td>
+                                                <td class="px-4 py-3">Start :</td>
+                                                <td class="px-4 py-3">{{$slope->sta1}}</td>
+                                            </tr>
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3">End :</td>
+                                                <td class="px-4 py-3">{{$slope->sta2}}</td>
+                                            </tr>
+
+                                            <!-- Coordinate with rowspan -->
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3 font-bold" rowspan="2">Coordinate</td>
+                                                <td class="px-4 py-3">Latitude :</td>
+                                                <td class="px-4 py-3">{{$slope->latitude}}</td>
+                                            </tr>
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3">Longitude :</td>
+                                                <td class="px-4 py-3">{{$slope->longtitude}}</td>
+                                            </tr>
+
+                                            <!-- GPS with rowspan -->
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3 font-bold" rowspan="2">GPS</td>
+                                                <td class="px-4 py-3">S :</td>
+                                                <td class="px-4 py-3">{{$slope->gps1}}</td>
+                                            </tr>
+                                            <tr
+                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-4 py-3">E :</td>
+                                                <td class="px-4 py-3">{{$slope->gps2}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+
+                                <div class=" flex justify-end">
+
+                                    @auth
+                                    @if (Auth::user()->role === 'admin')
+                                    <x-primary-button data-modal-target="editslope-modal"
+                                        data-modal-toggle="editslope-modal" type="button" class="m-3 bg-yellow-400">
+                                        Edit Table
+                                    </x-primary-button>
+
+                                    <!-- Edit Slope modal -->
+                                    <div id="editslope-modal" tabindex="-1" aria-hidden="true"
+                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <div class="relative p-4 w-full max-w-3xl max-h-full">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-3xl shadow dark:bg-gray-700">
+                                                <!-- Modal header -->
+                                                <div
+                                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                        Edit Slope
+                                                    </h3>
+                                                    <button type="button"
+                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        data-modal-toggle="editslope-modal">
+                                                        <svg class="w-3 h-3" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 14 14">
+                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="2"
+                                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <form class="p-4 md:p-5" method="POST" action="">
+                                                    @csrf
+                                                    <input type="hidden" value="{{$slope->slug}}" name="slug">
+                                                    <div class="grid gap-4 mb-4 grid-cols-2">
+
+                                                        <div class="col-span-2">
+                                                            <label for="slope_name"
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><span
+                                                                    class="text-red-600">*</span>Slope
+                                                                Name</label>
+                                                            <input type="text" readonly name="slope_name"
+                                                                id="slope_name" disabled
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                value="{{$slope->slope_name}}">
+                                                        </div>
+
+                                                        <div class="col-span-2">
+                                                            <label for="location"
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><span
+                                                                    class="text-red-600">*</span>Location</label>
+                                                            <input type="text" name="location" id="location"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                value="{{$slope->location}}">
+                                                        </div>
+
+                                                        <div class="col-span-2">
+                                                            <label for="category"
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><span
+                                                                    class="text-red-600">*</span>Side
+                                                                of Road</label>
+                                                            <select id="category" name="side_of_road"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                                                <option value="{{$slope->side_of_road}}" selected
+                                                                    hidden>{{$slope->side_of_road}}</option>
+                                                                <option value="A">A</option>
+                                                                <option value="B">B</option>
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-span-2">
+                                                            <label for="sta1"
+                                                                class="block text-sm font-medium text-gray-900 dark:text-white"><span
+                                                                    class="text-red-600">*</span>KM</label>
+                                                        </div>
+                                                        <div class="col-span-2 sm:col-span-1">
+                                                            <input type="text" name="sta1" id="sta1"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                placeholder="0+000" value="{{$slope->sta1}}">
+                                                        </div>
+                                                        <div class="col-span-2 sm:col-span-1">
+                                                            <input type="text" name="sta2" id="sta2"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                placeholder="0+000" value="{{$slope->sta2}}">
+                                                        </div>
+
+                                                        <div class="col-span-2">
+                                                            <label for="latitude"
+                                                                class="block text-sm font-medium text-gray-900 dark:text-white">Coordinate</label>
+                                                        </div>
+                                                        <div class="col-span-2 sm:col-span-1">
+                                                            <input type="text" name="latitude" id="latitude"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                placeholder="Latitude" value="{{$slope->latitude}}">
+                                                        </div>
+                                                        <div class="col-span-2 sm:col-span-1">
+                                                            <input type="text" name="longtitude" id="longtitude"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                placeholder="Longtitude" value="{{$slope->longtitude}}">
+                                                        </div>
+
+
+                                                        <div class="col-span-2">
+                                                            <label for="gps1"
+                                                                class="block text-sm font-medium text-gray-900 dark:text-white">GPS</label>
+                                                        </div>
+                                                        <div class="col-span-2 sm:col-span-1">
+                                                            <input type="text" name="gps1" id="gps1"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                placeholder="S:" value="{{$slope->gps1}}">
+                                                        </div>
+                                                        <div class="col-span-2 sm:col-span-1">
+                                                            <input type="text" name="gps2" id="gps2"
+                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                                                placeholder="E:" value="{{$slope->gps2}}">
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit"
+                                                        class="text-white inline-flex items-center bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
+                                                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor"
+                                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd"
+                                                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        Edit Slope
+                                                    </button>
+
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @endif
+                                    @endauth
+
+                                </div>
+
                             </div>
                             @if ($slope->slope_type === 'cut-type')
                             @include('inventory.partials.detail_cut')

@@ -64,6 +64,36 @@ class InventoryController extends Controller
         return redirect('/create/geometry/' . $slug);
     }
 
+    public function edit(Request $request)
+    {
+        $request->validate([
+            'location' => 'string|max:255',
+            'sta1' => 'string|max:255',
+            'sta2' => 'string|max:255',
+            'latitude' => 'nullable|string|max:255',
+            'longtitude' => 'nullable|string|max:255',
+            'gps1' => 'nullable|string|max:255',
+            'gps2' => 'nullable|string|max:255',
+            'side_of_road' => 'required|string|max:255',
+        ]);
+
+        $slope = Slopes::where('slug', $request->slug)->first();
+        //dd($request->all());
+
+        $slope->location = $request->location;
+        $slope->sta1 = $request->sta1;
+        $slope->sta2 = $request->sta2;
+        $slope->latitude = $request->latitude;
+        $slope->longtitude = $request->longtitude;
+        $slope->gps1 = $request->gps1;
+        $slope->gps2 = $request->gps2;
+        $slope->side_of_road = $request->side_of_road;
+        $slope->save();
+
+        //dd($request->all());
+        return redirect()->back();
+    }
+
     public function detail(string $slug)
     {
         $slope = Slopes::where('slug', $slug)->first();

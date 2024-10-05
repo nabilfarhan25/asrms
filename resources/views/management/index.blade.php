@@ -84,9 +84,7 @@
             </div>
         </div>
 
-
-        <div x-data="mapComponent()" x-init="init()" class="grid grid-cols-3 gap-4">
-
+        <div class="grid grid-cols-3 gap-4">
             <div class="col-span-2">
                 <div class="p-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
                     <div class="sm:flex justify-between mb-5">
@@ -122,24 +120,22 @@
                                 </select>
                             </form>
                         </div>
-
                     </div>
                     <div>
                         @php
                         $i=0;
                         @endphp
                         @foreach ($slopes as $slope)
-                        <button @click="changeLocation($event)" data-title="{{$slope->slope_name}}"
-                            data-latitude="{{str_replace('°','',$slope->latitude)}}"
-                            data-longitude="{{str_replace('°','',$slope->longtitude)}}"
-                            data-RS="{{isset(json_decode($slope->ranking)->RS) ? round((float)json_decode($slope->ranking)->RS,2) : '-'}}"
-                            data-TS="{{isset(json_decode($slope->ranking)->TS) ? round((float)json_decode($slope->ranking)->TS,2) : '-'}}"
-                            data-IS="{{isset(json_decode($slope->ranking)->IS) ? round((float)json_decode($slope->ranking)->IS,2) : '-'}}"
-                            data-CS="{{isset(json_decode($slope->ranking)->CS) ? round((float)json_decode($slope->ranking)->CS,2) : '-'}}"
-                            data-location="{{$slope->location}}" data-slope_type="{{$slope->slope_type}}"
-                            data-slug="{{$slope->slug }}"
-                            :class="activeContent === {{$i}} ? 'border-lime-600 bg-gray-200' : 'border-gray-200'"
-                            class="w-full text-left mb-4 rounded-xl border hover:border-lime-600">
+                        <button data-latitude="{{ str_replace('°','',$slope->latitude) }}"
+                            data-longitude="{{ str_replace('°','',$slope->longtitude) }}"
+                            data-RS="{{ isset(json_decode($slope->ranking)->RS) ? round((float)json_decode($slope->ranking)->RS, 2) : '-' }}"
+                            data-TS="{{ isset(json_decode($slope->ranking)->TS) ? round((float)json_decode($slope->ranking)->TS, 2) : '-' }}"
+                            data-IS="{{ isset(json_decode($slope->ranking)->IS) ? round((float)json_decode($slope->ranking)->IS, 2) : '-' }}"
+                            data-CS="{{ isset(json_decode($slope->ranking)->CS) ? round((float)json_decode($slope->ranking)->CS, 2) : '-' }}"
+                            data-location="{{ $slope->location }}" data-slope_type="{{ $slope->slope_type }}"
+                            data-slug="{{ $slope->slug }}" data-slope_name="{{ $slope->slope_name }}"
+                            onclick="updateMap(this)"
+                            class="w-full text-left mb-4 rounded-xl border hover:border-gray-400">
                             <div class="flex px-5 py-3 ">
 
                                 <div class="w-full border-r border-gray-300">
@@ -185,13 +181,13 @@
                     @endif
                 </div>
             </div>
-
             @if($slopes->isNotEmpty())
             <div class="">
                 <div class="p-5 bg-white border border-gray-200 shadow-sm rounded-2xl">
                     <div id="title">
-                        <h2 x-text="selectedItem.title"
+                        <h2
                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in font-bold mb-3 text-2xl">
+                            <span id="slope_name">{{$selectedSlope->slope_name}}</span>
                         </h2>
                     </div>
                     <div id="map" class="w-full rounded-xl h-64 mb-4 bg-gray-200"></div>
@@ -208,7 +204,8 @@
                                     <div id="rs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            <span x-text="selectedItem.RS"></span>
+                                            <span id="RS">{{ isset(json_decode($slope->ranking)->RS) ?
+                                                round((float)json_decode($slope->ranking)->RS, 2) : '-' }}</span>
                                         </h2>
                                     </div>
                                 </div>
@@ -220,7 +217,8 @@
                                     <div id="ts">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            <span x-text="selectedItem.TS"></span>
+                                            <span id="TS">{{ isset(json_decode($slope->ranking)->TS) ?
+                                                round((float)json_decode($slope->ranking)->TS, 2) : '-' }}</span>
                                         </h2>
                                     </div>
                                 </div>
@@ -234,7 +232,8 @@
                                     <div id="is">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            <span x-text="selectedItem.IS"></span>
+                                            <span id="IS">{{ isset(json_decode($slope->ranking)->IS) ?
+                                                round((float)json_decode($slope->ranking)->IS, 2) : '-' }}</span>
                                         </h2>
                                     </div>
                                 </div>
@@ -246,7 +245,8 @@
                                     <div id="cs">
                                         <h2
                                             class="animate-fade-up animate-once animate-duration-200 animate-ease-in text-3xl">
-                                            <span x-text="selectedItem.CS"></span>
+                                            <span id="CS">{{ isset(json_decode($slope->ranking)->CS) ?
+                                                round((float)json_decode($slope->ranking)->CS, 2) : '-' }}</span>
                                         </h2>
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@
                                         <div id="location">
                                             <p
                                                 class="animate-fade-left animate-once animate-duration-200 animate-ease-in">
-                                                <span x-text="selectedItem.location"></span>
+                                                <span id="location">{{$selectedSlope->location}}</span>
                                             </p>
                                         </div>
                                     </td>
@@ -282,7 +282,7 @@
                                         <div id="type">
                                             <p
                                                 class="animate-fade-left animate-once animate-duration-200 animate-ease-in">
-                                                <span x-text="selectedItem.slope_type"></span>
+                                                <span id="slope_type">{{$selectedSlope->slope_type}}</span>
                                             </p>
                                         </div>
                                     </td>
@@ -291,7 +291,7 @@
                         </table>
                     </div>
 
-                    <a id='link' x-bind:href="`/management/${selectedItem.slug}`">
+                    <a id='link' href="/management/{{$selectedSlope->slug}}">
                         <div
                             class="text-lime-700 hover:text-white border border-lime-700 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-full w-full text-sm px-5 py-2.5 text-center mb-2">
                             More
@@ -302,60 +302,79 @@
                 </div>
             </div>
             @endif
-
         </div>
 
-        <script>
-            function mapComponent() {
-                return {
-                    map: null,
-                    marker: null,
-                    activeContent: 0,
-                    selectedItem: { title: '', latitude: '', longitude: '',RS: '',TS: '',CS: '',IS: '',location: '',slope_type: '',slug: '' },
-    
-                    initMap() {
-                        this.map = new google.maps.Map(document.getElementById('map'), {
-                            center: { lat: {{str_replace('°','',$selectedSlope->latitude)}}, lng: {{str_replace('°','',$selectedSlope->longtitude)}} },
-                            zoom: 13,
-                        });
-    
-                        this.marker = new google.maps.Marker({
-                            position: { lat: {{str_replace('°','',$selectedSlope->latitude)}}, lng: {{str_replace('°','',$selectedSlope->longtitude)}} },
-                            map: this.map,
-                        });
-                        this.selectedItem = { title: '{{$selectedSlope->slope_name}}', latitude: {{str_replace('°','',$selectedSlope->latitude)}}, longitude: {{str_replace('°','',$selectedSlope->longtitude)}},RS:{{isset(json_decode($selectedSlope->ranking)->RS) ? round(json_decode($selectedSlope->ranking)->RS,2) : '-'}},TS:{{isset(json_decode($selectedSlope->ranking)->TS) ? round(json_decode($selectedSlope->ranking)->TS,2) : '-'}}, IS:{{isset(json_decode($selectedSlope->ranking)->IS) ? round(json_decode($selectedSlope->ranking)->IS,2) : '-'}}, CS:{{isset(json_decode($selectedSlope->ranking)->CS) ? round(json_decode($selectedSlope->ranking)->CS,2) : '-'}},location:'{{$selectedSlope->location}}',slope_type:'{{$selectedSlope->slope_type}}',slug:'{{$selectedSlope->slug}}'  };
-                    },
-                    
-                    changeLocation(event) {
-                        const title = event.currentTarget.getAttribute('data-title');
-                        const latitude = parseFloat(event.currentTarget.getAttribute('data-latitude'));
-                        const longitude = parseFloat(event.currentTarget.getAttribute('data-longitude'));
-                        const RS = parseFloat(event.currentTarget.getAttribute('data-RS'));
-                        const TS = parseFloat(event.currentTarget.getAttribute('data-TS'));
-                        const IS = parseFloat(event.currentTarget.getAttribute('data-IS'));
-                        const CS = parseFloat(event.currentTarget.getAttribute('data-CS'));
-                        const location = event.currentTarget.getAttribute('data-location');
-                        const slope_type = event.currentTarget.getAttribute('data-slope_type');
-                        const slug = event.currentTarget.getAttribute('data-slug');
 
-                        this.selectedItem = { title, latitude, longitude, RS, TS, IS, CS,location, slope_type, slug };
-                        
-                        this.activeContent = Array.from(event.currentTarget.parentNode.children).indexOf(event.currentTarget);
+        <script>
+            let map, marker;
     
-                        this.marker.setPosition({ lat: latitude, lng: longitude });
+            // Initialize the Google Map
+            function initMap() {
+                const defaultLocation = { lat: {{ str_replace('°','',$selectedSlope->latitude) }}, lng:  {{ str_replace('°','',$selectedSlope->longtitude) }} }; // Default location
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: defaultLocation,
+                    zoom: 13,
+                });
     
-                        this.map.setCenter({ lat: latitude, lng: longitude });
-                    },
-    
-                    init() {
-                        this.initMap();
-                    }
-                };
+                // Initialize marker at default location
+                marker = new google.maps.Marker({
+                    position: defaultLocation,
+                    map: map,
+                });
             }
     
-            document.addEventListener('alpine:init', () => {
-                Alpine.data('mapComponent', mapComponent);
-            });
+            let selectedButton = null; // Variable to track the selected button
+            // Function to update the map, marker, and other data based on button attributes
+            function updateMap(button) {
+                
+                // Reset the style of the previously selected button
+                if (selectedButton) {
+                    selectedButton.classList.remove('border-lime-600', 'bg-gray-100');
+                    selectedButton.classList.add('hover:border-lime-600'); // Add hover effect back
+                }
+
+                // Set the new selected button
+                selectedButton = button;
+                selectedButton.classList.add('border-lime-600', 'bg-gray-100');
+                selectedButton.classList.remove('hover:border-lime-600'); // Remove hover effect
+
+
+                const lat = parseFloat(button.getAttribute('data-latitude'));
+                const lng = parseFloat(button.getAttribute('data-longitude'));
+                const slope_name = button.getAttribute('data-slope_name');
+                const RS = button.getAttribute('data-RS');
+                const TS = button.getAttribute('data-TS');
+                const IS = button.getAttribute('data-IS');
+                const CS = button.getAttribute('data-CS');
+                const slug = button.getAttribute('data-slug');
+                const location = button.getAttribute('data-location');
+                const slope_type = button.getAttribute('data-slope_type');
+    
+                const newLocation = { lat: lat, lng: lng };
+    
+                // Update marker position
+                marker.setPosition(newLocation);
+    
+                // Center the map to the new location
+                map.setCenter(newLocation);
+                map.setZoom(13);
+    
+
+                const link = document.getElementById('link');
+                link.setAttribute('href', `/management/${slug}`);
+
+                // Update the displayed data
+                document.getElementById("slope_name").textContent = slope_name;
+                document.getElementById("RS").textContent = RS;
+                document.getElementById("TS").textContent = TS;
+                document.getElementById("IS").textContent = IS;
+                document.getElementById("CS").textContent = CS;
+                document.getElementById("location").textContent = location;
+                document.getElementById("slope_type").textContent = slope_type;
+                document.getElementById("lat").textContent = lat.toFixed(4);
+                document.getElementById("lng").textContent = lng.toFixed(4);
+
+            }
         </script>
 
         <script async defer
