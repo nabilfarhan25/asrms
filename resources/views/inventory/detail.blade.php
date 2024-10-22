@@ -179,7 +179,13 @@
                                     <button
                                         class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                                         id="files-styled-tab" data-tabs-target="#styled-files" type="button" role="tab"
-                                        aria-controls="files" aria-selected="false">Slope Documentation</button>
+                                        aria-controls="files" aria-selected="false">Slope Document</button>
+                                </li>
+                                <li class="me-2" role="presentation">
+                                    <button
+                                        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                        id="record-styled-tab" data-tabs-target="#styled-record" type="button"
+                                        role="tab" aria-controls="record" aria-selected="false">Disaster Record</button>
                                 </li>
 
                             </ul>
@@ -416,107 +422,410 @@
                             @elseif ($slope->slope_type === 'combine-type')
                             @include('inventory.partials.detail_combine')
                             @endif
+                            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-files"
+                                role="tabpanel" aria-labelledby="files-tab">
+                                <div class="grid sm:grid-cols-2 gap-2">
 
-                        </div>
-                        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-files" role="tabpanel"
-                            aria-labelledby="files-tab">
-                            <div class="grid sm:grid-cols-2 gap-2">
+                                    <div class="">
+                                        <h4 class="font-bold mb-2 text-gray-800">Slope Document</h4>
+                                    </div>
+                                    <form action="/upload-doc/{{$slope->slug}}" enctype="multipart/form-data"
+                                        method="POST">
+                                        <div>
+                                            @csrf
+                                            <x-file-upload name="doc" title="Upload Slope Document" required="true"
+                                                maxFileSize="10MB" type="document" notes="
+                                            Input your slope document and click upload to save the file 
+                                        " />
+                                        </div>
+                                        <div class="flex justify-end">
+                                            <x-primary-button>Upload</x-primary-button>
+                                        </div>
+                                    </form>
 
-                                <div class="">
-                                    <h4 class="font-bold mb-2 text-gray-800">Slope Documentation</h4>
                                 </div>
-                                <form action="/upload-doc/{{$slope->slug}}" enctype="multipart/form-data" method="POST">
-                                    <div>
-                                        @csrf
-                                        <x-file-upload name="doc" title="Upload Slope Document" required="true"
-                                            maxFileSize="10MB" type="document" notes="
-                                        Input your slope document and click upload to save the file 
-                                    " />
-                                    </div>
-                                    <div class="flex justify-end">
-                                        <x-primary-button>Upload</x-primary-button>
-                                    </div>
-                                </form>
+                                <x-line />
+                                <h4 class="font-bold mb-3">List of Documents</h4>
 
-                            </div>
-                            <x-line />
-                            <h4 class="font-bold mb-3">Documentation</h4>
+                                @foreach ($document as $doc)
 
-                            @foreach ($document as $doc)
-
-                            <div
-                                class="flex justify-between items-center mb-2 bg-gray-100 border border-gray-300 px-2 py-1 rounded-lg hover:bg-gray-200 cursor-pointer hover:underline">
-                                <p class="text-gray-700 font-semibold flex items-center">
-                                    <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                                            d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
-                                    </svg>
-                                    {{$doc->original_name}}
-                                </p>
-                                <div class="flex items-center">
-                                    <a href="/storage/{{$slope->slug}}/files/{{$doc->direction}}/{{$doc->file_name}}"
-                                        download class="hover:text-lime-600 mr-3" target="_blank">
-                                        Download
-                                    </a>
-                                    <button type="button" data-modal-target="popup-{{$doc->id}}"
-                                        data-modal-toggle="popup-{{$doc->id}}"
-                                        class="p-1 text-red-600 hover:text-red-700 hover:bg-gray-300 rounded-full"
-                                        type="button">
-                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                <div
+                                    class="flex justify-between items-center mb-2 bg-gray-100 border border-gray-300 px-2 py-1 rounded-lg hover:bg-gray-200 cursor-pointer hover:underline">
+                                    <p class="text-gray-700 font-semibold flex items-center">
+                                        <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                                d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
                                         </svg>
-                                    </button>
+                                        {{$doc->original_name}}
+                                    </p>
+                                    <div class="flex items-center">
+                                        <a href="/storage/{{$slope->slug}}/files/{{$doc->direction}}/{{$doc->file_name}}"
+                                            download class="hover:text-lime-600 mr-3" target="_blank">
+                                            Download
+                                        </a>
+                                        <button type="button" data-modal-target="popup-{{$doc->id}}"
+                                            data-modal-toggle="popup-{{$doc->id}}"
+                                            class="p-1 text-red-600 hover:text-red-700 hover:bg-gray-300 rounded-full"
+                                            type="button">
+                                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
                                 </div>
 
-                            </div>
+                                <div id="popup-{{$doc->id}}" tabindex="-1"
+                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative p-4 w-full max-w-md max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button type="button"
+                                                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="popup-{{$doc->id}}">
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                            <div class="p-4 md:p-5 text-center">
+                                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                    Are you sure you want to delete this document?</h3>
 
-                            <div id="popup-{{$doc->id}}" tabindex="-1"
-                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                <div class="relative p-4 w-full max-w-md max-h-full">
-                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                        <button type="button"
-                                            class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                            data-modal-hide="popup-{{$doc->id}}">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                            </svg>
-                                            <span class="sr-only">Close modal</span>
-                                        </button>
-                                        <div class="p-4 md:p-5 text-center">
-                                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                            </svg>
-                                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                Are you sure you want to delete this document?</h3>
+                                                <form action="/delete-doc/{{$doc->id}}" method="POST"
+                                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center text-center">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="px-5 py-2.5">
+                                                        Delete
+                                                    </button>
+                                                </form>
 
-                                            <form action="/delete-doc/{{$doc->id}}" method="POST"
-                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center text-center">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="px-5 py-2.5">
-                                                    Delete
-                                                </button>
-                                            </form>
-
-                                            <button data-modal-hide="popup-{{$doc->id}}" type="button"
-                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-lime-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
-                                                cancel</button>
+                                                <button data-modal-hide="popup-{{$doc->id}}" type="button"
+                                                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-lime-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                                                    cancel</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            @endforeach
+
+                            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-record"
+                                role="tabpanel" aria-labelledby="record-tab">
+
+                                <div class="flex justify-between items-center mb-5">
+                                    <h4 class="font-bold text-xl mb-2 text-gray-800">Disaster Record</h4>
+                                    <x-primary-link href="/create/record/{{$slope->slug}}">
+                                        New Record
+                                    </x-primary-link>
+                                </div>
+
+                                @foreach ($records as $record)
+
+                                <div
+                                    class=" flex py-2 px-2 justify-between items-center border-t border-gray-300 hover:bg-gray-100 hover:font-bold">
+                                    <div class="w-full">
+                                        <p class="text-sm text-gray-400">Time of occurrence</p>
+                                        <h4 class="text-lg">
+                                            {{$record->date_of_occurrence}}
+                                        </h4>
+                                    </div>
+                                    <div class="w-full">
+                                        <p class="text-sm text-gray-400">Type of Failure</p>
+                                        <h4 class="">
+                                            {{$record->type_of_failure}}
+                                        </h4>
+                                    </div>
+
+                                    <div class="w-full flex items-center justify-end text-right">
+                                        <button data-modal-target="record{{$record->id}}-modal"
+                                            data-modal-toggle="record{{$record->id}}-modal" class="mr-2">
+                                            Detail
+                                        </button>
+
+                                        <button data-modal-target="del{{$record->id}}-modal"
+                                            data-modal-toggle="del{{$record->id}}-modal"
+                                            class="p-1 text-red-600 hover:text-red-700 hover:bg-gray-300 rounded-full"
+                                            type="button">
+                                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                            </svg>
+                                        </button>
+
+                                        {{-- Delete Record Modal --}}
+                                        <div id="del{{$record->id}}-modal" tabindex="-1"
+                                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <div class="relative p-4 w-full max-w-md max-h-full">
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <button type="button"
+                                                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        data-modal-hide="del{{$record->id}}-modal">
+                                                        <svg class="w-3 h-3" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 14 14">
+                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="2"
+                                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                    <div class="p-4 md:p-5 text-center">
+                                                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none" viewBox="0 0 20 20">
+                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="2"
+                                                                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                        </svg>
+                                                        <h3
+                                                            class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                            Are you sure you want to delete Disaster Record at
+                                                            {{$record->date_of_occurrence}}?</h3>
+                                                        <form action="/delete/record/{{$record->id}}" method="POST"
+                                                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center text-center">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="px-5 py-2.5">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                        <button data-modal-hide="del{{$record->id}}-modal" type="button"
+                                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                                                            cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <!-- View Record Modal -->
+                                <div id="record{{$record->id}}-modal" tabindex="-1"
+                                    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative w-full max-w-7xl max-h-full">
+                                        <!-- Modal content -->
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <!-- Modal header -->
+                                            <div
+                                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                                                    Disaster Record - {{$record->date_of_occurrence}}
+                                                </h3>
+                                                <button type="button"
+                                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    data-modal-hide="record{{$record->id}}-modal">
+                                                    <svg class="w-3 h-3" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="p-4 md:p-5 space-y-4">
+                                                <table
+                                                    class="min-w-full table-auto border border-black shadow-lg rounded-lg">
+                                                    <thead class="bg-gray-200">
+                                                        <tr>
+                                                            <th colspan="4" class="border border-black text-left p-2">
+                                                                Date and Time of Occurrence</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="bg-white">
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Date:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->date_of_occurrence }}</td>
+                                                            <td class="border border-black p-2">Time:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->time_of_occurrence }} am / pm</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Type of Failure (may be more than one)</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2" colspan="4">{{
+                                                                $record->type_of_failure }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Dimension of Slope Failure</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Length:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->length_of_slope_failure }} m in longitudinal
+                                                                direction of road</td>
+                                                            <td class="border border-black p-2">Height:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->height_of_slope_failure }} m (both approximate
+                                                                figures)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Volume of Fallen Debris/Rocks</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2" colspan="2">Volume
+                                                                (approximate):</td>
+                                                            <td colspan="2" class="border border-black p-2">{{
+                                                                $record->volume_of_fallen_debris_rocks }} m³</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Damage and Loss</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2" colspan="2">Road / Road
+                                                                Structures / Vehicles / Other Assets:</td>
+                                                            <td colspan="2" class="border border-black p-2">{{
+                                                                $record->type_of_damage }}</td>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2" colspan="2">Death or
+                                                                Injury:</td>
+                                                            <td colspan="2" class="border border-black p-2">{{
+                                                                $record->death_or_injury }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Emergency Operation</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Scope of Operation:</td>
+                                                            <td colspan="3" class="border border-black p-2">{{
+                                                                $record->scope_of_operation }}</td>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Traffic Blockade:</td>
+                                                            <td colspan="3" class="border border-black p-2">{{
+                                                                $record->traffic_blockade }}</td>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Traffic Blockade
+                                                                Duration:</td>
+                                                            <td colspan="3" class="border border-black p-2">{{
+                                                                $record->traffic_blockade_duration }}
+                                                                (hours/days/months)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Rainfall (Before the Failure)</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">24 hours Rainfall of the
+                                                                Day:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->rainfall_24_hours }} mm (Date: {{
+                                                                $record->rainfall_date }})</td>
+                                                            <td class="border border-black p-2">Time:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->maximum_rainfall_time }}</td>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Maximum Hourly Rainfall:
+                                                            </td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->maximum_hourly_rainfall }} mm (Date: {{
+                                                                $record->maximum_rainfall_date }})</td>
+                                                            <td colspan="2" class="border border-black p-2"></td>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Total for Proceeding 3
+                                                                Days:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->total_rainfall_proceeding_3_days }} mm (From {{
+                                                                $record->rainfall_date_from }} to {{
+                                                                $record->rainfall_date_to }})</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Data Source</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td colspan="4" class="border border-black p-2">{{
+                                                                $record->data_source }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Pavement Condition</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Cracks (Yes/No):</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->pavement_cracks }}</td>
+                                                            <td class="border border-black p-2">Cause of Cracks:</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->cause_of_cracks }}</td>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Cracks Sealed (Yes/No):
+                                                            </td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->cracks_sealed }}</td>
+                                                            <td class="border border-black p-2">Depression (Yes/No):
+                                                            </td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->pavement_depression }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4"
+                                                                class="border border-black text-left p-2 bg-gray-200">
+                                                                Shoulder Condition</th>
+                                                        </tr>
+                                                        <tr class="hover:bg-gray-100">
+                                                            <td class="border border-black p-2">Shoulder Cracks
+                                                                (Yes/No):</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->shoulder_cracks }}</td>
+                                                            <td class="border border-black p-2">Shoulder Depression
+                                                                (Yes/No):</td>
+                                                            <td class="border border-black p-2">{{
+                                                                $record->shoulder_depression }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @endforeach
+                            </div>
                         </div>
 
                     </div>

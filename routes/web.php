@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -85,6 +85,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/create/characteristic/{slug}', [InventoryController::class, 'store_characteristic']);
     Route::get('/create/rating/{slug}', [InventoryController::class, 'create_rating']);
     Route::post('/create/rating/{slug}', [InventoryController::class, 'store_rating']);
+    Route::get('/create/record/{slug}', [InventoryController::class, 'create_record']);
+    Route::post('/create/record/{slug}', [InventoryController::class, 'store_record']);
+    Route::delete('/delete/record/{id}', [InventoryController::class, 'destroy_record']);
+
 
     // Inspection
     Route::get('/inspection/geometry/{slug}', [InspectionController::class, 'create_geometry']);

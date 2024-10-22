@@ -9,6 +9,7 @@ use App\Models\Mitigation;
 use App\Models\Preservation;
 use App\Models\SlopeDocumentation;
 use App\Models\Slopes;
+use App\Models\Record;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -105,6 +106,7 @@ class InventoryController extends Controller
             'geometry' => json_decode(Slopes::where('slug', $slug)->first()['geometry']),
             'characteristic' => json_decode(Slopes::where('slug', $slug)->first()['characteristic']),
             'document' => SlopeDocumentation::where('slug', $slug)->get(),
+            'records' => Record::where('slug', $slug)->get(),
 
             'img' => json_decode(Slopes::where('slug', $slug)->first()['img']),
         ];
@@ -587,5 +589,61 @@ class InventoryController extends Controller
         $file->delete();
         return redirect()->back();
     }
+
+    public function create_record(string $slug)
+    {
+        $data = [
+            'slope' => Slopes::where('slug', $slug)->first(),
+        ];
+
+        return view('inventory.record', $data);
+    }
+
+    public function store_record(Request $request)
+    {
+
+        $slope = Slopes::where('slug',$request->slug)->first();
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'slug' => 'required|string|max:255',
+            'date_of_occurrence' => 'required|string',
+            'time_of_occurrence' => 'nullable|string',
+            'type_of_failure' => 'required|string',
+            'length_of_slope_failure' => 'nullable|numeric',
+            'height_of_slope_failure' => 'nullable|numeric',
+            'volume_of_fallen_debris_rocks' => 'nullable|numeric',
+            'type_of_damage' => 'nullable|string',
+            'death_or_injury' => 'nullable|integer',
+            'scope_of_operation' => 'nullable|string',
+            'traffic_blockade' => 'nullable|string',
+            'traffic_blockade_duration' => 'nullable|string',
+            'rainfall_24_hours' => 'nullable|numeric',
+            'rainfall_date' => 'nullable|string',
+            'maximum_hourly_rainfall' => 'nullable|numeric',
+            'maximum_rainfall_date' => 'nullable|string',
+            'maximum_rainfall_time' => 'nullable|string',
+            'total_rainfall_proceeding_3_days' => 'nullable|numeric',
+            'rainfall_date_from' => 'nullable|string',
+            'rainfall_date_to' => 'nullable|string',
+            'data_source' => 'nullable|string',
+            'pavement_cracks' => 'nullable|string',
+            'cause_of_cracks' => 'nullable|string',
+            'cracks_sealed' => 'nullable|string',
+            'pavement_depression' => 'nullable|string',
+            'shoulder_cracks' => 'nullable|string',
+            'shoulder_depression' => 'nullable|string',
+        ]);
+        // Create a new slope failure record
+        $slopeFailure = Record::create($validatedData);
+        return redirect('/inventory/' . $request->slug);
+    }
+    
+    public function destroy_record(string $id){
+        $record = Record::where('id',$id)->first();
+        $record->delete();
+        return redirect()->back();
+    }
+    
 
 }
