@@ -600,6 +600,20 @@
                             </div>
                         </div>
                     </div>
+                    <x-line />
+                    <div class="grid sm:grid-cols-7 gap-4">
+                        <div class="col-span-3">
+                            <h4 class="font-bold">Shoulder Condition</h4>
+                        </div>
+                        <div class="col-span-4">
+                            <div class="mb-3">
+                                <x-file-upload name="img_record" title="Upload Slope Record Documentation"
+                                    required="true" maxFileSize="30MB" type="image" maxFiles="5" multiple notes="" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <x-line />
 
                 </form>
             </div>

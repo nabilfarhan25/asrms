@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('pavement_depression')->nullable(); // Nullable
             $table->string('shoulder_cracks')->nullable(); // Nullable
             $table->string('shoulder_depression')->nullable(); // Nullable
+            $table->json('img')->nullable(); // Nullable
             
             $table->timestamps();
         });

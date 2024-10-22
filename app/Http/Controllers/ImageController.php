@@ -184,7 +184,7 @@ class ImageController extends Controller
 
         if ($request->hasFile('doc')) {
             $img = $request->file('doc');
-            $img_name = Str::random(40) . '.' . $img->getClientOriginalExtension();
+            $img_name = $img->getClientOriginalName(). '-' .Str::random(3) . '.' . $img->getClientOriginalExtension();
             $doc = uniqid('doc-');
             $img->storeAs('temp/' . $doc, $img_name);
             TemporaryFile::create(
@@ -195,7 +195,23 @@ class ImageController extends Controller
 
                 ]
             );
-            return $img->getClientOriginalName();
+            return  $doc;
+        }
+
+        if ($request->hasFile('img_record')) {
+            $img = $request->file('img_record');
+            $img_name = Str::random(40) . '.' . $img->getClientOriginalExtension();
+            $img_record = uniqid('img_record-');
+            $img->storeAs('temp/' . $img_record, $img_name);
+            TemporaryFile::create(
+                [
+                    'file' => $img_record,
+                    'img' => $img_name,
+                    'type' => 'img_record',
+
+                ]
+            );
+            return  $img_record;
         }
 
         return '';

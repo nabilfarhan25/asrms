@@ -595,7 +595,12 @@ class InventoryController extends Controller
         $data = [
             'slope' => Slopes::where('slug', $slug)->first(),
         ];
-
+        // Reseting Files
+        $record_file = TemporaryFile::where('type','img_record')->first();
+        if (isset($record_file)) {
+            Storage::deleteDirectory('temp/' . $record_file->file);
+            $record_file->delete();
+        }
         return view('inventory.record', $data);
     }
 
@@ -634,6 +639,17 @@ class InventoryController extends Controller
             'shoulder_cracks' => 'nullable|string',
             'shoulder_depression' => 'nullable|string',
         ]);
+         // File Handling
+        $img = TemporaryFile::all();
+        $dir = TemporaryFile::select(['img', 'file','type'])->get();
+
+        foreach ($img as $i) {
+            Storage::move('temp/' . $i->file, $request->slug.'/'. $i->file);
+            TemporaryFile::find($i->id)->delete();
+        }
+
+        $validatedData['img'] = json_encode($dir);
+        
         // Create a new slope failure record
         $slopeFailure = Record::create($validatedData);
         return redirect('/inventory/' . $request->slug);
@@ -641,6 +657,10 @@ class InventoryController extends Controller
     
     public function destroy_record(string $id){
         $record = Record::where('id',$id)->first();
+
+        foreach (json_decode($record->img) as $r) {
+            Storage::deleteDirectory($record->slug.'/'.$r->file);
+        }
         $record->delete();
         return redirect()->back();
     }

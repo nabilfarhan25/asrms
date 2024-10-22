@@ -457,7 +457,7 @@
                                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                                 d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
                                         </svg>
-                                        {{$doc->original_name}}
+                                        {{$doc->file_name}}
                                     </p>
                                     <div class="flex items-center">
                                         <a href="/storage/{{$slope->slug}}/files/{{$doc->direction}}/{{$doc->file_name}}"
@@ -817,6 +817,13 @@
                                                     </tbody>
                                                 </table>
 
+                                                <h4 class="text-center text-xl font-bold">Documentation</h4>
+                                                <div class="flex flex-wrap justify-center">
+                                                    @foreach (json_decode($record->img) as $ir)
+                                                    <img src="/storage/{{$slope->slug}}/{{$ir->file}}/{{$ir->img}}"
+                                                        alt="" class="max-w-80 rounded-lg m-1">
+                                                    @endforeach
+                                                </div>
 
                                             </div>
 
