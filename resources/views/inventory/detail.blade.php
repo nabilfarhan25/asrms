@@ -67,7 +67,7 @@
                             <div class="inline-flex rounded-md shadow-sm" role="group">
                                 @auth
                                 <a href="/pdf-inventory/{{$slope->slug}}" target="_blank"
-                                    class="inline-flex items-center px-4 py-2 font-medium text-gray-900 bg-white border border-gray-200 {{Auth::user()->role !== 'admin' ? 'rounded-full' : 'rounded-s-full'}} hover:bg-gray-100 hover:text-lime-700 focus:z-10 focus:ring-2 focus:ring-lime-700 focus:text-lime-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-lime-500 dark:focus:text-white">
+                                    class="inline-flex items-center px-4 py-2 font-medium text-gray-900 bg-white border border-gray-200 {{Auth::user()->role === 'manager' || Auth::user() === 'engineer'  ? 'rounded-s-full' : 'rounded-full'}} hover:bg-gray-100 hover:text-lime-700 focus:z-10 focus:ring-2 focus:ring-lime-700 focus:text-lime-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-lime-500 dark:focus:text-white">
                                     <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -77,7 +77,7 @@
                                     Export PDF
                                 </a>
 
-                                @if (Auth::user()->role === 'admin')
+                                @if (Auth::user()->role === 'manager' || Auth::user()->role === 'engineer')
 
                                 <a href="/edit/geometry/{{$slope->slug}}"
                                     class="inline-flex items-center px-4 py-2 font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-yellow-300 focus:z-10 focus:ring-2 focus:ring-yellow-300 focus:text-yellow-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-yellow-300 dark:focus:text-white">
@@ -268,7 +268,7 @@
                                 <div class=" flex justify-end">
 
                                     @auth
-                                    @if (Auth::user()->role === 'admin')
+                                    @if (Auth::user()->role === 'manager' || Auth::user()->role === 'engineer')
                                     <x-primary-button data-modal-target="editslope-modal"
                                         data-modal-toggle="editslope-modal" type="button" class="m-3 bg-yellow-400">
                                         Edit Table

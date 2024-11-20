@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 @auth
-                @if (Auth::user()->role === 'admin')
+                @if (Auth::user()->role === 'manager' || Auth::user()->role === 'engineer')
                 <x-primary-button data-modal-target="addslope-modal" data-modal-toggle="addslope-modal" type="button">
                     Add Slope
                 </x-primary-button>
@@ -374,7 +374,7 @@
                     </p>
                 </div>
                 <div class="w-full sm:flex hidden items-center justify-end pl-5">
-                    @if (Auth::user()->role === 'admin')
+                    @if (Auth::user()->role === 'manager' || Auth::user()->role === 'engineer')
                     <button type="button" data-modal-target="modal-{{$slope->slug}}"
                         data-modal-toggle="modal-{{$slope->slug}}"
                         class="mr-3 text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">

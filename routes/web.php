@@ -8,6 +8,7 @@ use App\Http\Controllers\PreservationController;
 use App\Http\Controllers\MitigationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -58,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pdf-mitigation/{id}', [PDFController::class, 'mitigation']);
 });
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['auth', 'role:inspector,engineer,manager']], function () {
     // File Uploader
     Route::post('/temp-upload', [ImageController::class, 'tempUpload']);
     Route::delete('/temp-delete', [ImageController::class, 'tempDelete']);
@@ -109,7 +110,20 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/create/mitigation/{slug}', [MitigationController::class, 'create']);
     Route::post('/create/mitigation/{slug}', [MitigationController::class, 'store']);
     Route::delete('/mitigation/{slug}', [MitigationController::class, 'destroy']);
+    
+    Route::group(['middleware' => ['role:manager']], function () {
+    // Accounts
+    Route::get('/accounts', [AccountController::class, 'index']);
+    Route::post('/accounts/edit/{id}', [AccountController::class, 'edit']);
+    Route::delete('/accounts/delete/{id}', [AccountController::class, 'destroy']);
 
+    Route::post('/verifying/management/{id}', [InspectionController::class, 'appr_management']);
+    Route::delete('/inspection/delete/{id}', [InspectionController::class, 'destroy']);
+    });
+
+    Route::group(['middleware' => ['role:engineer,manager']], function () {
+    Route::post('/verifying/engineer/{id}', [InspectionController::class, 'appr_engineer']);
+    });
 });
 
 require __DIR__.'/auth.php';

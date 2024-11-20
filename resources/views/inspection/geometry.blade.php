@@ -69,7 +69,7 @@
                         <label for="weather_condition"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Weather
                             Condition</label>
-                        <input type="text" name="weather_condition" id="weather_condition"
+                        <input type="text" required name="weather_condition" id="weather_condition"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                     </div>
                     <x-line />

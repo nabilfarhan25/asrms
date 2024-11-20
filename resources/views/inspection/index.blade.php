@@ -274,6 +274,10 @@
                         </a>
                     </div>
                 </div>
+
+                @if ($slope->appr_management == "unverified")
+                unverified
+                @endif
             </div>
 
             @endforeach

@@ -284,7 +284,7 @@
                                     @endphp
                                     <li>
                                         <img id="p-{{$r}}"
-                                            src="/storage/{{$slope->slug}}/{{str_replace('/','-',\Carbon\Carbon::parse($slp->created_at)->format('Y/m/d')).'_'.$slope->slug}}/{{$i->file}}/{{$i->img}}"
+                                            src="/storage/{{$slope->slug}}/inspection/{{$i->file}}/{{$i->img}}"
                                             class="w-full rounded-lg h-44 object-cover" alt="">
                                     </li>
 

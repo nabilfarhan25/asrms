@@ -80,7 +80,7 @@ class InspectionController extends Controller
     {
         $data = [
             'slope' => Slopes::where('slug', $slug)->first(),
-            'inspections' => Inspection::where('slug', $slug)->get(),
+            'inspections' => Inspection::where('slug', $slug)->latest('created_at')->get(),
             'maintenance' => Maintenance::where('slug', $slug)->latest('created_at')->first(),
 
         ];
@@ -239,33 +239,6 @@ class InspectionController extends Controller
         $geometry = $request->session()->get('geometry');
         $characteristic = $request->session()->get('characteristic');
         $rating = $request->session()->get('rating');
- 
-        // Buckup System
-        $im = json_decode($slope->img);
-        foreach($im as $m){
-            Storage::move($request->slug.'/' . $m->file, $request->slug.'/'.str_replace('/','',Carbon::now()->toDateString()).'_'.$request->slug.'/'. $m->file);
-        }
-        $inspection = new Inspection();
-        $inspection->slope_name = $slope->slope_name;
-        $inspection->slug = $slope->slug;
-        $inspection->slope_type = $slope->slope_type;
-        $inspection->date_of_inspection = Carbon::now();
-        $inspection->weather_condition = $geometry['weather_condition'];
-        $inspection->geometry = $slope->geometry;
-        $inspection->characteristic = $slope->characteristic;
-        $inspection->rating = $slope->rating;
-        $inspection->ranking = $slope->ranking;
-        $inspection->img = $slope->img;
-        $inspection->save();
-
-        // File Handling
-        $img = TemporaryFile::all();
-        $dir = TemporaryFile::select(['img', 'file','type'])->get();
-
-        foreach ($img as $i) {
-            Storage::move('temp/' . $i->file, $request->slug.'/'. $i->file);
-            TemporaryFile::find($i->id)->delete();
-        }
 
         if ($slope->slope_type == 'cut-type' || $slope->slope_type == 'combine-type') {
             $IS = $rating['A1'] * $rating['A2'] * $rating['A3'] * $rating['A4'] * $rating['A5'] * $rating['B1'] * $rating['B2'];
@@ -357,17 +330,47 @@ class InspectionController extends Controller
             $inspection_date = 10;
             $maintenance_date = 2;
         }
+ 
+        // Buckup System
+        // $im = json_decode($slope->img);
+        // foreach($im as $m){
+        //     Storage::move($request->slug.'/' . $m->file, $request->slug.'/'.str_replace('/','',Carbon::now()->toDateString()).'_'.$request->slug.'/'. $m->file);
+        // }
 
-        $slope = Slopes::where('slug', $request->slug)->firstOrFail();
-        $slope->geometry = $geometry;
-        $slope->characteristic = $characteristic;
-        $slope->rating = $rating;
-        $slope->ranking = json_encode($ranking);
-        $slope->img = json_encode($dir);
-        $slope->engineer_inspection = Carbon::now()->addYear($inspection_date);
-        //$slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
+        // File Handling
+        $img = TemporaryFile::all();
+        $dir = TemporaryFile::select(['img', 'file','type'])->get();
+        
+        foreach ($img as $i) {
+            Storage::move('temp/' . $i->file, $request->slug.'/inspection/'. $i->file);
+            TemporaryFile::find($i->id)->delete();
+        }
 
-        $slope->save();
+        $inspection = new Inspection();
+        $inspection->slope_name = $slope->slope_name;
+        $inspection->slug = $slope->slug;
+        $inspection->slope_type = $slope->slope_type;
+        $inspection->date_of_inspection = Carbon::now();
+        $inspection->weather_condition = $geometry['weather_condition'];
+        $inspection->geometry = json_encode($geometry);
+        $inspection->characteristic = json_encode($characteristic);
+        $inspection->rating =json_encode($rating);
+        $inspection->ranking = json_encode($ranking);
+        $inspection->img = json_encode($dir);
+        $inspection->engineer_inspection = Carbon::now()->addYear($inspection_date);
+        $inspection->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
+        $inspection->save();
+
+        // $slope = Slopes::where('slug', $request->slug)->firstOrFail();
+        // $slope->geometry = $geometry;
+        // $slope->characteristic = $characteristic;
+        // $slope->rating = $rating;
+        // $slope->ranking = json_encode($ranking);
+        // $slope->img = json_encode($dir);
+        // $slope->engineer_inspection = Carbon::now()->addYear($inspection_date);
+        // //$slope->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
+
+        // $slope->save();
 
         $request->session()->forget(['geometry', 'characteristic', 'rating']);
         return redirect('/engineer-inspection/'.$request->slug);
@@ -416,6 +419,124 @@ class InspectionController extends Controller
         $slope->save();
 
         return redirect('/inspection/'.$request->slug);
+    }
+
+    public function appr_management(string $id, Request $request){
+
+        $inspection = Inspection::where('id', $id)->first();
+        $slug = $inspection->slug;
+        $inspection->appr_management = $request->appr_management;
+        $inspection->save();
+
+        if ($inspection->appr_engineer == 'verified'){
+            if ($inspection->img !== [] || $inspection->img !== null) {
+                $data = json_decode($inspection->img, true);
+                foreach ($data as $i) {
+                    Storage::move($slug.'/inspection/'.$i['file'], $slug.'/'.$i['file']);
+                }
+            }
+
+            $slope2 = Slopes::where('slug', $inspection->slug)->firstOrFail();
+            $slope = Slopes::where('slug', $inspection->slug)->firstOrFail();
+            $slope->geometry = $inspection->geometry;
+            $slope->characteristic = $inspection->characteristic;
+            $slope->rating = $inspection->rating;
+            $slope->ranking = $inspection->ranking;
+            $slope->img = $inspection->img;
+            $slope->engineer_inspection = $inspection->engineer_inspection;
+            $slope->maintenance_inspection = $inspection->maintenance_inspection;
+            $slope->save();
+
+
+            if ($slope2->img !== [] || $slope2->img !== null) {
+                $data = json_decode($slope2->img, true);
+                foreach ($data as $i) {
+                    Storage::move($slug.'/'.$i['file'], $slug.'/inspection/'.$i['file'] );
+                }
+            }
+
+            $inspection->slope_name = $slope2->slope_name;
+            $inspection->slug = $slope2->slug;
+            $inspection->slope_type = $slope2->slope_type;
+            $inspection->geometry = $slope2->geometry;
+            $inspection->characteristic = $slope2->characteristic;
+            $inspection->rating =$slope2->rating;
+            $inspection->ranking = $slope2->ranking;
+            $inspection->img = $slope2->img;
+            $inspection->engineer_inspection = $slope2->inspection_date;
+            $inspection->maintenance_inspection = $slope2->maintenance_date;
+            $inspection->save();
+
+
+
+        }
+        return redirect('/engineer-inspection/'.$slug);
+    }
+    public function appr_engineer(string $id, Request $request){
+
+        $inspection = Inspection::where('id', $id)->first();
+        $slug = $inspection->slug;
+        $inspection->appr_engineer = $request->appr_engineer;
+        $inspection->save();
+
+        if ($inspection->appr_management == 'verified'){
+            if ($inspection->img !== [] || $inspection->img !== null) {
+                $data = json_decode($inspection->img, true);
+                foreach ($data as $i) {
+                    Storage::move($slug.'/inspection/'.$i['file'], $slug.'/'.$i['file']);
+                }
+            }
+
+            $slope2 = Slopes::where('slug', $inspection->slug)->firstOrFail();
+            $slope = Slopes::where('slug', $inspection->slug)->firstOrFail();
+            $slope->geometry = $inspection->geometry;
+            $slope->characteristic = $inspection->characteristic;
+            $slope->rating = $inspection->rating;
+            $slope->ranking = $inspection->ranking;
+            $slope->img = $inspection->img;
+            $slope->engineer_inspection = $inspection->engineer_inspection;
+            $slope->maintenance_inspection = $inspection->maintenance_inspection;
+            $slope->save();
+
+
+            if ($slope2->img !== [] || $slope2->img !== null) {
+                $data = json_decode($slope2->img, true);
+                foreach ($data as $i) {
+                    Storage::move($slug.'/'.$i['file'], $slug.'/inspection/'.$i['file'] );
+                }
+            }
+
+            $inspection->slope_name = $slope2->slope_name;
+            $inspection->slug = $slope2->slug;
+            $inspection->slope_type = $slope2->slope_type;
+            $inspection->geometry = $slope2->geometry;
+            $inspection->characteristic = $slope2->characteristic;
+            $inspection->rating =$slope2->rating;
+            $inspection->ranking = $slope2->ranking;
+            $inspection->img = $slope2->img;
+            $inspection->engineer_inspection = $slope2->inspection_date;
+            $inspection->maintenance_inspection = $slope2->maintenance_date;
+            $inspection->save();
+
+
+
+        }
+        return redirect('/engineer-inspection/'.$slug);
+    }
+
+    public function destroy(string $id){
+
+        $item = Inspection::where('id',$id)->first();
+        $slug = $item->slug;
+
+        if ($item->img !== [] || $item->img !== null) {
+            $data = json_decode($item->img, true);
+            foreach ($data as $i) {
+                Storage::deleteDirectory($item->slug.'/inspection/'.$i['file']);
+            }
+        }
+        $item->delete();
+        return redirect('/engineer-inspection/'.$slug)->with('success', 'Item deleted successfully.');
     }
 
 }

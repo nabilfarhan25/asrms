@@ -270,9 +270,14 @@
                                     </ul>
                                 </div>
 
+                                @auth
+                                @if (Auth::user()->role === 'manager' || Auth::user()->role === 'engineer' ||
+                                Auth::user()->role === 'inspector')
                                 <x-primary-link href="/inspection/geometry/{{$slope->slug}}">
                                     Start Inspection
                                 </x-primary-link>
+                                @endif
+                                @endauth
                             </div>
 
                         </div>
@@ -283,43 +288,111 @@
                             @foreach ($inspections as $inspection)
                             <a href="/engineer-inspection/{{$inspection->slug}}/{{$inspection->id}}">
                                 <div
-                                    class="flex px-5 py-3 mb-4 rounded-lg bg-gray-200 border border-gray-300 hover:border-lime-600">
-                                    <div class="w-full border-r border-gray-300">
-                                        <p class="text-sm text-gray-500">
-                                            Inspection on:
-                                        </p>
-                                        <div class="text-lg font-bold"> {{date('d F Y',
-                                            strtotime($inspection->updated_at))}}</div>
-                                    </div>
-                                    <div class="w-full md:block hidden text-center border-r border-gray-300">
-                                        <p class="text-sm text-gray-500">
-                                            Ranking Score :
-                                        </p>
-                                        <div class=" font-semibold">
-                                            {{round(json_decode($inspection->ranking)->TS*0.062,2)}}
+                                    class=" px-5 py-3 mb-4 rounded-lg bg-gray-200 border border-gray-300 hover:border-lime-600">
+                                    <div class="flex">
+                                        <div class="w-full border-r border-gray-300">
+                                            <p class="text-sm text-gray-500">
+                                                Inspection on:
+                                            </p>
+                                            <div class="text-lg font-bold"> {{date('d F Y',
+                                                strtotime($inspection->updated_at))}}</div>
+                                        </div>
+                                        <div class="w-full md:block hidden text-center border-r border-gray-300">
+                                            <p class="text-sm text-gray-500">
+                                                Ranking Score :
+                                            </p>
+                                            <div class=" font-semibold">
+                                                {{round(json_decode($inspection->ranking)->TS*0.062,2)}}
+                                            </div>
+                                        </div>
+                                        <div class="w-full md:block hidden text-center border-r border-gray-300">
+                                            <p class="text-sm text-gray-500">
+                                                Total Score :
+                                            </p>
+                                            <div class=" font-semibold">
+                                                {{round(json_decode($inspection->ranking)->TS,2)}}
+                                            </div>
+                                        </div>
+                                        <div class="w-full md:block hidden text-center border-r border-gray-300">
+                                            <p class="text-sm text-gray-500">
+                                                Instability Score :
+                                            </p>
+                                            <div class=" font-semibold">
+                                                {{round(json_decode($inspection->ranking)->IS,2)}}
+                                            </div>
+                                        </div>
+                                        <div class="w-full md:block hidden text-center">
+                                            <p class="text-sm text-gray-500">
+                                                Consequence Score :
+                                            </p>
+                                            <div class=" font-semibold">
+                                                {{round(json_decode($inspection->ranking)->CS,2)}}
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="flex justify-between items-center pt-3">
+                                        <div class="flex">
+                                            @if ($inspection->appr_management == "unverified")
+                                            @auth
+                                            @if (Auth::user()->role === 'manager')
+                                            <form action="/verifying/management/{{$inspection->id}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" value="verified" name="appr_management">
+                                                <x-primary-button type="submit" class="me-2">
+                                                    Approve Inspection
+                                                </x-primary-button>
+                                            </form>
+                                            @else
+                                            <div
+                                                class="border border-yellow-400 me-2 text-yellow-400 bg-slate-200 py-3 px-4 rounded-full">
+                                                Need Manager Verification
+                                            </div>
+                                            @endif
+                                            @endauth
+                                            @else
+                                            <div class="me-2 text-gray-500 bg-slate-300 py-3 px-4 rounded-full">
+                                                Manager Approved
+                                            </div>
+                                            @endif
 
-                                    <div class="w-full md:block hidden text-center border-r border-gray-300">
-                                        <p class="text-sm text-gray-500">
-                                            Total Score :
-                                        </p>
-                                        <div class=" font-semibold">{{round(json_decode($inspection->ranking)->TS,2)}}
+                                            @if ($inspection->appr_engineer == "unverified")
+                                            @auth
+                                            @if (Auth::user()->role === 'manager' || Auth::user()->role === 'engineer')
+                                            <form action="/verifying/engineer/{{$inspection->id}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" value="verified" name="appr_engineer">
+                                                <x-primary-button type="submit" class="me-2">
+                                                    Approve Inspection (Engineer)
+                                                </x-primary-button>
+                                            </form>
+                                            @else
+                                            <div
+                                                class="border border-yellow-400 me-2 text-yellow-400 bg-slate-200 py-3 px-4 rounded-full">
+                                                Need Engineer Verification
+                                            </div>
+                                            @endif
+                                            @endauth
+                                            @else
+                                            <div class="me-2 text-gray-500 bg-slate-300 py-3 px-4 rounded-full">
+                                                Engineer Approved
+                                            </div>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <div class="w-full md:block hidden text-center border-r border-gray-300">
-                                        <p class="text-sm text-gray-500">
-                                            Instability Score :
-                                        </p>
-                                        <div class=" font-semibold">{{round(json_decode($inspection->ranking)->IS,2)}}
+                                        <div>
+                                            @auth
+                                            @if (Auth::user()->role === 'manager')
+                                            <form action="/inspection/delete/{{$inspection->id}}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="hidden" value="verified" name="appr_management">
+                                                <x-danger-button type="submit" class="me-2">
+                                                    Delete Inspection
+                                                </x-danger-button>
+                                            </form>
+                                            @endif
+                                            @endauth
                                         </div>
-                                    </div>
-                                    <div class="w-full md:block hidden text-center">
-                                        <p class="text-sm text-gray-500">
-                                            Consequence Score :
-                                        </p>
-                                        <div class=" font-semibold">{{round(json_decode($inspection->ranking)->CS,2)}}
-                                        </div>
+
                                     </div>
                                 </div>
                             </a>
