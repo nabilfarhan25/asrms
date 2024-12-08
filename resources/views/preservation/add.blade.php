@@ -206,8 +206,8 @@
                                         1.4 Surface drainage channels
                                     </label>
                                     <label class="block mb-2">
-                                        <input type="checkbox" name="type1_measures[]" value="local_trimming">
-                                        1.5 Local trimming/filling
+                                        <input type="checkbox" name="type1_measures[]" value="resloping">
+                                        1.5 Resloping
                                     </label>
                                     <label class="block mb-2">
                                         <input type="checkbox" name="type1_measures[]" value="dentition">
@@ -248,7 +248,7 @@
                                     </label>
                                     <label class="block mb-2">
                                         <input type="checkbox" name="type2_measures[]" value="counterfort_drains">
-                                        2.3 Counterfort drains
+                                        2.3 Counterfort drains (Slope Drain)
                                     </label>
                                     <label class="block mb-2">
                                         <input type="checkbox" name="type2_measures[]" value="relief_drains">
@@ -309,6 +309,11 @@
                                         <input type="checkbox" name="type3_measures[]" value="rock_dowels">
                                         3.6 Rock dowels for rock cut slopes
                                     </label>
+                                    <label class="block mb-2">
+                                        <input type="checkbox" name="type4_measures[]" value="other_structure">
+                                        3.7 Other Slope Structure (concrete pile, steel pile, etc.)
+                                    </label>
+
                                 </div>
                             </div>
                         </div>

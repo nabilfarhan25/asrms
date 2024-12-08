@@ -65,7 +65,7 @@
                             <div class="inline-flex rounded-md shadow-sm" role="group">
                                 @auth
                                 <a href="/pdf-rating/{{$slope->slug}}" target="_blank"
-                                    class="inline-flex items-center px-4 py-2 font-medium text-gray-900 bg-white border border-gray-200 {{Auth::user()->role !== 'admin' ? 'rounded-full' : 'rounded-s-full'}} hover:bg-gray-100 hover:text-lime-700 focus:z-10 focus:ring-2 focus:ring-lime-700 focus:text-lime-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-lime-500 dark:focus:text-white">
+                                    class="inline-flex items-center px-4 py-2 font-medium text-gray-900 bg-white border border-gray-200 {{Auth::user()->role !== 'manager' ? 'rounded-full' : 'rounded-s-full'}} hover:bg-gray-100 hover:text-lime-700 focus:z-10 focus:ring-2 focus:ring-lime-700 focus:text-lime-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-lime-500 dark:focus:text-white">
                                     <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -75,7 +75,7 @@
                                     Export PDF
                                 </a>
 
-                                @if (Auth::user()->role === 'admin')
+                                @if (Auth::user()->role === 'manager' || Auth::user()->role === 'engineer')
 
                                 <a href="/edit/geometry/{{$slope->slug}}"
                                     class="inline-flex items-center px-4 py-2 font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-yellow-300 focus:z-10 focus:ring-2 focus:ring-yellow-300 focus:text-yellow-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-yellow-300 dark:focus:text-white">
@@ -264,6 +264,53 @@
                         @endif
                     </div>
 
+                    <x-line />
+                    <div>
+                        <h3 class="mb-3 text-lg font-medium text-gray-900 dark:text-white">Smart & LHRA Hazard Rating
+                        </h3>
+                        <div class="grid grid-cols-2">
+                            <div class="pe-5">
+                                Smart Rating :
+                                <div class="text-2xl font-bold">
+                                    {{$slope->smart_category != null ? $slope->smart_category : '-'}}
+                                </div>
+                                <x-line />
+                                <div class="flex text-lg justify-between">
+                                    <div>
+                                        Y Value
+                                    </div>
+                                    <div class="font-bold">
+                                        {{$slope->y_value != null ? $slope->y_value : '-'}}
+                                    </div>
+                                </div>
+                                <div class="flex text-lg justify-between">
+                                    <div>
+                                        P Value
+                                    </div>
+                                    <div class="font-bold">
+                                        {{$slope->p_value != null ? $slope->p_value : '-'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                LHRA Rating :
+                                <div class="text-2xl font-bold">
+                                    {{$slope->lhra_category != null ? $slope->lhra_category : '-'}}
+                                </div>
+                                <x-line />
+                                <div class="flex text-lg justify-between">
+                                    <div>
+                                        Score
+                                    </div>
+                                    <div class="font-bold">
+                                        {{$slope->lhra_score != null ? $slope->lhra_score : '-'}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
@@ -325,7 +372,7 @@
                                     @endforeach
 
                                     @if ($count == 0)
-                                    <div class="col-span-3 rounded-lg bg-gray-200 text-gray-400 text-center p-5">
+                                    <div class="w-full col-span-3 rounded-lg bg-gray-200 text-gray-400 text-center p-5">
                                         There's No Documentation
                                     </div>
                                     @endif

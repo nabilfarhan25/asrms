@@ -132,9 +132,11 @@
                             data-TS="{{ isset(json_decode($slope->ranking)->TS) ? round((float)json_decode($slope->ranking)->TS, 2) : '-' }}"
                             data-IS="{{ isset(json_decode($slope->ranking)->IS) ? round((float)json_decode($slope->ranking)->IS, 2) : '-' }}"
                             data-CS="{{ isset(json_decode($slope->ranking)->CS) ? round((float)json_decode($slope->ranking)->CS, 2) : '-' }}"
-                            data-location="{{ $slope->location }}" data-slope_type="{{ $slope->slope_type }}"
-                            data-slug="{{ $slope->slug }}" data-slope_name="{{ $slope->slope_name }}"
-                            onclick="updateMap(this)"
+                            data-location="{{ $slope->location }}"
+                            data-smart_category="{{ $slope->smart_category != null ? $slope->smart_category : '-'  }}"
+                            data-lhra_category="{{ $slope->lhra_category != null ? $slope->lhra_category : '-'  }}"
+                            data-slope_type="{{ $slope->slope_type }}" data-slug="{{ $slope->slug }}"
+                            data-slope_name="{{ $slope->slope_name }}" onclick="updateMap(this)"
                             class="w-full text-left mb-4 rounded-xl border hover:border-gray-400">
                             <div class="flex px-5 py-3 ">
 
@@ -255,34 +257,36 @@
                     </div>
 
                     <x-line />
-                    <div class="relative overflow-x-auto">
 
+                    <p class="text-gray-400 font-semibold">Score :</p>
+                    <div class="relative overflow-x-auto">
                         <table class="mb-5 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <tbody>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Location
+                                        class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Smart Rating
                                     </th>
-                                    <td class="px-6 py-4">
-                                        <div id="location">
+
+                                    <td class="py-4">
+                                        <div id="">
                                             <p
                                                 class="animate-fade-left animate-once animate-duration-200 animate-ease-in">
-                                                <span id="location">{{$selectedSlope->location}}</span>
+                                                <span id="smart_category">{{$selectedSlope->smart_category}}</span>
                                             </p>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Slope Type
+                                        class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        LHRA Rating
                                     </th>
-                                    <td class="px-6 py-4">
-                                        <div id="type">
+                                    <td class="py-4">
+                                        <div id="">
                                             <p
                                                 class="animate-fade-left animate-once animate-duration-200 animate-ease-in">
-                                                <span id="slope_type">{{$selectedSlope->slope_type}}</span>
+                                                <span id="lhra_category">{{$selectedSlope->lhra_category}}</span>
                                             </p>
                                         </div>
                                     </td>
@@ -350,6 +354,11 @@
                 const location = button.getAttribute('data-location');
                 const slope_type = button.getAttribute('data-slope_type');
     
+                const smart_category = button.getAttribute('data-smart_category');
+                const lhra_category = button.getAttribute('data-lhra_category');
+
+
+
                 const newLocation = { lat: lat, lng: lng };
     
                 // Update marker position
@@ -364,6 +373,10 @@
                 link.setAttribute('href', `/management/${slug}`);
 
                 // Update the displayed data
+                document.getElementById("smart_category").textContent = smart_category;
+                document.getElementById("lhra_category").textContent = lhra_category;
+
+
                 document.getElementById("slope_name").textContent = slope_name;
                 document.getElementById("RS").textContent = RS;
                 document.getElementById("TS").textContent = TS;
@@ -373,6 +386,8 @@
                 document.getElementById("slope_type").textContent = slope_type;
                 document.getElementById("lat").textContent = lat.toFixed(4);
                 document.getElementById("lng").textContent = lng.toFixed(4);
+                
+
 
             }
         </script>
