@@ -116,27 +116,159 @@
                                     Routine Maintenance
                                 </th>
                             </tr>
+
                             <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
                                     $watch('volume + price', value => {
                                         total = parseFloat(volume) * parseFloat(price);
                                         grandTotal += total;
                                     })
                                 ">
-                                <td class="border border-gray-300 px-4 py-2">Drainage Maintenance</td>
+                                <td class="border border-gray-300 px-4 py-2">Grass and Plant Cleaning Work</td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="drainage_maintenance_volume"
-                                        name="drainage_maintenance_volume" x-model.number="volume"
+                                    <input type="number" step="0.01" id="routine_maintenance1_volume"
+                                        name="routine_maintenance1_volume" x-model.number="volume"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">m</td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="drainage_maintenance_price"
-                                        name="drainage_maintenance_price" x-model.number="price"
+                                    <input type="number" step="0.01" id="routine_maintenance1_price"
+                                        name="routine_maintenance1_price" x-model.number="price"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="drainage_maintenance_total"
-                                        name="drainage_maintenance_total" x-model.number="total" readonly
+                                    <input type="number" step="0.01" id="routine_maintenance1_total"
+                                        name="routine_maintenance1_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Brush Cleaning Work</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="routine_maintenance2_volume"
+                                        name="routine_maintenance2_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="routine_maintenance2_price"
+                                        name="routine_maintenance2_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="routine_maintenance2_total"
+                                        name="routine_maintenance2_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                $watch('volume + price', value => {
+                                    total = parseFloat(volume) * parseFloat(price);
+                                    grandTotal += total;
+                                })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Drainage Cleaning Work</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="routine_maintenance3_volume"
+                                        name="routine_maintenance3_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="routine_maintenance3_price"
+                                        name="routine_maintenance3_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="routine_maintenance3_total"
+                                        name="routine_maintenance3_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="5" class="text-left p-2 bg-gray-100">
+                                    Drainage Improvement
+                                </th>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Drainage Repair Work</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement1_volume"
+                                        name="drainage_improvement1_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement1_price"
+                                        name="drainage_improvement1_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement1_total"
+                                        name="drainage_improvement1_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Perimeter Drainage Channel Installation
+                                    Work Type U DS I</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement2_volume"
+                                        name="drainage_improvement2_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement2_price"
+                                        name="drainage_improvement2_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement2_total"
+                                        name="drainage_improvement2_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Drainage Channel Installation Work Type U
+                                    DS 8</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement3_volume"
+                                        name="drainage_improvement3_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement3_price"
+                                        name="drainage_improvement3_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement3_total"
+                                        name="drainage_improvement3_total" x-model.number="total" readonly
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                             </tr>
@@ -146,28 +278,55 @@
                                         grandTotal += total;
                                     })
                                 ">
-                                <td class="border border-gray-300 px-4 py-2">Vegetation Maintenance</td>
+                                <td class="border border-gray-300 px-4 py-2">Subdrainage Installation Work</td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="vegetation_maintenance_volume"
-                                        name="vegetation_maintenance_volume" x-model.number="volume"
+                                    <input type="number" step="0.01" id="drainage_improvement4_volume"
+                                        name="drainage_improvement4_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement4_price"
+                                        name="drainage_improvement4_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="drainage_improvement4_total"
+                                        name="drainage_improvement4_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <th colspan="5" class="text-left p-2 bg-gray-100">
+                                    Stability Improvement
+                                </th>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Vegetation Planting Work (Revegetation)
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement1_volume"
+                                        name="stability_improvement1_volume" x-model.number="volume"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="vegetation_maintenance_price"
-                                        name="vegetation_maintenance_price" x-model.number="price"
+                                    <input type="number" step="0.01" id="stability_improvement1_price"
+                                        name="stability_improvement1_price" x-model.number="price"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="vegetation_maintenance_total"
-                                        name="vegetation_maintenance_total" x-model.number="total" readonly
+                                    <input type="number" step="0.01" id="stability_improvement1_total"
+                                        name="stability_improvement1_total" x-model.number="total" readonly
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
-                            </tr>
-                            <tr>
-                                <th colspan="5" class="text-left p-2 bg-gray-100">
-                                    Drainage
-                                </th>
                             </tr>
                             <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
                                     $watch('volume + price', value => {
@@ -175,131 +334,248 @@
                                         grandTotal += total;
                                     })
                                 ">
-                                <td class="border border-gray-300 px-4 py-2">Drainage Construction</td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="making_drainage_volume"
-                                        name="making_drainage_volume" x-model.number="volume"
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                </td>
-                                <td class="border border-gray-300 px-4 py-2">m</td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="making_drainage_price"
-                                        name="making_drainage_price" x-model.number="price"
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                <td class="border border-gray-300 px-4 py-2">Regrading/Reslooping Work
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="making_drainage_total"
-                                        name="making_drainage_total" x-model.number="total" readonly
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                </td>
-
-                            </tr>
-                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
-                                    $watch('volume + price', value => {
-                                        total = parseFloat(volume) * parseFloat(price);
-                                        grandTotal += total;
-                                    })
-                                ">
-                                <td class="border border-gray-300 px-4 py-2">Drainage Repairment</td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="repair_drainage_volume"
-                                        name="repair_drainage_volume" x-model.number="volume"
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                </td>
-                                <td class="border border-gray-300 px-4 py-2">m</td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="repair_drainage_price"
-                                        name="repair_drainage_price" x-model.number="price"
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                </td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="repair_drainage_total"
-                                        name="repair_drainage_total" x-model.number="total" readonly
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                </td>
-
-                            </tr>
-
-                            <tr>
-                                <th colspan="5" class="text-left p-2 bg-gray-100">
-                                    Re-Vegetation
-                                </th>
-                            </tr>
-                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
-                                    $watch('volume + price', value => {
-                                        total = parseFloat(volume) * parseFloat(price);
-                                        grandTotal += total;
-                                    })
-                                ">
-                                <td class="border border-gray-300 px-4 py-2">Planting Vegetation</td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="planting_vegetation_volume"
-                                        name="planting_vegetation_volume" x-model.number="volume"
+                                    <input type="number" step="0.01" id="stability_improvement2_volume"
+                                        name="stability_improvement2_volume" x-model.number="volume"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="planting_vegetation_price"
-                                        name="planting_vegetation_price" x-model.number="price"
+                                    <input type="number" step="0.01" id="stability_improvement2_price"
+                                        name="stability_improvement2_price" x-model.number="price"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="planting_vegetation_total"
-                                        name="planting_vegetation_total" x-model.number="total" readonly
+                                    <input type="number" step="0.01" id="stability_improvement2_total"
+                                        name="stability_improvement2_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Reslooping Work
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement3_volume"
+                                        name="stability_improvement3_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement3_price"
+                                        name="stability_improvement3_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement3_total"
+                                        name="stability_improvement3_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                            $watch('volume + price', value => {
+                                total = parseFloat(volume) * parseFloat(price);
+                                grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Shotcrete Work
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement4_volume"
+                                        name="stability_improvement4_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement4_price"
+                                        name="stability_improvement4_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement4_total"
+                                        name="stability_improvement4_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Soil Nailing/Ground Anchor Work
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement5_volume"
+                                        name="stability_improvement5_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement5_price"
+                                        name="stability_improvement5_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement5_total"
+                                        name="stability_improvement5_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Ground Anchor Work
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement6_volume"
+                                        name="stability_improvement6_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement6_price"
+                                        name="stability_improvement6_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement6_total"
+                                        name="stability_improvement6_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Slope Cover Stone Pass Wall Work
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement7_volume"
+                                        name="stability_improvement7_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement7_price"
+                                        name="stability_improvement7_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement7_total"
+                                        name="stability_improvement7_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Concrete Retaining Wall Work
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement8_volume"
+                                        name="stability_improvement8_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement8_price"
+                                        name="stability_improvement8_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement8_total"
+                                        name="stability_improvement8_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Gabion Wall Work (Bronjong)
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement9_volume"
+                                        name="stability_improvement9_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement9_price"
+                                        name="stability_improvement9_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement9_total"
+                                        name="stability_improvement9_total" x-model.number="total" readonly
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                            </tr>
+                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
+                                    $watch('volume + price', value => {
+                                        total = parseFloat(volume) * parseFloat(price);
+                                        grandTotal += total;
+                                    })
+                                ">
+                                <td class="border border-gray-300 px-4 py-2">Pile Structure Work
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement10_volume"
+                                        name="stability_improvement10_volume" x-model.number="volume"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement10_price"
+                                        name="stability_improvement10_price" x-model.number="price"
+                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <input type="number" step="0.01" id="stability_improvement10_total"
+                                        name="stability_improvement10_total" x-model.number="total" readonly
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                             </tr>
 
-                            <tr>
-                                <th colspan="5" class="text-left p-2 bg-gray-100">
-                                    Re-Construction of Slope Geometry
-                                </th>
-                            </tr>
                             <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
                                     $watch('volume + price', value => {
                                         total = parseFloat(volume) * parseFloat(price);
                                         grandTotal += total;
                                     })
                                 ">
-                                <td class="border border-gray-300 px-4 py-2">Re-Sloping with soil of choice</td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="reslope_volume" name="reslope_volume"
-                                        x-model.number="volume"
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                </td>
-                                <td class="border border-gray-300 px-4 py-2">m<sup>3</sup></td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="reslope_price" name="reslope_price"
-                                        x-model.number="price"
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                <td class="border border-gray-300 px-4 py-2">Concrete Injection Work
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="reslope_total" name="reslope_total"
-                                        x-model.number="total" readonly
+                                    <input type="number" step="0.01" id="stability_improvement11_volume"
+                                        name="stability_improvement11_volume" x-model.number="volume"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
-                            </tr>
-                            <tr x-data="{ volume: 0, price: 0, total: 0 }" x-init="
-                                    $watch('volume + price', value => {
-                                        total = parseFloat(volume) * parseFloat(price);
-                                        grandTotal += total;
-                                    })
-                                ">
-                                <td class="border border-gray-300 px-4 py-2">Re-Grading</td>
+                                <td class="border border-gray-300 px-4 py-2">m<sup>2</sup></td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="regrading_volume" name="regrading_volume"
-                                        x-model.number="volume"
-                                        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
-                                </td>
-                                <td class="border border-gray-300 px-4 py-2">m<sup>3</sup></td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="regrading_price" name="regrading_price"
-                                        x-model.number="price"
+                                    <input type="number" step="0.01" id="stability_improvement11_price"
+                                        name="stability_improvement11_price" x-model.number="price"
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    <input type="number" step="0.01" id="regrading_total" name="regrading_total"
-                                        x-model.number="total" readonly
+                                    <input type="number" step="0.01" id="stability_improvement11_total"
+                                        name="stability_improvement11_total" x-model.number="total" readonly
                                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-600 focus:border-lime-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
                                 </td>
                             </tr>

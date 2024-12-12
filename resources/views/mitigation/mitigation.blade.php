@@ -197,111 +197,143 @@
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Drainage Maintenance
+                                                Grass and Plant Cleaning Work
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{$estimate->drainage_maintenance_volume}}
+                                                {{$estimate->routine_maintenance1_volume}}
                                             </td>
                                             <td class="px-6 py-4">
                                                 m
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->drainage_maintenance_price}}
+                                                {{$estimate->routine_maintenance1_price}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->drainage_maintenance_total}}
+                                                {{$estimate->routine_maintenance1_total}}
                                             </td>
                                         </tr>
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Vegetation Maintenance
+                                                Brush Cleaning Work
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{$estimate->vegetation_maintenance_volume}}
+                                                {{$estimate->routine_maintenance2_volume}}
                                             </td>
                                             <td class="px-6 py-4">
                                                 m<sup>2</sup>
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->vegetation_maintenance_price}}
+                                                {{$estimate->routine_maintenance2_price}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->vegetation_maintenance_total}}
+                                                {{$estimate->routine_maintenance2_total}}
                                             </td>
-                                        </tr>
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th scope="row" colspan="5"
-                                                class="font-bold px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                                Drainage
-                                            </th>
                                         </tr>
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Drainage Construction
+                                                Routine Maintenance
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{$estimate->making_drainage_volume}}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                m
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{$estimate->making_drainage_price}}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{$estimate->making_drainage_total}}
-                                            </td>
-                                        </tr>
-
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Drainage Repairment
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {{$estimate->repair_drainage_volume}}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                m
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{$estimate->repair_drainage_price}}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{$estimate->repair_drainage_total}}
-                                            </td>
-                                        </tr>
-
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th scope="row" colspan="5"
-                                                class="font-bold px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                                Re-Vegetation
-                                            </th>
-                                        </tr>
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Planting Vegetation
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {{$estimate->planting_vegetation_volume}}
+                                                {{$estimate->routine_maintenance3_volume}}
                                             </td>
                                             <td class="px-6 py-4">
                                                 m<sup>2</sup>
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->planting_vegetation_price}}
+                                                {{$estimate->routine_maintenance3_price}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->planting_vegetation_total}}
+                                                {{$estimate->routine_maintenance3_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row" colspan="5"
+                                                class="font-bold px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                                Drainage Improvement
+                                            </th>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Drainage Repair Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement1_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement1_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement1_total}}
+                                            </td>
+                                        </tr>
+
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Perimeter Drainage Channel Installation Work Type U DS I
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement2_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement2_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement2_total}}
+                                            </td>
+                                        </tr>
+
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Drainage Channel Installation Work Type U DS 8
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement3_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement3_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement3_total}}
+                                            </td>
+                                        </tr>
+
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Subdrainage Installation Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement4_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement4_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->drainage_improvement4_total}}
                                             </td>
                                         </tr>
 
@@ -309,48 +341,218 @@
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row" colspan="5"
                                                 class="font-bold px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                                Re-Construction of Slope Geometry
+                                                Stability Improvement
                                             </th>
                                         </tr>
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Re-Sloping with soil of choice
+                                                Vegetation Planting Work (Revegetation)
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{$estimate->reslope_volume}}
+                                                {{$estimate->stability_improvement1_volume}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                m<sup>3</sup>
+                                                m2
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->reslope_price}}
+                                                {{$estimate->stability_improvement1_price}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->reslope_total}}
+                                                {{$estimate->stability_improvement1_total}}
                                             </td>
                                         </tr>
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Re-Grading
+                                                Regrading/Reslooping Work
                                             </th>
                                             <td class="px-6 py-4">
-                                                {{$estimate->regrading_volume}}
+                                                {{$estimate->stability_improvement2_volume}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                m<sup>3</sup>
+                                                m2
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->regrading_price}}
+                                                {{$estimate->stability_improvement2_price}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$estimate->regrading_total}}
+                                                {{$estimate->stability_improvement2_total}}
                                             </td>
                                         </tr>
-
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Reslooping Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement3_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement3_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement3_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Shotcrete Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement4_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement4_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement4_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Soil Nailing/Ground Anchor Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement5_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement5_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement5_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Ground Anchor Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement6_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement6_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement6_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Slope Cover Stone Pass Wall Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement7_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement7_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement7_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Concrete Retaining Wall Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement8_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement8_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement8_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Gabion Wall Work (Bronjong)
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement9_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement9_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement9_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Pile Structure Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement10_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement10_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement10_total}}
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                Concrete Injection Work
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement11_volume}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                m2
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement11_price}}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{$estimate->stability_improvement11_total}}
+                                            </td>
+                                        </tr>
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <th scope="row" colspan="5"

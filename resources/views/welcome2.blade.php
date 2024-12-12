@@ -192,99 +192,9 @@
 
     {{-- Menu --}}
     <div class="flex flex-wrap justify-center p-5">
-        <a class="m-1" href="/inventory">
-            <div
-                class="max-w-60 border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600 h-full">
-                <div class="flex justify-center mb-3">
 
-                    <img src="/components/icons/inventory-ico.svg"
-                        class="sm:h-20 h-16 group-hover:animate-jump animate-once animate-ease-in-out" alt="">
-                </div>
-                <div class="text-center">
-                    <h2 class="font-bold sm:text-lg mb-1">
-                        SLOPE INVENTORY
-                    </h2>
-                    <p class="text-xs">Complete database of all managed slopes with essential data for
-                        monitoring.
-                    </p>
-                </div>
-            </div>
-        </a>
 
-        <a class="m-1" href="/management">
-            <div
-                class="max-w-60 border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600 h-full">
-                <div class="flex justify-center mb-3">
-                    <img src="/components/icons/management-ico.svg"
-                        class="sm:h-20 h-16 group-hover:animate-jump animate-once animate-ease-in-out" alt="">
-                </div>
-                <div class="text-center">
-                    <h2 class="font-bold sm:text-lg mb-1">
-                        SLOPE PRIORITY
-                    </h2>
-                    <p class="text-xs">Helps prioritize slope handling based on risk and urgency for
-                        effective resource use.
-                    </p>
-                </div>
-            </div>
-        </a>
-
-        <a class="m-1" href="inspection">
-            <div
-                class="max-w-60 border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600 h-full">
-                <div class="flex justify-center mb-3">
-                    <img src="/components/icons/inspection-ico.svg"
-                        class="sm:h-20 h-16 group-hover:animate-jump animate-once animate-ease-in-out" alt="">
-                </div>
-                <div class="text-center">
-                    <h2 class="font-bold sm:text-lg mb-1">
-                        INSPECTION
-                    </h2>
-                    <p class="text-xs"> Integrated inspection tracking and real-time reporting for early
-                        issue detection and resolution.
-                    </p>
-                </div>
-            </div>
-        </a>
-
-        <a class="m-1" href="preservation">
-            <div
-                class="max-w-60 border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600 h-full">
-                <div class="flex justify-center mb-3">
-                    <img src="/components/icons/preservation-ico.svg"
-                        class="sm:h-20 h-16 group-hover:animate-jump animate-once animate-ease-in-out" alt="">
-                </div>
-                <div class="text-center">
-                    <h2 class="font-bold sm:text-lg mb-1">
-                        SLOPE PRESERVATION
-                    </h2>
-                    <p class="text-xs"> Integrated inspection tracking and real-time reporting for early
-                        issue detection and resolution.
-                    </p>
-                </div>
-            </div>
-        </a>
-
-        <a class="m-1" href="mitigation">
-            <div
-                class="max-w-60 border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600 h-full">
-                <div class="flex justify-center mb-3">
-                    <img src="/components/icons/mitigation-ico.svg"
-                        class="sm:h-20 h-16 group-hover:animate-jump animate-once animate-ease-in-out" alt="">
-                </div>
-                <div class="text-center">
-                    <h2 class="font-bold sm:text-lg mb-1">
-                        MITIGATION CALCULATE
-                    </h2>
-                    <p class="text-xs">Provides tailored mitigation solutions based on data analysis to
-                        reduce landslide risks.
-
-                    </p>
-                </div>
-            </div>
-        </a>
-
-        <a class="m-1" href="/map" target="_blank">
+        <a class="m-1" href="https://jsb-map.gwadestek.com/">
             <div
                 class="max-w-60 border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600 h-full">
                 <div class="flex justify-center mb-3">
@@ -293,7 +203,7 @@
                 </div>
                 <div class="text-center">
                     <h2 class="font-bold sm:text-lg mb-1">
-                        SLOPE INFORMATION
+                        SLOPE INFORMATION MAP
                     </h2>
                     <p class="text-xs">Visualizing slope locations, inspection statuses,
                         and mitigation actions for quick decision-making.
@@ -301,6 +211,25 @@
                 </div>
             </div>
         </a>
+
+        <a class="m-1" href="https://jsb-mitigation-map.gwadestek.com/">
+            <div
+                class="max-w-60 border-2 border-gray-300 px-5 py-10 rounded-3xl group transition ease-in-out duration-150 hover:shadow hover:text-lime-600 hover:border-lime-600 h-full">
+                <div class="flex justify-center mb-3">
+                    <img src="/components/icons/info-ico.svg"
+                        class="sm:h-20 h-16 group-hover:animate-jump animate-once animate-ease-in-out" alt="">
+                </div>
+                <div class="text-center">
+                    <h2 class="font-bold sm:text-lg mb-1">
+                        SLOPE MITIGATION MAP
+                    </h2>
+                    <p class="text-xs">Visualizing slope mitigation, preservation action,
+                        and Cost Estimation.
+                    </p>
+                </div>
+            </div>
+        </a>
+
     </div>
 
 

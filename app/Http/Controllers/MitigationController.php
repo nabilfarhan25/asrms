@@ -78,7 +78,7 @@ class MitigationController extends Controller
         unset($estimate['slug']);
         unset($estimate['slope_condition']);
         unset($estimate['mitigation_strategy']);
-
+//dd($estimate);
         $mitigation = new Mitigation();
         $mitigation->slope_name = $slope->slope_name;
         $mitigation->slug = $slope->slug;
