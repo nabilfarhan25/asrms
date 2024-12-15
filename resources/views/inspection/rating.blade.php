@@ -73,6 +73,67 @@
                     @elseif($slope->slope_type === 'combine-type')
                     @include('inventory.partials.add_combine_rating')
                     @endif
+
+                    <x-line />
+                    <div class="">
+                        <div class="form-section mb-4">
+                            <div class="flex justify-between items-center">
+                                <legend class="text-lg font-semibold mb-2">LHRA & SMART Scoring</legend>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="mb-2">
+                                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">LHRA
+                                        Rating:</label>
+                                    <select
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                        name="lhra_category" id="">
+                                        <option>Low Hazard</option>
+                                        <option>Moderate Hazard</option>
+                                        <option>High Hazard</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="mb-2">
+                                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">SMART
+                                        Rating:</label>
+                                    <select
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                                        name="smart_category" id="">
+                                        <option>Very Low</option>
+                                        <option>Low</option>
+                                        <option>Medium</option>
+                                        <option>High</option>
+                                        <option>Very High</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-2">
+                                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Y
+                                        Value:</label>
+                                    <input value="0" type="number" step="0.01" name="y_value"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </div>
+
+                                <div class="mb-2">
+                                    <label
+                                        class="block mb-1 font-medium text-gray-900 dark:text-gray-300">Scoring:</label>
+                                    <input value="0" type="number" step="0.01" name="lhra_score"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </div>
+
+                                <div class="mb-2">
+                                    <label class="block mb-1 font-medium text-gray-900 dark:text-gray-300">P
+                                        Value:</label>
+                                    <input value="0" type="number" step="0.01" name="p_value"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>

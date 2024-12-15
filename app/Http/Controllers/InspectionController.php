@@ -359,6 +359,11 @@ class InspectionController extends Controller
         $inspection->img = json_encode($dir);
         $inspection->engineer_inspection = Carbon::now()->addYear($inspection_date);
         $inspection->maintenance_inspection = Carbon::now()->addYear($maintenance_date);
+        $inspection->lhra_category = $request->lhra_category;
+        $inspection->smart_category = $request->smart_category;
+        $inspection->lhra_score = $request->lhra_score;
+        $inspection->y_value = $request->y_value;
+        $inspection->p_value = $request->p_value;
         $inspection->save();
 
         // $slope = Slopes::where('slug', $request->slug)->firstOrFail();
@@ -445,6 +450,11 @@ class InspectionController extends Controller
             $slope->img = $inspection->img;
             $slope->engineer_inspection = $inspection->engineer_inspection;
             $slope->maintenance_inspection = $inspection->maintenance_inspection;
+            $slope->lhra_category = $inspection->lhra_category;
+            $slope->smart_category = $inspection->smart_category;
+            $slope->lhra_score = $inspection->lhra_score;
+            $slope->y_value = $inspection->y_value;
+            $slope->p_value = $inspection->p_value;
             $slope->save();
 
 
@@ -465,6 +475,11 @@ class InspectionController extends Controller
             $inspection->img = $slope2->img;
             $inspection->engineer_inspection = $slope2->inspection_date;
             $inspection->maintenance_inspection = $slope2->maintenance_date;
+            $inspection->lhra_category = $slope2->lhra_category;
+            $inspection->smart_category = $slope2->smart_category;
+            $inspection->lhra_score = $slope2->lhra_score;
+            $inspection->y_value = $slope2->y_value;
+            $inspection->p_value = $slope2->p_value;
             $inspection->save();
 
 
@@ -496,6 +511,11 @@ class InspectionController extends Controller
             $slope->img = $inspection->img;
             $slope->engineer_inspection = $inspection->engineer_inspection;
             $slope->maintenance_inspection = $inspection->maintenance_inspection;
+            $slope->lhra_category = $inspection->lhra_category;
+            $slope->smart_category = $inspection->smart_category;
+            $slope->lhra_score = $inspection->lhra_score;
+            $slope->y_value = $inspection->y_value;
+            $slope->p_value = $inspection->p_value;
             $slope->save();
 
 
@@ -516,6 +536,11 @@ class InspectionController extends Controller
             $inspection->img = $slope2->img;
             $inspection->engineer_inspection = $slope2->inspection_date;
             $inspection->maintenance_inspection = $slope2->maintenance_date;
+            $inspection->lhra_category = $slope2->lhra_category;
+            $inspection->smart_category = $slope2->smart_category;
+            $inspection->lhra_score = $slope2->lhra_score;
+            $inspection->y_value = $slope2->y_value;
+            $inspection->p_value = $slope2->p_value;
             $inspection->save();
 
 
