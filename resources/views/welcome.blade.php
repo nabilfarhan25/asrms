@@ -90,10 +90,31 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-600 md:p-0 dark:text-white md:dark:hover:text-lime-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Documents</a>
-                        </li>
+                        @auth
+
+
+                        @endauth
+
+                        @if (Route::has('login'))
+                        <div>
+                            @auth
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <a {{ __('Log Out') }} </a>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    this.closest('form').submit();"
+                                        class="underline block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-600 md:p-0 dark:text-white md:dark:hover:text-lime-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Log
+                                        Out</a>
+                            </form>
+                            @else
+                            <li>
+                                <a href="/login"
+                                    class="underline block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-600 md:p-0 dark:text-white md:dark:hover:text-lime-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
+                            </li>
+                            @endauth
+                        </div>
+                        @endif
 
                     </ul>
                 </div>
