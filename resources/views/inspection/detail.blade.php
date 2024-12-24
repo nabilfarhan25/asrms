@@ -229,7 +229,7 @@
                                             </p>
                                             <x-line />
                                             <h2 class="text-3xl text-bold">
-                                                {{round(json_decode($slope->ranking)->TS*0.062,2)}}
+                                                {{round(json_decode($slope->ranking)->RS,2)}}
                                             </h2>
                                         </div>
                                     </div>

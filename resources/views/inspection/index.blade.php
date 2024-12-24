@@ -211,7 +211,7 @@
                         <p class="text-sm text-gray-500">
                             Ranking Slope (RS) :
                         </p>
-                        <div class=" font-semibold">{{round(json_decode($slope->ranking)->TS*0.062,2)}}</div>
+                        <div class=" font-semibold">{{round(json_decode($slope->ranking)->RS,2)}}</div>
                     </div>
                 </div>
                 <div class="w-full border-r border-gray-300">
