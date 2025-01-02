@@ -9,10 +9,28 @@ use App\Http\Controllers\MitigationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountController;
+use App\Models\Slopes;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
-    return view('welcome');
+
+    $slopes = Slopes::all();
+    // Gabungkan tanggal dari kedua kolom, lalu urutkan
+    $inspections = collect($slopes)->flatMap(function ($item) {
+        return [
+                ['date' => $item->engineer_inspection, 'type' => 'Engineer Inspection','slope_name' => $item->slope_name ,'slug' => $item->slug],
+                ['date' => $item->maintenance_inspection, 'type' => 'Maintenance Inspection','slope_name' => $item->slope_name ,'slug' => $item->slug],
+            ];
+        })->filter(function ($item) {
+            return !is_null($item['date']); // Filter null dates
+        })->sortBy('date')->take(6); // Urutkan berdasarkan tanggal
+
+    $data = [
+        'slopes' => $inspections,
+    ];
+
+    return view('welcome',$data);
 });
 Route::get('/map', function () {
     return view('welcome2');
